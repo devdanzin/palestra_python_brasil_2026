@@ -22,7 +22,7 @@ Como já citei, sou biólogo. Minha área de atuação é fauna: os animaizinhos
 
 Imagine que você está na natureza, numa mata desconhecida, nunca estudada. Você sabe que existem animais ali, só não sabe quais, nem onde estão. Com bugs é a mesma coisa: é certo que eles existem, mas quais são? Em que partes do software eles estão?
 
-Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar. Você pode fazer uma simples observação: está lá esperando o que vai aparecer e PÁ, CAPIVARA. Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos. Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
+Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar. Você pode fazer uma simples observação: está lá esperando o que vai aparecer e, do nada, PÁ, CAPIVARA. Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos. Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
 
 Com os bugs, a simples observação é o que chamamos de revisão manual do código: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar. Procurar por indícios corresponde à análise estática, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs. E tentar atrair animais com iscas diferentes parece com o fuzzing, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
 
@@ -54,7 +54,7 @@ Essa técnica corresponde à observação simples na busca por animais. Você es
 
 Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, por ÔXI, varia.
 
-Nessa técnica, as regras geralmente ficam armazenadas nas cabeças dos desenvolvedores e sua aplicação depende de olhar afiado para encontrar problemas. Isso requer experiência e faro. Talvez seja a técnica mais precisa e profunda para encontrar bugs em softwares, mas também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
+Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas. Isso requer experiência e faro. Talvez seja a técnica mais precisa e profunda para encontrar bugs em softwares, mas também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
 
 [...]
 

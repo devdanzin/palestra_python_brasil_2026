@@ -1,0 +1,376 @@
+<!doctype html>
+
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=1024" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <title>Caçando bugs em Python: do olho humano à IA</title>
+
+        <meta name="description" content="" />
+        <meta name="author" content="Daniel Diniz" />
+
+        <link
+            href="//fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+            rel="stylesheet"
+        />
+        <link href="css/impress-common.css" rel="stylesheet" />
+        <link href="css/impress-demo.css" rel="stylesheet" />
+
+        <link rel="shortcut icon" href="favicon.png" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    </head>
+
+    <body class="impress-not-supported">
+        <div class="fallback-message">
+            <p>Algo deu errado. Use um navegador moderno.</p>
+        </div>
+
+        <div id="impress">
+            <!-- 1. TÍTULO E INTRODUÇÃO: A Borda da Floresta -->
+            <!-- Uma visão inicial geral, antes de entrarmos na mata. -->
+            <img
+                src="visao_floresta_05.png"
+                alt="Visão da Floresta"
+                style="
+                    scale: 10;
+                    z-index: -1;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                "
+            />
+
+            <div
+                id="titulo"
+                class="step slide appear"
+                data-x="0"
+                data-y="-4000"
+                data-scale="4"
+            >
+                <h1>Caçando bugs em</h1>
+                <h2>
+                    <img
+                        src="images/python-logo-transparent.png"
+                        alt="Python Logo"
+                    />
+                </h2>
+                <h2>do olho humano à IA</h2>
+                <h3>Daniel Diniz</h3>
+            </div>
+
+            <div
+                id="quem_sou"
+                class="step slide appear"
+                data-x="0"
+                data-y="-4000"
+                data-scale="4"
+            >
+                <h1>Quem sou</h1>
+                <ul>
+                    <li class="substep">Pai</li>
+                    <li class="substep">Biólogo</li>
+                    <li class="substep">Programador amador</li>
+                    <li class="substep">Python Triage Team</li>
+                    <li class="substep">Python Fuzzing Team</li>
+                    <li class="substep">Caçador de bugs</li>
+                </ul>
+            </div>
+            <div
+                id="paralelo"
+                class="step slide appear"
+                data-x="0"
+                data-y="-4000"
+                data-scale="4"
+            >
+                <h1>Um paralelo</h1>
+                <p>Biologia : Programação</p>
+                <p>Animais : Bugs</p>
+                <p>⬇️</p>
+                <p>Descobertas</p>
+            </div>
+            <div
+                id="floresta_01"
+                class="step"
+                data-x="0"
+                data-y="-4000"
+                data-scale="4"
+            ></div>
+
+            <div
+                id="floresta_02"
+                class="step"
+                data-x="-2500"
+                data-y="-4000"
+                data-scale="4"
+            ></div>
+
+            <div
+                id="observacao_direta"
+                class="step slide appear"
+                data-x="-2500"
+                data-y="-4000"
+                data-scale="4"
+            >
+                <h1>Observação Direta</h1>
+                <p>Método mais básico</p>
+            </div>
+            <div
+                id="observacao"
+                class="step"
+                data-x="-2000"
+                data-y="-700"
+                data-scale="2"
+            ></div>
+
+            <div
+                id="observacao_capivara"
+                class="step appear"
+                data-x="-2000"
+                data-y="-700"
+                data-scale="2"
+            >
+                <img src="capivara_01.jpg" alt="Capivara">
+            </div>
+
+            <div
+                id="registro-indicios"
+                class="step slide appear"
+                data-x="-2000"
+                data-y="-700"
+                data-scale="2"
+            >
+                <h1>Registro de indícios</h1>
+                <h2>Evidências indiretas da presença de animais</h2>
+            </div>
+
+            <div
+                id="pegadas"
+                class="step appear"
+                data-x="1000"
+                data-y="3500"
+                data-scale="3"
+            ></div>
+
+            <div
+                id="armadilhas-fotograficas"
+                class="step slide appear"
+                data-x="1000"
+                data-y="3500"
+                data-scale="3"
+            >
+                <h1>Armadilhas Fotográficas</h1>
+                <h2>Câmeras automáticas com iscas diversas</h2>
+            </div>
+
+            <div
+                id="armadilhas"
+                class="step appear"
+                data-x="-7500"
+                data-y="5500"
+                data-scale="4"
+            ></div>
+
+            <div
+                id="paralelo2"
+                class="step slide appear"
+                data-x="-7500"
+                data-y="5500"
+                data-scale="4"
+            >
+                <h1>Paralelo</h1>
+                <p>Simples Observação: Revisão Manual</p>
+                <p>Registro de Indícios: Análise Estática</p>
+                <p>Armadilhas Fotográficas (Iscas): Fuzzing</p>
+            </div>
+            <div
+                id="agentes-ia"
+                class="step slide appear"
+                data-x="-7500"
+                data-y="5500"
+                data-scale="4"
+            >
+                <h1>A Equipe de Pessoas Biólogas</h1>
+                <h2>Especialistas em diversos grupos</h2>
+
+                </p>
+            </div>
+            <div
+                id="agentes-ia_visao"
+                class="step appear"
+                data-x="-6250"
+                data-y="2500"
+                data-scale="3.5"
+            ></div>
+
+            <div
+                id="agentes-ia_especialistas"
+                class="step appear"
+                data-x="-6250"
+                data-y="2500"
+                data-scale="3.5"
+            ><img src="pessoas_biologas.png" alt=""></div>
+
+            <div
+                id="resultados1"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Relatórios de Campo</h1>
+                <p>SPOILERS!</p>
+
+            </div>
+
+            <div
+                id="tecnicas"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Técnicas</h1>
+                <p>Revisão Manual</p>
+                <p>Análise Estática</p>
+                <p>Fuzzing</p>
+                <p>Análise Baseada em IA</p>
+
+            </div>
+
+            <div
+                id="revisao-manual"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Revisão Manual</h1>
+                <p class="substep">Todo mundo faz</p>
+                <p class="substep">Desenvolvimento Guiado por Uai</p>
+                <p class="substep">Depende da experiência</p>
+                <p class="substep">Não escala bem</p>
+
+            </div>
+
+            <div
+                id="analise-estatica"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Análise Estática</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="fuzzing"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Fuzzing</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="analise-baseada-em-ia"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Análise Baseada em IA</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Ferramentas</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas-revisao-manual"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Revisão Manual</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id=""
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id=""
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="overview"
+                class="step"
+                data-x="650"
+                data-y="500"
+                data-scale="12"
+            >
+
+            </div>
+        </div>
+        <script src="js/impress.js"></script>
+        <script>
+            impress().init();
+        </script>
+    </body>
+</html>
