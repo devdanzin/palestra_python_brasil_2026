@@ -7,12 +7,13 @@ Saudações a todas e a todos! Meu nome é Daniel Diniz e esta é a palestra "Ca
 Primeiro, gostaria de agradecer a vocês por participar da palestra. Segundo, gostaria de me apresentar.
 
 Minhas qualificações, em ordem de importância:
- - Sou pai do Pedro, que tem 12 anos e está aqui conosco
- - Sou biólogo e exerço a profissão
- - Sou Programador Amador de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
- - Faço parte do Python Triage Team, grupo oficial que faz triagem de bugs no GitHub do CPython, a principal implementação do Python
- - Faço parte do Python Fuzzing Team, grupo oficial voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
- - Sou um caçador de bugs, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
+
+- Sou pai do Pedro, que tem 12 anos e está aqui conosco
+- Sou biólogo e exerço a profissão
+- Sou Programador Amador de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
+- Faço parte do Python Triage Team, grupo oficial que faz triagem de bugs no GitHub do CPython, a principal implementação do Python
+- Faço parte do Python Fuzzing Team, grupo oficial voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
+- Sou um caçador de bugs, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
 
 Estou envolvido na análise de projetos escritos em Python há pouco menos de 20 anos e gostaria de trazer para vocês algumas coisas que aprendi, desenvolvi e descobri ao longo desse tempo.
 
@@ -110,9 +111,9 @@ A interação com as pessoas mantenedoras é um tópico que merece uma palestra 
 
 Agora faremos um breve passeio por ferramentas que nos ajudam a aplicar as técnicas descritas, com certa ênfase nas ferramentas de IA que desenvolvi.
 
-### Revisão Manual de Código
+### Para Revisão Manual de Código
 
-Como vimos, este método não utiliza ferramentas específicas. Mas pode se valer de processos como discutir os achados com outras pessoas, criar programas ou scripts para reproduzir o problema, etc. Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se encontramos um "Uai". É um código mal escrito e confuso, mas isso é só para atrapalhar a análise de vocês. 
+Como vimos, este método não utiliza ferramentas específicas. Mas pode se valer de processos como discutir os achados com outras pessoas, criar programas ou scripts para reproduzir o problema, etc. Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se encontramos um "Uai". É um código mal escrito e confuso, mas isso é só para atrapalhar a análise de vocês.
 
 ```python
 def max_pow(a, b):
@@ -131,7 +132,7 @@ def max_pow(a, b):
 
 O Uai que eu vejo é que falta um `return` ao final do segundo bloco: o código vai printar o resultado, mas vai retornar `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
 
-### Análise Estática
+### Para Análise Estática
 
 Acredito que seja a técnica com mais ferramentas disponíveis, você acha alguma para quase qualquer linguagem de programação.
 
@@ -143,7 +144,7 @@ Vamos dar uma rápida olhada em como algumas dessas ferramentas são utilizadas 
 
 [...]
 
-### Fuzzing
+### Para Fuzzing
 
 AFL, fuzzers específicos do CPython no OSSFuzz, fusil e lafleur.
 
@@ -153,8 +154,7 @@ Vamos ver brevemente como uma dessas ferramentas, lafleur, funciona e que tipo d
 
 [...]
 
-
-### Análise Baseada em IA (Híbrida)
+### Para Análise Baseada em IA (Híbrida)
 
 Temos uma ampla gama de projetos nessa categoria: pr-review-toolkit, xxx, yyy. Mas geralmente são focados ou em análise de PRs ou de segurança do código. Além disso, são multi-linguagem.
 
@@ -164,7 +164,7 @@ No ecossistema Python, as principais ferramentas de análise baseada em IA são 
 - cext-review-toolkit, que analisa extensões em C e C++ para Python.
 - ft-review-toolkit, que analisa suporte e problemas de extensões em C relacionados ao Free Threading.
 - cpython-review-toolkit, que analisa o código do próprio CPython.
-- rust-ext-review-toolkit (junto com Charlie Lin), que analisa extensões em Rust para Python. 
+- rust-ext-review-toolkit (junto com Charlie Lin), que analisa extensões em Rust para Python.
 
 Essas ferramentas formam um família que compartilha métodos, código e filosofia, sendo cada uma adaptada de forma específica para o fim a que se destina. Alguns agentes e scripts são compartilhados e adaptados, outros são exclusivos de uma ferramenta.
 
@@ -174,25 +174,21 @@ Vamos ver exemplos dos tipos de erro que uma dessas ferramentas encontra:
 
 [...]
 
-
 ## Resultados e Conclusões
 
 Como foi citado lá no início, essas minhas ferramentas de fuzzing e IA que discutimos não são teóricas, com aplicação potencial. Elas foram utilizadas em algumas campanhas voltadas ao ecossistema Python e trouxeram resultados significativos.
 
-
-### Sobre as Campanhas 
+### Sobre as Campanhas
 
 Descrição das campanhas (período, quem se envolveu, posts dos resultados, etc.).
 
 [...]
-
 
 ### Resultados Alcançados
 
 Descrição detalhada dos resultados das campanhas.
 
 [...]
-
 
 ### Importância das Campanhas
 
@@ -202,15 +198,13 @@ Esse tipo de esforço sistemático é importante em diferentes níveis. No mais 
 
 As ferramentas permitem que até mesmo pessoas com pouca familiaridade com o código de um projeto rodem análises capazes de ajudar a tornar o software mais robusto. Também deixam as pessoas especialistas num projeto avaliarem o código de formas totalmente diferentes das que estão acostumadas.
 
-Além de possibilitarem as campanhas e análises individuais de bases de código, as ferramentas ensinam pessoas desenvolvedoras a pensar como caçadoras de bugs: uma abordagem adversarial na qual pensamos "como isso pode dar errado?" por diversas perspectivas. 
-
+Além de possibilitarem as campanhas e análises individuais de bases de código, as ferramentas ensinam pessoas desenvolvedoras a pensar como caçadoras de bugs: uma abordagem adversarial na qual pensamos "como isso pode dar errado?" por diversas perspectivas.
 
 ### Futuro
 
 Perspectivas com modelos mais potentes, aprimoramentos das ferramentas e mais pessoas caçando bugs.
 
 [...]
-
 
 ## Fechamento
 
