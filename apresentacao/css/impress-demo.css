@@ -323,7 +323,7 @@ a:focus {
     font-size: 30px;
     /*line-height: 36px;*/
     letter-spacing: -1px;
-    background-image: url("../cobra_loading.svg");
+    background-image: url("../images/cobra_loading.svg");
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: bottom;
@@ -429,6 +429,10 @@ h3 {
     color: black;
     /*line-height: 300px;*/
     padding-top: 30px;
+}
+
+#analise-baseada-em-ia h1 {
+    font-size: 70px;
 }
 
 #paralelo2 p {
