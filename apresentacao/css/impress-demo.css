@@ -410,6 +410,10 @@ h3 {
     transform: translateZ(50px);*/
 }
 
+#ferramentas-revisao-manual h1 {
+    font-size: 70px;
+}
+
 #resultados1 p,
 #registro-indicios h2 {
     font-size: 50px;
@@ -487,6 +491,33 @@ ul {
     transition: 3s;
     color: black;
     font-size: 40px;
+}
+
+.impress-progressbar {
+    position: absolute;
+    right: 318px;
+    bottom: 1px;
+    left: 118px;
+    border-radius: 7px;
+    border: 2px solid rgba(100, 100, 100, 1);
+}
+.impress-progressbar DIV {
+    width: 0;
+    height: 20px;
+    border-radius: 5px;
+    background: rgba(175, 175, 175, 1);
+    transition: width 1s linear;
+}
+.impress-progress {
+    position: absolute;
+    left: 40px;
+    bottom: 1px;
+    text-align: left;
+    opacity: 1 !important;
+    font-size: 30px;
+    background-color: #fff !important;
+    color: #000;
+    font-weight: bold;
 }
 
 /*

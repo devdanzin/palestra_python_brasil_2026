@@ -14,6 +14,7 @@
             href="//fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
             rel="stylesheet"
         />
+        <link rel="stylesheet" href="js/highlight/styles/github.css">
         <link href="css/impress-common.css" rel="stylesheet" />
         <link href="css/impress-demo.css" rel="stylesheet" />
 
@@ -320,7 +321,181 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Revisão Manual</h1>
+                <h1>Para Revisão Manual</h1>
+<pre class="substep"><code>def max_pow(a, b):
+    """Maior número na exponenciação de um par."""
+    if a > b:
+        result = b ** a
+        if b < 0 and a % 2 == 0:
+            result = abs(result)
+        return result
+    else:
+        result = a ** b
+        if a < 0 and b % 2 == 0:
+            result = abs(result)</code></pre>
+            </div>
+
+            <div
+                id="ferramentas-analise-estatica"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Análise Estática</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas-fuzzing"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Fuzzing</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas-ia1"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Análise Baseada em IA</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas-ia2"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Análise Baseada em IA</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="ferramentas-ia3"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Análise Baseada em IA</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="resultados_01"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Resultados</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+
+            <div
+                id="resultados_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Resultados</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+
+            <div
+                id="resultados_03"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Resultados</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+
+            <div
+                id="conclusoes_01"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Conclusões</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="conclusoes_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Conclusões</h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
+            <div
+                id="conclusoes_03"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Conclusões</h1>
                 <p></p>
                 <p></p>
                 <p></p>
@@ -357,6 +532,22 @@
                 <p></p>
 
             </div>
+
+            <div
+                id=""
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+
+            </div>
+
 
             <div
                 id="overview"
@@ -368,6 +559,12 @@
 
             </div>
         </div>
+
+        <div id="impress-toolbar"></div>
+        <div class="impress-progressbar"><div></div></div>
+        <div class="impress-progress"></div>
+
+        <script type="text/javascript" src="js/highlight/highlight.pack.js"></script>
         <script src="js/impress.js"></script>
         <script>
             impress().init();
