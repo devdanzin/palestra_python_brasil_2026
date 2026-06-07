@@ -2,9 +2,13 @@
 
 ## Introdução
 
+### Olá
+
 Saudações a todas e a todos! Meu nome é Daniel Diniz e esta é a palestra "Caçando bugs em Python: do olho humano à IA".
 
 Primeiro, gostaria de agradecer a vocês por participar da palestra. Segundo, gostaria de me apresentar.
+
+### Quem sou
 
 Minhas qualificações, em ordem de importância:
 
