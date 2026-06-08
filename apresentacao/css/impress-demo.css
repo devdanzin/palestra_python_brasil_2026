@@ -286,6 +286,20 @@ a:focus {
     transition: opacity 1s;
 }
 
+.sudden {
+    -webkit-transition: opacity 0s !important;
+    -moz-transition: opacity 0s !important;
+    -ms-transition: opacity 0s !important;
+    -o-transition: opacity 0s !important;
+    transition: opacity 0s !important;
+}
+
+.absolute {
+    position: absolute;
+    top: -60px;
+    left: -60px;
+}
+
 .impress-enabled .step.active {
     opacity: 1;
 }

@@ -218,7 +218,7 @@ Vocês lembram da metáfora do levantamento de fauna no início? Quando você de
 
 ### Um Convite
 
-Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa usuária de algum projeto específico com o qual gostaria de contribuir, ou apenas ficou com curiosidade sobre o que foi mencionado, fica aqui o convite para que a gente analise esse código em conjunto utilizando as ferramentas que foram apresentadas. Não sei se alguém vai se interessar em fazer isso, mas estou à disposição para ensinar e fazer junto.
+Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa usuária de algum projeto específico com o qual gostaria de contribuir, ou apenas ficou com curiosidade sobre o que foi mencionado, fica aqui o convite para que a gente analise esse código em conjunto utilizando as ferramentas que foram apresentadas. Se essas ferramentas fizerem sentido para o código de vocês, estou à disposição para ensinar e fazer junto.
 
 ### Agradecimento e Contato
 
