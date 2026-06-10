@@ -20,10 +20,10 @@
 /* ============================ 1. VARIÁVEIS =============================== */
 
 :root {
-    /* Fonte dos slides.
-       PROVISÓRIO: este é o valor atual ("Open Sans"). Defina o valor final
-       depois de testar — basta trocar esta única linha. */
-    --fonte: "Open Sans", sans-serif;
+    /* Fonte dos slides */
+    --fonte: sans-serif;
+
+    --fonte-codigo: monospace;
 
     /* Cor padrão do texto */
     --cor-texto: #000;
@@ -306,6 +306,7 @@ ul {
    seletor para não repetir a regra. (Em #paralelo, o text-align não afeta os
    <span> inline — o alinhamento das colunas é feito nas células, mais abaixo.) */
 #paralelo span,
+#paralelo p,
 #observacao_direta p,
 #tecnicas p,
 #revisao_manual p,
@@ -404,6 +405,7 @@ ul {
 
 #ferramentas_revisao_manual code {
     font-size: 130%;
+    font-family: var(--fonte-codigo);
 }
 
 /* --- fechamento --- */

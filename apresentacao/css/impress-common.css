@@ -1,7 +1,7 @@
-/* impress.js doesn't require any particular CSS file. 
-Each author should create their own, to achieve the visual style they want. 
-Yet in practice many plugins will not do anything useful without CSS. (See for example mouse-timeout plugin.) 
-This file contains sample CSS that you may want to use in your presentation. 
+/* impress.js doesn't require any particular CSS file.
+Each author should create their own, to achieve the visual style they want.
+Yet in practice many plugins will not do anything useful without CSS. (See for example mouse-timeout plugin.)
+This file contains sample CSS that you may want to use in your presentation.
 It is focused on plugin functionality, not the visual style of your presentation. */
 
 /* Using the substep plugin, hide bullet points at first, then show them one by one. */
@@ -14,7 +14,7 @@ It is focused on plugin functionality, not the visual style of your presentation
     transition: opacity 1s;
 }
 /*
-  Speaker notes allow you to write comments within the steps, that will not 
+  Speaker notes allow you to write comments within the steps, that will not
   be displayed as part of the presentation. However, they will be picked up
   and displayed by impressConsole.js when you press P.
 */
@@ -149,7 +149,7 @@ body.impress-mouse-timeout {
 */
 
 .impress-enabled                          { pointer-events: none }
-.impress-enabled #impress                 { pointer-events: auto }
+.impress-enabled #impress                 { pointer-events: none }
 
  /*If you disable pointer-events, you need to re-enable them for the toolbar.
    And the speaker console while at it.*/
@@ -168,5 +168,3 @@ body.impress-mouse-timeout {
 
     But it was fun to learn about it, wasn't it?
 */
-
-
