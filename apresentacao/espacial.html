@@ -1,22 +1,24 @@
 <!doctype html>
-
-<html lang="pt">
+<html lang="pt-BR">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=1024" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <title>Caçando bugs em Python: do olho humano à IA</title>
 
-        <meta name="description" content="" />
+        <meta
+            name="description"
+            content="Palestra sobre caça a bugs em Python: da revisão manual à análise com IA. Por Daniel Diniz."
+        />
         <meta name="author" content="Daniel Diniz" />
 
         <link
             href="//fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="js/highlight/styles/github.css">
-        <link href="css/impress-common.css" rel="stylesheet" />
-        <link href="css/impress-demo.css" rel="stylesheet" />
+        <link rel="stylesheet" href="js/highlight/styles/github.css" />
+        <link rel="stylesheet" href="css/impress-common.css" />
+        <link rel="stylesheet" href="css/impress-demo.css" />
 
         <link rel="shortcut icon" href="favicon.png" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -28,19 +30,20 @@
         </div>
 
         <div id="impress">
-            <!-- 1. TÍTULO E INTRODUÇÃO: A Borda da Floresta -->
-            <!-- Uma visão inicial geral, antes de entrarmos na mata. -->
+            <!--
+                Imagem de fundo: a "floresta" sobre a qual a apresentação voa.
+                O posicionamento e a ampliação (scale) estão no CSS (#fundo).
+            -->
             <img
+                id="fundo"
                 src="images/visao_floresta_05.png"
-                alt="Visão da Floresta"
-                style="
-                    scale: 10;
-                    z-index: -1;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                "
+                alt="Visão da floresta"
             />
+
+            <!-- ===================================================================
+                 VOO 1 — A borda da floresta (x=0, y=-4000, scale=4)
+                 Visão geral inicial, antes de entrarmos na mata.
+                 =================================================================== -->
 
             <div
                 id="titulo"
@@ -50,12 +53,11 @@
                 data-scale="4"
             >
                 <h1>Caçando bugs em</h1>
-                <h2>
-                    <img
-                        src="images/python-logo-transparent2.png"
-                        alt="Python Logo"
-                    />
-                </h2>
+                <img
+                    class="logo-titulo"
+                    src="images/python-logo-transparent2.png"
+                    alt="Python"
+                />
                 <h2>do olho humano à IA</h2>
                 <h3>Daniel Diniz</h3>
             </div>
@@ -77,6 +79,7 @@
                     <li class="substep">Caçador de bugs</li>
                 </ul>
             </div>
+
             <div
                 id="paralelo"
                 class="step slide appear"
@@ -86,22 +89,28 @@
             >
                 <h1>Um paralelo</h1>
                 <div class="table-container">
-                <table>
-                    <tr>
-                        <td><span class="esquerda">Biologia</span></td>
-                        <td><span class="dois_pontos">:</span></td>
-                        <td><span class="direita">Programação</span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="esquerda">Animais</span></td>
-                        <td><span class="dois_pontos">:</span></td>
-                        <td><span class="direita">Bugs</span></td>
-                    </tr>
-                </table>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><span class="esquerda">Biologia</span></td>
+                                <td><span class="dois_pontos">:</span></td>
+                                <td>
+                                    <span class="direita">Programação</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="esquerda">Animais</span></td>
+                                <td><span class="dois_pontos">:</span></td>
+                                <td><span class="direita">Bugs</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <p>⬇️</p>
                 <p>Descobertas</p>
             </div>
+
+            <!-- Passo "câmera" (sem conteúdo): só posiciona o voo. -->
             <div
                 id="floresta_01"
                 class="step"
@@ -109,6 +118,10 @@
                 data-y="-4000"
                 data-scale="4"
             ></div>
+
+            <!-- ===================================================================
+                 VOO 2 — Deslizamos para o lado (x=-2500)
+                 =================================================================== -->
 
             <div
                 id="floresta_02"
@@ -128,6 +141,11 @@
                 <h1>Observação Direta</h1>
                 <p>Método mais básico</p>
             </div>
+
+            <!-- ===================================================================
+                 VOO 3 — Mergulho no acampamento / observação (x=-2000, y=-700, scale=2)
+                 =================================================================== -->
+
             <div
                 id="observacao"
                 class="step"
@@ -143,11 +161,11 @@
                 data-y="-700"
                 data-scale="2"
             >
-                <img src="images/capivara_01.jpg" alt="Capivara">
+                <img src="images/capivara_01.jpg" alt="Capivara" />
             </div>
 
             <div
-                id="registro-indicios"
+                id="registro_indicios"
                 class="step slide appear"
                 data-x="-2000"
                 data-y="-700"
@@ -156,6 +174,10 @@
                 <h1>Registro de indícios</h1>
                 <h2>Evidências indiretas da presença de animais</h2>
             </div>
+
+            <!-- ===================================================================
+                 VOO 4 — Sobre as pegadas (x=1000, y=3500, scale=3)
+                 =================================================================== -->
 
             <div
                 id="pegadas"
@@ -166,7 +188,7 @@
             ></div>
 
             <div
-                id="armadilhas-fotograficas"
+                id="armadilhas_fotograficas"
                 class="step slide appear"
                 data-x="1000"
                 data-y="3500"
@@ -175,6 +197,10 @@
                 <h1>Armadilhas Fotográficas</h1>
                 <h2>Câmeras automáticas com iscas diversas</h2>
             </div>
+
+            <!-- ===================================================================
+                 VOO 5 — Região das armadilhas (x=-7500, y=5500, scale=4)
+                 =================================================================== -->
 
             <div
                 id="armadilhas"
@@ -185,7 +211,7 @@
             ></div>
 
             <div
-                id="paralelo2"
+                id="paralelo_2"
                 class="step slide appear"
                 data-x="-7500"
                 data-y="5500"
@@ -196,8 +222,9 @@
                 <p>Registro de Indícios: Análise Estática</p>
                 <p>Armadilhas Fotográficas (Iscas): Fuzzing</p>
             </div>
+
             <div
-                id="agentes-ia"
+                id="agentes_ia"
                 class="step slide appear"
                 data-x="-7500"
                 data-y="5500"
@@ -205,11 +232,14 @@
             >
                 <h1>A Equipe de Pessoas Biólogas</h1>
                 <h2>Especialistas em diversos grupos</h2>
-
-                </p>
             </div>
+
+            <!-- ===================================================================
+                 VOO 6 — Zoom na equipe (x=-6250, y=2500, scale=3.5)
+                 =================================================================== -->
+
             <div
-                id="agentes-ia_visao"
+                id="agentes_ia_visao"
                 class="step appear"
                 data-x="-6250"
                 data-y="2500"
@@ -217,15 +247,28 @@
             ></div>
 
             <div
-                id="agentes-ia_especialistas"
+                id="agentes_ia_especialistas"
                 class="step appear"
                 data-x="-6250"
                 data-y="2500"
                 data-scale="3.5"
-            ><img src="images/pessoas_biologas.png" alt=""></div>
+            >
+                <img
+                    src="images/pessoas_biologas.png"
+                    alt="Equipe de pessoas biólogas"
+                />
+            </div>
+
+            <!-- ===================================================================
+                 FIM DO VOO — A câmera para de se mover.
+                 Daqui em diante todos os slides são cartões fixos na MESMA posição
+                 (x=0, y=0, scale=11), exibidos de frente, um por cima do outro.
+                 Os slides marcados como "Placeholder" ainda estão com <p> vazios,
+                 aguardando o conteúdo.
+                 =================================================================== -->
 
             <div
-                id="resultados1"
+                id="relatorios_campo"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -233,7 +276,6 @@
             >
                 <h1>Relatórios de Campo</h1>
                 <p>SPOILERS!</p>
-
             </div>
 
             <div
@@ -248,11 +290,10 @@
                 <p>Análise Estática</p>
                 <p>Fuzzing</p>
                 <p>Análise Baseada em IA</p>
-
             </div>
 
             <div
-                id="revisao-manual"
+                id="revisao_manual"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -263,11 +304,16 @@
                 <p class="substep">Depende da experiência</p>
                 <p class="substep">Não escala bem</p>
                 <p class="substep">Desenvolvimento Guiado por Uai</p>
-                <img class="substep sudden absolute" src="images/capivara_02.jpg">
+                <img
+                    class="substep sudden absolute"
+                    src="images/capivara_02.jpg"
+                    alt="Capivara"
+                />
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="analise-estatica"
+                id="analise_estatica"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -278,9 +324,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
                 id="fuzzing"
                 class="step slide appear"
@@ -293,11 +339,11 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="analise-baseada-em-ia"
+                id="analise_baseada_em_ia"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -308,9 +354,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
                 id="ferramentas"
                 class="step slide appear"
@@ -323,32 +369,32 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
             <div
-                id="ferramentas-revisao-manual"
+                id="ferramentas_revisao_manual"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
                 <h1>Para Revisão Manual</h1>
-<pre class="substep"><code class="python">def max_pow(a, b):
+                <pre class="substep"><code class="python">def max_pow(a, b):
     """Maior número na exponenciação de um par."""
-    if a > b:
+    if a &gt; b:
         result = b ** a
-        if b < 0 and a % 2 == 0:
+        if b &lt; 0 and a % 2 == 0:
             result = abs(result)
         return result
     else:
         result = a ** b
-        if a < 0 and b % 2 == 0:
+        if a &lt; 0 and b % 2 == 0:
             result = abs(result)</code></pre>
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="ferramentas-analise-estatica"
+                id="ferramentas_analise_estatica"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -359,11 +405,11 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="ferramentas-fuzzing"
+                id="ferramentas_fuzzing"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -374,11 +420,11 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="ferramentas-ia1"
+                id="ferramentas_ia_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -389,11 +435,11 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="ferramentas-ia2"
+                id="ferramentas_ia_02"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -404,11 +450,11 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
-                id="ferramentas-ia3"
+                id="ferramentas_ia_03"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -419,9 +465,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
                 id="resultados_01"
                 class="step slide appear"
@@ -434,10 +480,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
-
+            <!-- Placeholder -->
             <div
                 id="resultados_02"
                 class="step slide appear"
@@ -450,10 +495,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
-
+            <!-- Placeholder -->
             <div
                 id="resultados_03"
                 class="step slide appear"
@@ -466,10 +510,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
-
+            <!-- Placeholder -->
             <div
                 id="conclusoes_01"
                 class="step slide appear"
@@ -482,9 +525,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
                 id="conclusoes_02"
                 class="step slide appear"
@@ -497,9 +540,9 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
+            <!-- Placeholder -->
             <div
                 id="conclusoes_03"
                 class="step slide appear"
@@ -512,7 +555,6 @@
                 <p></p>
                 <p></p>
                 <p></p>
-
             </div>
 
             <div
@@ -523,18 +565,14 @@
                 data-scale="11"
             >
                 <h1>Fechamento</h1>
-                <p class="substep">A ferramentas funcionaram com:
-                    <ul class="substep">
-                        <li>CPython</li>
-                        <li>lxml</li>
-                        <li>Cython</li>
-                        <li>bottleneck</li>
-                    </ul>
-                </p>
+                <p class="substep">As ferramentas funcionaram com:</p>
+                <ul class="substep">
+                    <li>CPython</li>
+                    <li>lxml</li>
+                    <li>Cython</li>
+                    <li>bottleneck</li>
+                </ul>
                 <p class="substep">Também podem funcionar para você!</p>
-                <p></p>
-                <p></p>
-
             </div>
 
             <div
@@ -546,7 +584,11 @@
             >
                 <h1>Um Convite</h1>
                 <p class="substep">Vamos caçar bugs?</p>
-                <img class="substep sudden" src="images/capivara_programando.png" width="35%">
+                <img
+                    class="substep sudden imagem-convite"
+                    src="images/capivara_programando.png"
+                    alt="Capivara programando"
+                />
             </div>
 
             <div
@@ -557,33 +599,62 @@
                 data-scale="11"
             >
                 <h1>Contato</h1>
-                <br/>
-                <p><img src="images/email.png" width="72px"> <span>devdanzin@gmail.com</span></p>
-                <p><img src="images/telegram.png" width="72px"> <span>https://t.me/devdanzin</span></p>
-                <p><img src="images/github.svg" width="72px"> <span>https://github.com/devdanzin</span></p>
-                <p><img src="images/mastodon_pq.png"> <span>https://mastodon.social/@danzin</span></p>
-                <p><img src="images/python-logo-only.png" height="72px"> <span>https://discuss.python.org/u/devdanzin</span></p>
-                <img class="substep sudden absolute" src="images/capivara_computador.gif" width="25%">
-
+                <br />
+                <!-- Ícones decorativos: o texto ao lado já identifica cada contato (alt vazio de propósito). -->
+                <p>
+                    <img class="contato-icone" src="images/email.png" alt="" />
+                    <span>devdanzin@gmail.com</span>
+                </p>
+                <p>
+                    <img
+                        class="contato-icone"
+                        src="images/telegram.png"
+                        alt=""
+                    />
+                    <span>https://t.me/devdanzin</span>
+                </p>
+                <p>
+                    <img class="contato-icone" src="images/github.svg" alt="" />
+                    <span>https://github.com/devdanzin</span>
+                </p>
+                <p>
+                    <img
+                        class="contato-icone"
+                        src="images/mastodon_pq.png"
+                        alt=""
+                    />
+                    <span>https://mastodon.social/@danzin</span>
+                </p>
+                <p>
+                    <img
+                        class="contato-icone"
+                        src="images/python-logo-only.png"
+                        alt=""
+                    />
+                    <span>https://discuss.python.org/u/devdanzin</span>
+                </p>
+                <img
+                    class="substep sudden absolute imagem-contato"
+                    src="images/capivara_computador.gif"
+                    alt="Capivara usando o computador"
+                />
             </div>
 
-
+            <!-- Passo de overview: zoom-out final que mostra todos os slides. -->
             <div
                 id="overview"
                 class="step"
                 data-x="650"
                 data-y="500"
                 data-scale="12"
-            >
-
-            </div>
+            ></div>
         </div>
 
         <div id="impress-toolbar"></div>
         <div class="impress-progressbar"><div></div></div>
         <div class="impress-progress"></div>
 
-        <script type="text/javascript" src="js/highlight/highlight.pack.js"></script>
+        <script src="js/highlight/highlight.pack.js"></script>
         <script src="js/impress.js"></script>
         <script>
             impress().init();
