@@ -307,7 +307,6 @@
                 />
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="analise_estatica"
                 class="step slide appear"
@@ -316,13 +315,12 @@
                 data-scale="11"
             >
                 <h1>Análise Estática</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p class="substep">Não executa, procura padrões</p>
+                <p class="substep">Regras pré-definidas, configuráveis</p>
+                <p class="substep">Funciona bem em larga escala</p>
+                <p class="substep">Tende a gerar falsos positivos</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="fuzzing"
                 class="step slide appear"
@@ -331,28 +329,40 @@
                 data-scale="11"
             >
                 <h1>Fuzzing</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>Fornece inputs problemáticos</p>
+                <p>Executa, análise dinâmica</p>
+                <p>Alcança bugs profundos</p>
+                <p>Escala bem, exige muita CPU</p>
             </div>
 
-            <!-- Placeholder -->
             <div
-                id="analise_baseada_em_ia"
+                id="analise_baseada_em_ia_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
                 <h1>Análise Baseada em IA</h1>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p class="substep">Estruturada, com agentes especializados</p>
+                <p class="substep">Revisão direta do código</p>
+                <p class="substep">Procura por padrões</p>
+                <p class="substep">Testa inputs problemáticos</p>
+            </div>
+
+            <div
+                id="analise_baseada_em_ia_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Análise Baseada em IA</h1>
+                <p class="substep">Técnicas exclusivas de IA</p>
+                <p class="substep">Trabalho em conjunto</p>
+                <p class="substep">Passo de síntese</p>
                 <p></p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="ferramentas"
                 class="step slide appear"
@@ -361,10 +371,7 @@
                 data-scale="11"
             >
                 <h1>Ferramentas</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>Para cada técnica vista</p>
             </div>
 
             <div
@@ -388,37 +395,68 @@
             result = abs(result)</code></pre>
             </div>
 
-            <!-- Placeholder -->
             <div
-                id="ferramentas_analise_estatica"
+                id="ferramentas_analise_estatica_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
                 <h1>Para Análise Estática</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p class="substep">Populares em projetos Python</p>
+                <p class="substep">Focam em estilo, erros, tipagem</p>
+                <p class="substep">pylint, ruff, mypy, pyright, bandit</p>
             </div>
 
-            <!-- Placeholder -->
             <div
-                id="ferramentas_fuzzing"
+                id="ferramentas_analise_estatica_02"
+                class="step appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <img src="images/ruff.png" style="width: 230%; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="ruff">
+            </div>
+
+            <div
+                id="ferramentas_analise_estatica3"
+                class="step appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <img src="images/mypy.png" style="width: 230%; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" alt="mypy">
+            </div>
+
+            <div
+                id="ferramentas_fuzzing_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
                 <h1>Para Fuzzing</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p class="substep">Pouco conhecidas e usadas</p>
+                <p class="substep">AFL, fusil, lafleur, ferramentas fechadas</p>
+                <p class="substep">Hypothesis?</p>
             </div>
 
-            <!-- Placeholder -->
+            <div
+                id="ferramentas_fuzzing_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>lafleur</h1>
+                <img src="images/lafleur.png" style="width: 55%; position:absolute; top: 50%; left: 30%; transform: translate(-50%, -50%);" alt="">
+                <p>Seleção</p>
+                <p>Mutação</p>
+                <p>Execução</p>
+                <p>Análise</p>
+                <p>Introspecção</p>
+            </div>
+
             <div
                 id="ferramentas_ia_01"
                 class="step slide appear"
@@ -427,13 +465,11 @@
                 data-scale="11"
             >
                 <h1>Para Análise Baseada em IA</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>Exemplos</p>
+                <p>Informações</p>
+                <p>Etc.</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="ferramentas_ia_02"
                 class="step slide appear"
@@ -442,13 +478,16 @@
                 data-scale="11"
             >
                 <h1>Para Análise Baseada em IA</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <span>Família -review-toolkit:</span>
+                <ul>
+                    <li>code (Python puro)</li>
+                    <li>cext (extensões C e C++)</li>
+                    <li>ft (suporte a Free Threading)</li>
+                    <li>cpython (CPython em si)</li>
+                    <li>rust-ext (extensões Rust)</li>
+                </ul>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="ferramentas_ia_03"
                 class="step slide appear"
