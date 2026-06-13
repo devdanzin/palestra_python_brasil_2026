@@ -30,7 +30,8 @@
 
     /* Escala tipográfica (px no espaço de design 1920x1080 do impress) */
     --fs-h1: 140px;
-    --fs-h1-menor: 100px;
+    --fs-h1-medio: 120px; /* títulos um pouco longos */
+    --fs-h1-menor: 100px; /* títulos bem longos */
     --fs-h2: 80px;
     --fs-h3: 70px;
     --fs-corpo: 30px; /* texto base dentro do cartão do slide */
@@ -210,7 +211,9 @@ a:focus {
         linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
         url("../images/cobra_loading.svg");
     background-repeat: no-repeat;
-    background-position: center, right bottom;
+    background-position:
+        center,
+        right bottom;
     background-size: auto, 25%;
 }
 
@@ -317,16 +320,29 @@ ul {
     width: 25%;
 }
 
+/* Capturas de tela de ferramentas (ruff, mypy) exibidas em tela cheia,
+   centralizadas no passo. (Antes eram estilos inline no <img>.) */
+.print-ferramenta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 230%;
+}
+
 /* ============ 7. SLIDES DE CONTEÚDO (ORDEM DE APARIÇÃO) ================== */
 
-/* --- Compartilhado por vários slides ---
-   Parágrafos centrais de 70px usados por: paralelo, observação direta,
-   técnicas, revisão manual, análise estática e paralelo 2. Reunidos num único
-   seletor para não repetir a regra. (Em #paralelo, o text-align não afeta os
-   <span> inline — o alinhamento das colunas é feito nas células, mais abaixo.) */
+/* --- Parágrafos centrais (compartilhado por vários slides) ---
+   O corpo de texto central de 70px, centralizado, usado pela maioria dos slides
+   de conteúdo. Reunido num único seletor para não repetir a regra.
+   (Em #paralelo o text-align não afeta os <span> inline da tabela — o
+   alinhamento das colunas é feito nas células, mais abaixo; mas afeta os <p>.)
+   Ficam de fora: slides de imagem (sem <p>) e os de layout próprio
+   (fuzzing_02 e ia_02). Ao criar um novo slide de conteúdo, inclua o <p> aqui. */
 #paralelo span,
 #paralelo p,
 #observacao_direta p,
+#paralelo_2 p,
 #tecnicas p,
 #revisao_manual p,
 #analise_estatica p,
@@ -335,14 +351,9 @@ ul {
 #analise_baseada_em_ia_02 p,
 #ferramentas p,
 #ferramentas_analise_estatica_01 p,
-#ferramentas_analise_estatica_02 p,
-#ferramentas_analise_estatica_03 p,
 #ferramentas_fuzzing_01 p,
-#ferramentas_fuzzing_02 p,
 #ferramentas_ia_01 p,
-#ferramentas_ia_02 p,
-#ferramentas_ia_03 p,
-#paralelo_2 p {
+#ferramentas_ia_03 p {
     font-size: var(--fs-paragrafo);
     text-align: center;
     color: var(--cor-texto);
@@ -437,13 +448,13 @@ ul {
 /* Título longo: reduzido para caber. */
 #analise_baseada_em_ia_01 h1,
 #analise_baseada_em_ia_02 h1 {
-    font-size: 120px;
+    font-size: var(--fs-h1-medio);
 }
 
 /* --- ferramentas_revisao_manual (slide de código) --- */
 /* Título longo: reduzido para caber. */
 #ferramentas_revisao_manual h1 {
-    font-size: 120px;
+    font-size: var(--fs-h1-medio);
 }
 
 /* Sem a mascote aqui: código é o que menos tolera sobreposição. */
@@ -469,21 +480,41 @@ ul {
     font-family: var(--fonte-codigo);
 }
 
-#ferramentas_fuzzing_02 h1 {
-    text-align: right;
-    padding-right: 250px;
-    padding-top: 20px;
+/* --- ferramentas_fuzzing_02 (slide do lafleur) ---
+   O diagrama do ciclo do lafleur fica à esquerda (posição absoluta); o título e
+   a lista de etapas vão à direita, com recuo à direita para não sobrepor a
+   imagem. (Antes a imagem tinha estilo inline.) */
+#ferramentas_fuzzing_02 img {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    width: 55%;
 }
 
-
+#ferramentas_fuzzing_02 h1,
 #ferramentas_fuzzing_02 p {
     text-align: right;
-    padding-right: 250px;
     padding-top: 20px;
+    padding-right: 250px;
 }
 
-#ferramentas_ia_02 span,
-#ferramentas_ia_03 span {
+#ferramentas_fuzzing_02 p {
+    font-size: var(--fs-paragrafo);
+    color: var(--cor-texto);
+}
+
+/* --- ferramentas_ia (família -review-toolkit) --- */
+/* Títulos repetidos e longos: tamanho menor, com respiro para o conteúdo. */
+#ferramentas_ia_01 h1,
+#ferramentas_ia_02 h1,
+#ferramentas_ia_03 h1 {
+    font-size: var(--fs-h1-menor);
+    padding-bottom: 30px;
+}
+
+/* Rótulo "Família -review-toolkit:" e a lista de toolkits (slide ia_02). */
+#ferramentas_ia_02 span {
     font-size: var(--fs-paragrafo);
     text-align: left;
     color: var(--cor-texto);
@@ -495,13 +526,6 @@ ul {
     color: var(--cor-texto);
     padding-top: var(--espaco-li);
     padding-left: var(--recuo-li);
-}
-
-#ferramentas_ia_01 h1,
-#ferramentas_ia_02 h1,
-#ferramentas_ia_03 h1 {
-    font-size: var(--fs-h1-menor);
-    padding-bottom: 30px;
 }
 
 /* --- fechamento --- */
