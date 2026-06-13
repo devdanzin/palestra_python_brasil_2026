@@ -89,7 +89,7 @@ Com o fuzzing, é possível encontrar bugs que outras técnicas não alcançam, 
 
 ### Análise Baseada em IA (Híbrida)
 
-É uma técnica recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando ao modelo que procure de forma livre. Mas aqui vamos falar sobre uma forma mais estruturada, na qual delegamos a diversos agentes que procurem tipos de bugs específicos. Usada dessa maneira, a IA permite uma abordagem híbrida, com características de revisão manual, análise estática e fuzzing.
+É uma técnica recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando ao modelo que procure de forma livre. Mas aqui vamos falar sobre uma forma mais estruturada, na qual delegamos a diversos agentes que procuram tipos de bugs específicos. Usada dessa maneira, a IA permite uma abordagem híbrida, com características de revisão manual, análise estática e fuzzing.
 
 Esta técnica corresponde à equipe de pessoas biólogas especialistas trabalhando em conjunto.
 
@@ -142,11 +142,13 @@ Acredito que seja a técnica com mais ferramentas disponíveis, você acha algum
 
 Em Python, são famosos os linters e os checadores de tipagem. É comum que essas ferramentas venham como parte do IDE, como é o caso do PyCharm e do Zed, seja nativamente, seja na forma de LSPs. Elas encontram erros como variáveis não definidas, problemas de estilo, código com potencial de falhar por fluxos incompletos, tipos incorretos, mas não analisam a lógica mais profunda do código.
 
-Exemplos bem conhecidos são ruff e pylint e os checadores de tipagem, como mypy e pyright.
+Exemplos bem conhecidos são ruff e pylint e os checadores de tipagem, como mypy e pyright. Temos outros, por exemplo o bandit, que é um linter para encontrar vulnerabilidades em código Python.
 
 Vamos dar uma rápida olhada em como algumas dessas ferramentas são utilizadas e os resultados delas:
 
-[...]
+Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, tipos incorretos, entre outros. Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão. Mas, se você pede para que ele use regras mais estritas, ele encontrará o UAI.
+
+O mesmo acontece com o mypy, que é um checador de tipagem que analisa o código Python e encontra problemas de tipos incorretos. Ele não encontra o nosso UAI do código anterior nas configurações padrão, mas no modo estrito, ele encontrará o UAI.
 
 ### Para Fuzzing
 
