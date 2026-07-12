@@ -259,8 +259,9 @@
                  FIM DO VOO — A câmera para de se mover.
                  Daqui em diante todos os slides são cartões fixos na MESMA posição
                  (x=0, y=0, scale=11), exibidos de frente, um por cima do outro.
-                 Os slides marcados como "Placeholder" ainda estão com <p> vazios,
-                 aguardando o conteúdo.
+                 Os slides "ferramentas_ia_01" e "ferramentas_ia_03" ainda
+                 aguardam conteúdo definitivo (ferramentas de terceiros e
+                 exemplos de erros encontrados).
                  =================================================================== -->
 
             <div
@@ -329,10 +330,10 @@
                 data-scale="11"
             >
                 <h1>Fuzzing</h1>
-                <p>Fornece inputs problemáticos</p>
-                <p>Executa, análise dinâmica</p>
-                <p>Alcança bugs profundos</p>
-                <p>Escala bem, exige muita CPU</p>
+                <p class="substep">Fornece inputs problemáticos</p>
+                <p class="substep">Executa, análise dinâmica</p>
+                <p class="substep">Alcança bugs profundos</p>
+                <p class="substep">Escala bem, exige muita CPU</p>
             </div>
 
             <div
@@ -360,7 +361,6 @@
                 <p class="substep">Técnicas exclusivas de IA</p>
                 <p class="substep">Trabalho em conjunto</p>
                 <p class="substep">Passo de síntese</p>
-                <p></p>
             </div>
 
             <div
@@ -382,7 +382,7 @@
                 data-scale="11"
             >
                 <h1>Para Revisão Manual</h1>
-                <pre class="substep"><code class="python">def max_pow(a, b):
+                <pre class="substep"><code class="python">def max_power(a, b):
     """Maior número na exponenciação de um par."""
     if a &gt; b:
         result = b ** a
@@ -445,8 +445,8 @@
             >
                 <h1>Para Fuzzing</h1>
                 <p class="substep">Pouco conhecidas e usadas</p>
-                <p class="substep">AFL, fusil, lafleur, ferramentas fechadas</p>
-                <p class="substep">Hypothesis?</p>
+                <p class="substep">AFL, OSS-Fuzz, fusil, lafleur, ferramentas fechadas</p>
+                <p class="substep">Hypothesis se aproxima</p>
             </div>
 
             <div
@@ -513,7 +513,6 @@
                 <p></p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="resultados_01"
                 class="step slide appear"
@@ -521,14 +520,13 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Resultados</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>As Campanhas</h1>
+                <p class="substep">2008: primeiros bugs, no olho</p>
+                <p class="substep">2024-2025: fuzzing do CPython</p>
+                <p class="substep">2026: IA no CPython e nas extensões</p>
+                <p class="substep">Tudo reportado e catalogado</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="resultados_02"
                 class="step slide appear"
@@ -536,14 +534,13 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Resultados</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Resultados: Fuzzing</h1>
+                <p class="substep">fusil: 146 bugs distintos</p>
+                <p class="substep">52 issues em 2024-2025, release blockers</p>
+                <p class="substep">lafleur: 28 bugs no JIT</p>
+                <p class="substep">Falta de memória: 31 bugs numa issue</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="resultados_03"
                 class="step slide appear"
@@ -551,14 +548,13 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Resultados</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Resultados: IA</h1>
+                <p class="substep">Extensões: ~690 achados, 215+ reproduzidos</p>
+                <p class="substep">138 bugs em extensões, 55 no CPython</p>
+                <p class="substep">Free threading: 4.556+ corridas, 30+ crashes</p>
+                <p class="substep">No total: 464 bugs, 321 resolvidos</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="conclusoes_01"
                 class="step slide appear"
@@ -566,14 +562,13 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Conclusões</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Importância das Campanhas</h1>
+                <p class="substep">Bugs corrigidos, APIs repensadas</p>
+                <p class="substep">Cultura de caça nos projetos</p>
+                <p class="substep">146 bugs: eu reportei, o projeto corrigiu</p>
+                <p class="substep">114 issues abertas por outras pessoas</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="conclusoes_02"
                 class="step slide appear"
@@ -581,14 +576,13 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Conclusões</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Importância das Ferramentas</h1>
+                <p class="substep">Análises úteis sem conhecer o código</p>
+                <p class="substep">Olhares novos para quem é especialista</p>
+                <p class="substep">Ensinam a pensar como caça-bugs</p>
+                <p class="substep">"Como isso pode dar errado?"</p>
             </div>
 
-            <!-- Placeholder -->
             <div
                 id="conclusoes_03"
                 class="step slide appear"
@@ -596,11 +590,11 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Conclusões</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Futuro</h1>
+                <p class="substep">Modelos melhores, agentes mais afiados</p>
+                <p class="substep">Mais agentes, mais verificação</p>
+                <p class="substep">Novas campanhas a caminho</p>
+                <p class="substep">Mais gente caçando: que tal você?</p>
             </div>
 
             <div
@@ -614,9 +608,10 @@
                 <p class="substep">As ferramentas funcionaram com:</p>
                 <ul class="substep">
                     <li>CPython</li>
-                    <li>lxml</li>
+                    <li>Pillow</li>
                     <li>Cython</li>
-                    <li>bottleneck</li>
+                    <li>PyPy</li>
+                    <li>Dezenas de outros projetos</li>
                 </ul>
                 <p class="substep">Também podem funcionar para você!</p>
             </div>

@@ -38,10 +38,10 @@ Agora imagine uma equipe onde cada pessoa bióloga é especialista em uma classe
 Bom, para adiantar o que um esforço de caça aos bugs pode encontrar, eu gostaria de dar spoilers sobre uma campanha recente de caça aos bugs baseada em IA, focando tanto no CPython quanto no ecossistema de extensões Python em C e C++.
 
 Essa campanha começou em março deste ano, e nela eu utilizei ferramentas que serão detalhadas em breve.
-Nesse período, foram encontrados mais de 300 bugs no código C do CPython.
-Além disso, foram analisadas cerca de 90 extensões Python em C, correspondendo a cerca de 2 milhões de linhas de código. Nessas extensões, foram encontrados por volta de 2000 bugs. Desses bugs, cerca de 300 possuem exemplos de reprodução: um pequeno script que demonstra o crash ou o comportamento inesperado do código.
+Nesse período, foram encontrados 55 bugs distintos no código do CPython.
+Além disso, foram analisadas 50 extensões Python em C e C++. Nelas, foram apontados cerca de 690 problemas em nível de correção, dos quais mais de 215 possuem exemplos de reprodução: um pequeno script que demonstra o crash ou o comportamento inesperado do código. Depois de deduplicar, confirmar e reportar, esses achados viraram 138 bugs distintos registrados nos projetos. Uma análise específica de free threading, cobrindo 18 extensões, ainda mapeou mais de 4.500 corridas de dados potenciais e mais de 30 crashes reproduzíveis.
 
-Antes da virada para ferramentas baseadas em IA, uma campanha de fuzzing tradicional do CPython em 2024-2025 já tinha rendido 52 issues, incluindo release blockers, que são bugs tão severos que uma nova versão do Python só pode ser lançada depois de consertá-los. Um fuzzer mais recente, focado no JIT experimental do Python, encontrou XX crashes.
+Antes da virada para ferramentas baseadas em IA, uma campanha de fuzzing tradicional do CPython em 2024-2025 já tinha rendido 52 issues, incluindo release blockers, que são bugs tão severos que uma nova versão do Python só pode ser lançada depois de consertá-los. Um fuzzer mais recente, focado no JIT experimental do Python, já encontrou 28 bugs distintos.
 
 Espero que esses resultados tenham despertado curiosidade sobre como encontrar esses bugs, porque é isso que veremos agora.
 
@@ -79,7 +79,7 @@ Por isso, ela é menos precisa e profunda, mas mais rápida e escalável do que 
 
 Fuzzing é uma técnica baseada em fornecer inputs problemáticos ou inválidos, frequentemente de forma aleatória e guiada, para testar a robustez do software. Como o software é executado com esses inputs, é uma forma de análise dinâmica.
 
-Esta técnica corresponde às câmeras com iscas diferentes para atrair animais. Você oferece inputs e vê atraem algum bug.
+Esta técnica corresponde às câmeras com iscas diferentes para atrair animais. Você oferece inputs e vê se atraem algum bug.
 
 No fuzzing, em vez de regras pré-definidas, os inputs são gerados aleatoriamente e frequentemente de forma guiada por um mecanismo de feedback. A parte de ser aleatório, que significa gerar inputs de forma imprevisível e "criativa", permite que o fuzzer explore uma ampla gama de inputs, enquanto a parte de ser guiada pelo feedback, que significa levar em conta o efeito dos inputs anteriores na hora de construir novos, ajuda a identificar inputs com maior probabilidade de encontrar bugs.
 
@@ -105,7 +105,7 @@ E é possível ter agentes utilizando técnicas que só são possíveis com IA, 
 
 Além do trabalho individual de cada agente, eles também podem corroborar ou desmentir os resultados uns dos outros, às vezes utilizando estes resultados como base da sua própria análise. Por exemplo, um agente que identifica erros de lógica pode ser guiado por um agente que identifica trechos de código mais complexos, mais propensos a abrigar bugs.
 
-Como cada agente tem uma missão específica, geralmente precisamos de um passo de unificação dos seus relatórios. Esse passo remove duplicatas, analisa e prioriza os problemas encontrados, e gera um relatório que pode ser encaminhado às pessoas mantenedoras do código para que possam resolver, ou pelos menos tomar ciência, os bugs.
+Como cada agente tem uma missão específica, geralmente precisamos de um passo de unificação dos seus relatórios. Esse passo remove duplicatas, analisa e prioriza os problemas encontrados, e gera um relatório que pode ser encaminhado às pessoas mantenedoras do código para que possam resolver os bugs, ou pelo menos tomar ciência deles.
 
 A interação com as pessoas mantenedoras é um tópico que merece uma palestra por si só, pois passa por incredulidade, sobrecarga, resistências diversas, respeito ao tempo e energia de pessoas mantenedoras, formas adequadas de comunicação, etc.
 
@@ -120,21 +120,20 @@ Agora faremos um breve passeio por ferramentas que nos ajudam a aplicar as técn
 Como vimos, este método não utiliza ferramentas específicas. Mas pode se valer de processos como discutir os achados com outras pessoas, criar programas ou scripts para reproduzir o problema, etc. Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se encontramos um "Uai". É um código mal escrito e confuso, mas isso é só para atrapalhar a análise de vocês.
 
 ```python
-def max_pow(a, b):
-    """Encontra o maior número possível na exponenciação de um par de números."""
+def max_power(a, b):
+    """Encontra o maior número possível na exponenciação de um par."""
     if a > b:
         result = b ** a
         if b < 0 and a % 2 == 0:
             result = abs(result)
-        print(result)
         return result
-    result = a ** b
-    if a < 0 and b % 2 == 0:
-        result = abs(result)
-    print(result)
+    else:
+        result = a ** b
+        if a < 0 and b % 2 == 0:
+            result = abs(result)
 ```
 
-O Uai que eu vejo é que falta um `return` ao final do segundo bloco: o código vai printar o resultado, mas vai retornar `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
+O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o código calcula tudo direitinho, guarda em `result` e... esquece de retornar. Quem chamar a função por esse caminho recebe `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
 
 ### Para Análise Estática
 
@@ -146,9 +145,9 @@ Exemplos bem conhecidos são ruff e pylint e os checadores de tipagem, como mypy
 
 Vamos dar uma rápida olhada em como algumas dessas ferramentas são utilizadas e os resultados delas:
 
-Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, tipos incorretos, entre outros. Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão. Mas, se você pede para que ele use regras mais estritas, ele encontrará o UAI.
+Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, fluxos incompletos, entre outros. Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão. Mas, se ativamos as regras de fluxo de retorno, o grupo RET, ele encontra o UAI na hora, apontando que falta um `return` explícito no fim de uma função que pode retornar valores.
 
-O mesmo acontece com o mypy, que é um checador de tipagem que analisa o código Python e encontra problemas de tipos incorretos. Ele não encontra o nosso UAI do código anterior nas configurações padrão, mas no modo estrito, ele encontrará o UAI.
+Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso. O modo estrito reclama, mas apenas da falta das anotações. A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`. A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela flagra o caminho que não retorna nada.
 
 ### Para Fuzzing
 
@@ -172,7 +171,7 @@ No ecossistema Python, as principais ferramentas de análise baseada em IA são 
 - cpython-review-toolkit, que analisa o código do próprio CPython.
 - rust-ext-review-toolkit (junto com Charlie Lin), que analisa extensões em Rust para Python.
 
-Essas ferramentas formam um família que compartilha métodos, código e filosofia, sendo cada uma adaptada de forma específica para o fim a que se destina. Alguns agentes e scripts são compartilhados e adaptados, outros são exclusivos de uma ferramenta.
+Essas ferramentas formam uma família que compartilha métodos, código e filosofia, sendo cada uma adaptada de forma específica para o fim a que se destina. Alguns agentes e scripts são compartilhados e adaptados, outros são exclusivos de uma ferramenta.
 
 Vamos ver como é a organização geral desses plugins.
 
@@ -186,19 +185,25 @@ Como foi citado lá no início, essas minhas ferramentas de fuzzing e IA que dis
 
 ### Sobre as Campanhas
 
-Descrição das campanhas (período, quem se envolveu, posts dos resultados, etc.).
+As campanhas aconteceram em ondas, e a ordem delas conta a própria história do título da palestra. Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no velho bugs.python.org, achados na base do Uai. Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar no JIT experimental. E em março de 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
+
+Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts [PREENCHER: posts/links dos resultados], e organizei tudo num catálogo de bugs: cada número que vou mostrar a seguir vem de lá e é auditável.
 
 [...]
 
 ### Resultados Alcançados
 
-Descrição detalhada dos resultados das campanhas.
+Começando pela onda de fuzzing: o fusil, somando o modo clássico, o modo de falhas de alocação de memória e os plugins, é responsável por 146 bugs distintos até hoje — só a caçada de crashes por falta de memória rendeu 31 bugs distintos numa única issue guarda-chuva. O lafleur, focado no JIT experimental, já soma 28 bugs, e o plugin do fusil para a extensão cereggii, mais 14.
+
+Na onda de IA, o cext-review-toolkit apontou cerca de 690 problemas em 50 extensões, mais de 215 deles com script de reprodução, que depois de deduplicação e triagem viraram 138 bugs reportados. O cpython-review-toolkit encontrou 55 bugs no CPython, e o ft-review-toolkit, além de 29 bugs já reportados, mapeou mais de 4.500 corridas de dados potenciais em 18 extensões.
+
+Somando todas as ondas — olho humano, fuzzing e IA — o catálogo registra 464 bugs distintos, sendo 146 crashes, com 347 issues e 490 PRs associados, e 321 bugs já corrigidos ou fechados. De 9 bugs em 2008, no olho, para 250 bugs só em 2026, com fuzzing e IA: os números contam a mesma história do título.
 
 [...]
 
 ### Importância das Campanhas
 
-Esse tipo de esforço sistemático é importante em diferentes níveis. No mais básico, reportamos problemas e às vezes soluções para bugs específicos. Também fomentamos que as pessoas mantenedoras procurem mais falhas e problemas, além dos que identificamos, por si mesmas, às vezes até utilizando as mesmas ferramentas. Isso pode mudar um pouco a cultura do projeto. O fato de ser um esforço amplo permite que identifiquemos problemas recorrentes em diferentes contextos, podendo dar origem a soluções nas APIs que frequentemente são utilizadas de maneira incorreta. Por fim, a discussão que esse tipo de campanha gera contribui para que projetos procurem por ajuda para analisar seu código de diversas formas e adotem práticas defensivas preventivas. Tudo isso tem impactos positivos na comunidade Python, pois, desde que feita com responsabilidade e respeito a pessoas mantenedoras, uma campanha dessas mobiliza energia para aumentar a robustez e confiabilidade do software que usamos.
+Esse tipo de esforço sistemático é importante em diferentes níveis. No mais básico, reportamos problemas e às vezes soluções para bugs específicos. Também fomentamos que as pessoas mantenedoras procurem mais falhas e problemas, além dos que identificamos, por si mesmas, às vezes até utilizando as mesmas ferramentas. Isso pode mudar um pouco a cultura do projeto. O fato de ser um esforço amplo permite que identifiquemos problemas recorrentes em diferentes contextos, podendo dar origem a soluções nas APIs que frequentemente são utilizadas de maneira incorreta. Por fim, a discussão que esse tipo de campanha gera contribui para que projetos procurem por ajuda para analisar seu código de diversas formas e adotem práticas defensivas preventivas. Tudo isso tem impactos positivos na comunidade Python, pois, desde que feita com responsabilidade e respeito a pessoas mantenedoras, uma campanha dessas mobiliza energia para aumentar a robustez e confiabilidade do software que usamos. E os números mostram que dá para fazer isso sem virar ruído: 146 dos bugs catalogados foram issues que eu abri e uma pessoa mantenedora escolheu corrigir, e outros 114 foram registrados pelas próprias pessoas dos projetos a partir dos meus relatórios. Quando o relatório é bom, ele vira trabalho aceito, não spam.
 
 ### Importância das Ferramentas
 
@@ -208,7 +213,7 @@ Além de possibilitarem as campanhas e análises individuais de bases de código
 
 ### Futuro
 
-Perspectivas com modelos mais potentes, aprimoramentos das ferramentas e mais pessoas caçando bugs.
+E o que vem por aí? Três frentes. Primeiro, os modelos: cada geração de LLM deixa os agentes mais afiados, então bugs que hoje escapam serão encontrados amanhã pelas mesmas ferramentas, sem mudar uma linha delas. Segundo, as ferramentas: mais tipos de agente, verificação automática mais rigorosa dos achados antes de qualquer relatório e menos atrito para rodar em projetos novos, além de uma nova grande campanha [PREENCHER: detalhes e alvos da próxima campanha]. Terceiro, e mais importante: mais gente caçando. As ferramentas existem, funcionam e estão disponíveis — o que falta é você.
 
 [...]
 
@@ -216,7 +221,7 @@ Perspectivas com modelos mais potentes, aprimoramentos das ferramentas e mais pe
 
 Bom, basicamente é isso que eu tinha para compartilhar com vocês. Chegamos à parte final da palestra, espero que estejamos todas e todos bem, quem cochilou pode acordar agora.
 
-Vocês lembram da metáfora do levantamento de fauna no início? Quando você desenvolve um arsenal de técnicas que funciona num local desconhecido, permitindo encontrar diversos tipos de animais, esse arsenal também serve para descobertas semelhantes em outros locais. As ferramentas que vocês viram hoje encontraram bugs no CPython, no Pillow, no PyPy, no Cython, no bottleneck e agora elas estão à disposição para encontrar bugs no código de vocês.
+Vocês lembram da metáfora do levantamento de fauna no início? Quando você desenvolve um arsenal de técnicas que funciona num local desconhecido, permitindo encontrar diversos tipos de animais, esse arsenal também serve para descobertas semelhantes em outros locais. As ferramentas que vocês viram hoje encontraram bugs no CPython, no Pillow, no Cython, no PyPy e em dezenas de outros projetos, e agora elas estão à disposição para encontrar bugs no código de vocês.
 
 ### Um Convite
 
@@ -224,4 +229,4 @@ Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa
 
 ### Agradecimento e Contato
 
-Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato. Se quiser tirar uma dúvida, solicitar uma análise ou só bater papo, fique a vontade para mandar mensagens. Obrigado!
+Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato. Se quiser tirar uma dúvida, solicitar uma análise ou só bater papo, fique à vontade para mandar mensagens. Obrigado!
