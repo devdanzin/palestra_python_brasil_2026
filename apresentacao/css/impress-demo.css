@@ -36,6 +36,7 @@
     --fs-h3: 70px;
     --fs-corpo: 30px; /* texto base dentro do cartão do slide */
     --fs-paragrafo: 70px; /* parágrafos centrais da maioria dos slides */
+    --fs-paragrafo-denso: 60px; /* parágrafos dos slides densos em números */
     --fs-ul: 55px;
 
     /* Espaçamento vertical padrão acima de cada parágrafo central */
@@ -338,7 +339,8 @@ ul {
    (Em #paralelo o text-align não afeta os <span> inline da tabela — o
    alinhamento das colunas é feito nas células, mais abaixo; mas afeta os <p>.)
    Ficam de fora: slides de imagem (sem <p>) e os de layout próprio
-   (fuzzing_02 e ia_02). Ao criar um novo slide de conteúdo, inclua o <p> aqui. */
+   (fuzzing_02 e ia_02). Ao criar um novo slide de conteúdo, inclua o <p> aqui.
+   (Exceção: resultados/conclusões têm bloco próprio, com fonte menor.) */
 #paralelo span,
 #paralelo p,
 #observacao_direta p,
@@ -526,6 +528,30 @@ ul {
     color: var(--cor-texto);
     padding-top: var(--espaco-li);
     padding-left: var(--recuo-li);
+}
+
+/* --- resultados / conclusoes --- */
+/* Slides densos em números: parágrafos centralizados como no seletor
+   compartilhado, mas um pouco menores (60px) para as linhas com métricas
+   (ex.: "Free threading: 4.556+ corridas, 30+ crashes") caberem sem quebra. */
+#resultados_01 p,
+#resultados_02 p,
+#resultados_03 p,
+#conclusoes_01 p,
+#conclusoes_02 p,
+#conclusoes_03 p {
+    font-size: var(--fs-paragrafo-denso);
+    text-align: center;
+    color: var(--cor-texto);
+    padding-top: var(--espaco-paragrafo);
+}
+
+/* Títulos longos ("Importância das ..."): reduzidos para caber numa linha,
+   mesmo tratamento dos títulos de ferramentas_ia. */
+#conclusoes_01 h1,
+#conclusoes_02 h1 {
+    font-size: var(--fs-h1-menor);
+    padding-bottom: 30px;
 }
 
 /* --- fechamento --- */
