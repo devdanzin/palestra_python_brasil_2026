@@ -1,0 +1,7 @@
+# Caches de ferramentas de análise usadas nas demos (ruff, mypy)
+.ruff_cache/
+.mypy_cache/
+
+# Arquivos de rascunho/scratch (diffs e mensagens de commit em preparação)
+*.diff
+*.txt
