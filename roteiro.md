@@ -47,7 +47,7 @@ Espero que esses resultados tenham despertado curiosidade sobre como encontrar e
 
 ## Técnicas
 
-Falaremos de três técnicas básicas, ou famílias de técnicas, que são as mais importantes que conheço para encontrar bugs em projetos Python, e depois de uma quarta abordagem, híbrida, que combina aspectos das três: a análise baseada em IA.
+Falaremos de três técnicas básicas, ou famílias de técnicas, que são as mais importantes que conheço para encontrar bugs em projetos Python, e depois de uma quarta abordagem: a análise baseada em IA.
 
 Primeiro, abordaremos a revisão manual de código, aquela que a gente faz meio que automaticamente lendo o código quando está escrevendo ou fazendo revisão de código. Em seguida, a análise estática, que é uma técnica que analisa o código sem executá-lo, utilizando ferramentas. Depois disso, o fuzzing, que é automatizado e pode encontrar bugs que as outras técnicas não conseguem. Por fim, examinaremos a análise baseada em IA, que é híbrida, porque apresenta características de todas as outras técnicas.
 
@@ -59,9 +59,7 @@ Essa técnica corresponde à observação simples na busca por animais. Você es
 
 Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, por ÔXI, varia.
 
-Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas. Isso requer experiência e faro. Talvez seja a técnica mais precisa e profunda para encontrar bugs em softwares, mas também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
-
-[...]
+Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas. Isso requer experiência e faro. Talvez seja a técnica mais precisa e profunda para encontrar bugs em softwares, mas até por isso também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
 
 ### Análise Estática
 
@@ -73,8 +71,6 @@ Cada ferramenta tem uma forma de consumir e analisar o código. Pode fazer um pa
 
 Por isso, ela é menos precisa e profunda, mas mais rápida e escalável do que a revisão manual. Mas ainda depende de olhar afiado para filtrar os falsos positivos que as ferramentas tendem a gerar. Ou seja, é capaz de lidar com grandes quantidades de código rapidamente, mas sem o detalhamento e confiabilidade da revisão manual.
 
-[...]
-
 ### Fuzzing
 
 Fuzzing é uma técnica baseada em fornecer inputs problemáticos ou inválidos, frequentemente de forma aleatória e guiada, para testar a robustez do software. Como o software é executado com esses inputs, é uma forma de análise dinâmica.
@@ -83,9 +79,7 @@ Esta técnica corresponde às câmeras com iscas diferentes para atrair animais.
 
 No fuzzing, em vez de regras pré-definidas, os inputs são gerados aleatoriamente e frequentemente de forma guiada por um mecanismo de feedback. A parte de ser aleatório, que significa gerar inputs de forma imprevisível e "criativa", permite que o fuzzer explore uma ampla gama de inputs, enquanto a parte de ser guiada pelo feedback, que significa levar em conta o efeito dos inputs anteriores na hora de construir novos, ajuda a identificar inputs com maior probabilidade de encontrar bugs.
 
-Com o fuzzing, é possível encontrar bugs que outras técnicas não alcançam, em larga escala e, em geral, confirmados, pois a detecção é de estados inválidos do programa que podem ser reproduzidos. Por isso, ele é mais preciso e confiável do que a análise estática, mas menos abrangente e geralmente requer bastante tempo de CPU para ter bons resultados. Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro.
-
-[...]
+Com o fuzzing, é possível encontrar bugs que outras técnicas não alcançam, em larga escala e, em geral, confirmados, pois a detecção é de estados inválidos do programa que podem ser reproduzidos. Por isso, ele é mais preciso e confiável do que a análise estática, mas menos abrangente e geralmente requer bastante tempo de CPU para ter bons resultados, além de não encontrar problemas de lógica que não tenham sintomas claros. Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro.
 
 ### Análise Baseada em IA (Híbrida)
 
@@ -108,8 +102,6 @@ Além do trabalho individual de cada agente, eles também podem corroborar ou de
 Como cada agente tem uma missão específica, geralmente precisamos de um passo de unificação dos seus relatórios. Esse passo remove duplicatas, analisa e prioriza os problemas encontrados, e gera um relatório que pode ser encaminhado às pessoas mantenedoras do código para que possam resolver os bugs, ou pelo menos tomar ciência deles.
 
 A interação com as pessoas mantenedoras é um tópico que merece uma palestra por si só, pois passa por incredulidade, sobrecarga, resistências diversas, respeito ao tempo e energia de pessoas mantenedoras, formas adequadas de comunicação, etc.
-
-[...]
 
 ## Ferramentas
 
@@ -137,7 +129,7 @@ O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o códig
 
 ### Para Análise Estática
 
-Acredito que seja a técnica com mais ferramentas disponíveis, você acha alguma para quase qualquer linguagem de programação.
+Acredito que seja a técnica com mais ferramentas disponíveis, e você acha alguma para quase qualquer linguagem de programação.
 
 Em Python, são famosos os linters e os checadores de tipagem. É comum que essas ferramentas venham como parte do IDE, como é o caso do PyCharm e do Zed, seja nativamente, seja na forma de LSPs. Elas encontram erros como variáveis não definidas, problemas de estilo, código com potencial de falhar por fluxos incompletos, tipos incorretos, mas não analisam a lógica mais profunda do código.
 
@@ -153,7 +145,7 @@ Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamen
 
 AFL, fuzzers específicos do CPython no OSSFuzz, fusil e lafleur.
 
-Como executam o código, acabam analisando a lógica profunda.
+Como vimos, elas executam o código e acabam analisando a lógica profunda, desde que tenha efeitos visíveis.
 
 Vamos ver brevemente como uma dessas ferramentas, lafleur, funciona e que tipo de resultados ela traz:
 
@@ -181,7 +173,7 @@ Vamos ver exemplos dos tipos de erro que uma dessas ferramentas encontra:
 
 ## Resultados e Conclusões
 
-Como foi citado lá no início, essas minhas ferramentas de fuzzing e IA que discutimos não são teóricas, com aplicação potencial. Elas foram utilizadas em algumas campanhas voltadas ao ecossistema Python e trouxeram resultados significativos.
+Como foi citado lá no início, essas ferramentas de fuzzing e IA que discutimos não são teóricas, com aplicação potencial. Elas foram utilizadas em algumas campanhas voltadas ao ecossistema Python e trouxeram resultados significativos.
 
 ### Sobre as Campanhas
 
