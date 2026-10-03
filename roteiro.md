@@ -6,7 +6,7 @@
 
 Boa tarde a todas e a todos! Meu nome é Daniel e esta é a palestra "Caçando bugs em Python: do olho humano à IA".
 
-Primeiro, gostaria de agradecer a vocês por participarem da palestra. Segundo, gostaria de me apresentar.
+Gostaria de agradecer a vocês por participarem da palestra. E também gostaria de me apresentar.
 
 ### Quem sou
 
@@ -19,19 +19,21 @@ Minhas qualificações, em ordem de importância:
 - E Fuzzing Team, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
 - Sou um caçador de bugs, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
 
-Estou envolvido na análise de projetos escritos em Python há pouco menos de 20 anos e gostaria de trazer para vocês algumas coisas que aprendi, desenvolvi e descobri ao longo desse tempo.
+Há quase 20 anos eu procuro problemas em projetos Python. Hoje quero mostrar algumas coisas que aprendi fazendo isso.
 
 ## Um breve paralelo
 
-Como já citei, sou biólogo. Minha área de atuação é fauna: os animaizinhos desse mundão. E também sou programador, e minha área é a caça a bugs, defeitos e problemas de software em geral. Vejo muitas semelhanças entre essas duas atividades. Por isso, convido vocês a passearem por um paralelo entre biologia e programação.
+E existe uma coincidência curiosa entre essas duas partes da minha vida. Na biologia eu trabalho com fauna. Na programação, eu caço bugs. E as duas atividades se parecem mais do que parece. Por isso, convido vocês a passearem por um paralelo entre biologia e programação.
 
-Imagine que você está na natureza, numa mata desconhecida, nunca estudada. Você sabe que existem animais ali, só não sabe quais, nem onde estão. Com bugs é a mesma coisa: é certo que eles existem, mas quais são? Em que partes do software eles estão?
+Imagine que você está na natureza, numa mata desconhecida, nunca estudada. Você sabe que existem animais ali. Só não sabe quais. Nem onde. Com bugs é a mesma coisa: eles existem. A pergunta é: quais? E onde?
 
 Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar. Você pode fazer uma simples observação: está lá esperando o que vai aparecer e, do nada, PÁ, CAPIVARA. Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos. Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
 
 Com os bugs, a simples observação é o que chamamos de revisão manual do código: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar. Procurar por indícios corresponde à análise estática, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs. E tentar atrair animais com iscas diferentes parece com o fuzzing, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
 
-Agora imagine uma equipe onde cada pessoa bióloga é especialista em uma classe de animal: uma em mamíferos, outra em aves, outra em répteis, e todas varrem o mesmo trecho de mata simultaneamente, cada uma com seu próprio método, procurando os animais que vivem ali. É assim que os agentes de IA trabalham: cada um caça uma classe específica de bug, como vazamento de referência, falha de NULL, problema de GIL, utilizando as técnicas citadas em paralelo no mesmo código.
+Agora imagine uma equipe de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo tempo, mas cada uma procurando coisas diferentes.
+
+É assim que os agentes de IA trabalham: cada um caça uma classe específica de bug. Um procura problemas de memória. Outro, de concorrência. Outro, de erros de API.
 
 ## Spoilers
 
@@ -47,8 +49,14 @@ Espero que esses resultados tenham despertado curiosidade sobre como encontrar e
 
 ## Técnicas
 
-Falaremos de três técnicas básicas, ou famílias de técnicas, que são as mais importantes que conheço para encontrar bugs em projetos Python, e depois de uma quarta abordagem: a análise baseada em IA.
+Vamos ver quatro abordagens.
 
+Primeiro, o olho humano: revisão manual.
+
+Depois, ferramentas que procuram padrões: análise estática.
+
+Depois, programas que provocam o software: fuzzing.
+E finalmente IA, que mistura características das três anteriores.
 Primeiro, abordaremos a revisão manual de código, aquela que a gente faz meio que automaticamente lendo o código quando está escrevendo ou fazendo revisão de código. Em seguida, a análise estática, que é uma técnica que analisa o código sem executá-lo, utilizando ferramentas. Depois disso, o fuzzing, que é automatizado e pode encontrar bugs que as outras técnicas não conseguem. Por fim, examinaremos a análise baseada em IA, que é híbrida, porque apresenta características de todas as outras técnicas.
 
 ### Revisão Manual de Código
