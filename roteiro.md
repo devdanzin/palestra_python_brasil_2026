@@ -4,9 +4,9 @@
 
 ### Olá
 
-Saudações a todas e a todos! Meu nome é Daniel Diniz e esta é a palestra "Caçando bugs em Python: do olho humano à IA".
+Boa tarde a todas e a todos! Meu nome é Daniel e esta é a palestra "Caçando bugs em Python: do olho humano à IA".
 
-Primeiro, gostaria de agradecer a vocês por participar da palestra. Segundo, gostaria de me apresentar.
+Primeiro, gostaria de agradecer a vocês por participarem da palestra. Segundo, gostaria de me apresentar.
 
 ### Quem sou
 
@@ -14,9 +14,9 @@ Minhas qualificações, em ordem de importância:
 
 - Sou pai do Pedro, que tem 12 anos e está aqui conosco
 - Sou biólogo e exerço a profissão
-- Sou Programador Amador de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
-- Faço parte do Python Triage Team, grupo oficial que faz triagem de bugs no GitHub do CPython, a principal implementação do Python
-- Faço parte do Python Fuzzing Team, grupo oficial voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
+- Sou Programador Amador de Python há mais de 20 anos, mas nunca atuei profissionalmente na área de tecnologia
+- Faço parte de dois times oficiais do Python: Triage Team que faz triagem de bugs no GitHub do CPython
+- E Fuzzing Team, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
 - Sou um caçador de bugs, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
 
 Estou envolvido na análise de projetos escritos em Python há pouco menos de 20 anos e gostaria de trazer para vocês algumas coisas que aprendi, desenvolvi e descobri ao longo desse tempo.
