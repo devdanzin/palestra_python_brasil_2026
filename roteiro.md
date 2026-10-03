@@ -27,9 +27,19 @@ E existe uma coincidência curiosa entre essas duas partes da minha vida. Na bio
 
 Imagine que você está na natureza, numa mata desconhecida, nunca estudada. Você sabe que existem animais ali. Só não sabe quais. Nem onde. Com bugs é a mesma coisa: eles existem. A pergunta é: quais? E onde?
 
-Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar. Você pode fazer uma simples observação: está lá esperando o que vai aparecer e, do nada, PÁ, CAPIVARA. Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos. Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
+Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar.
 
-Com os bugs, a simples observação é o que chamamos de revisão manual do código: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar. Procurar por indícios corresponde à análise estática, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs. E tentar atrair animais com iscas diferentes parece com o fuzzing, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
+Você pode fazer uma simples observação: está lá esperando o que vai aparecer e, do nada, PÁ, CAPIVARA.
+
+Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos.
+
+Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
+
+Com os bugs, a simples observação é o que chamamos de revisão manual do código: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar.
+
+Procurar por indícios corresponde à análise estática, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs.
+
+E tentar atrair animais com iscas diferentes parece com o fuzzing, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
 
 Agora imagine uma equipe de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo tempo, mas cada uma procurando coisas diferentes.
 
@@ -56,8 +66,8 @@ Primeiro, o olho humano: revisão manual.
 Depois, ferramentas que procuram padrões: análise estática.
 
 Depois, programas que provocam o software: fuzzing.
+
 E finalmente IA, que mistura características das três anteriores.
-Primeiro, abordaremos a revisão manual de código, aquela que a gente faz meio que automaticamente lendo o código quando está escrevendo ou fazendo revisão de código. Em seguida, a análise estática, que é uma técnica que analisa o código sem executá-lo, utilizando ferramentas. Depois disso, o fuzzing, que é automatizado e pode encontrar bugs que as outras técnicas não conseguem. Por fim, examinaremos a análise baseada em IA, que é híbrida, porque apresenta características de todas as outras técnicas.
 
 ### Revisão Manual de Código
 
@@ -225,7 +235,11 @@ Vocês lembram da metáfora do levantamento de fauna no início? Quando você de
 
 ### Um Convite
 
-Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa usuária de algum projeto específico com o qual gostaria de contribuir, ou apenas ficou com curiosidade sobre o que foi mencionado, fica aqui o convite para que a gente analise esse código em conjunto utilizando as ferramentas que foram apresentadas. Se essas ferramentas fizerem sentido para o código de vocês, estou à disposição para ensinar e fazer junto. PÁ, CAPIVARA!
+Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa usuária de algum projeto específico com o qual gostaria de contribuir, ou apenas ficou com curiosidade sobre o que foi mencionado, fica aqui o convite para que a gente analise esse código em conjunto utilizando as ferramentas que foram apresentadas.
+
+Se essas ferramentas fizerem sentido para o código de vocês, estou à disposição para ensinar e fazer junto.
+
+PÁ, CAPIVARA!
 
 ### Agradecimento e Contato
 
