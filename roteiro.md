@@ -12,36 +12,36 @@ Gostaria de agradecer a vocês por participarem da palestra. E também gostaria 
 
 Minhas qualificações, em ordem de importância:
 
-- Sou pai do Pedro, que tem 12 anos e está aqui conosco
-- Sou biólogo e exerço a profissão
-- Sou Programador Amador de Python há mais de 20 anos, mas nunca atuei profissionalmente na área de tecnologia
-- Faço parte de dois times oficiais do Python: Triage Team que faz triagem de bugs no GitHub do CPython
-- E Fuzzing Team, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
-- Sou um caçador de bugs, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
+- Sou pai do **Pedro**, que tem 12 anos e está aqui conosco
+- Sou **biólogo** e exerço a profissão
+- Sou Programador **Amador** de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
+- Faço parte de dois times **oficiais** do Python: **Triage Team** que faz triagem de bugs no GitHub do CPython
+- E **Fuzzing Team**, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
+- Sou um **caçador de bugs**, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
 
 Há quase 20 anos eu procuro problemas em projetos Python. Hoje quero mostrar algumas coisas que aprendi fazendo isso.
 
 ## Um breve paralelo
 
-E existe uma coincidência curiosa entre essas duas partes da minha vida. Na biologia eu trabalho com fauna. Na programação, eu caço bugs. E as duas atividades se parecem mais do que parece. Por isso, convido vocês a passearem por um paralelo entre biologia e programação.
+E existe uma coincidência curiosa entre essas duas partes da minha vida. Na biologia eu trabalho com fauna. Na programação, eu caço bugs. E as duas atividades se parecem mais do que a gente imagina. Por isso, convido vocês a passearem por um **paralelo** entre biologia e programação.
 
 Imagine que você está na natureza, numa mata desconhecida, nunca estudada. Você sabe que existem animais ali. Só não sabe quais. Nem onde. Com bugs é a mesma coisa: eles existem. A pergunta é: quais? E onde?
 
 Existem diversas formas de descobrir quais animais estão presentes, mas ocultos, naquele lugar.
 
-Você pode fazer uma simples observação: está lá esperando o que vai aparecer e, do nada, PÁ, CAPIVARA.
+Você pode fazer uma **simples observação**: está lá esperando o que vai aparecer e, do nada, **PÁ, CAPIVARA**.
 
-Você pode procurar por indícios e pistas, como pegadas, tocas ou ninhos.
+Você pode **procurar por indícios e pistas**, como pegadas, tocas ou ninhos.
 
-Ou você pode, por exemplo, colocar câmeras automáticas com diversos tipos de isca para registrar animais que forem lá comer.
+Ou você pode, por exemplo, colocar **câmeras automáticas** com diversos tipos de isca para registrar animais que forem lá comer.
 
-Com os bugs, a simples observação é o que chamamos de revisão manual do código: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar.
+Com os bugs, a simples observação é o que chamamos de **revisão manual do código**: procuramos os bugs ativamente, mas sem técnicas ou ferramentas específicas para ajudar.
 
-Procurar por indícios corresponde à análise estática, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs.
+Procurar por indícios corresponde à **análise estática**, uma técnica que tenta encontrar partes do código que estejam seguindo padrões que geralmente resultam em bugs.
 
-E tentar atrair animais com iscas diferentes parece com o fuzzing, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
+E tentar atrair animais com iscas diferentes parece com o **fuzzing**, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
 
-Agora imagine uma equipe de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo tempo, mas cada uma procurando coisas diferentes.
+Agora imagine **uma equipe** de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo t empo, mas cada uma procurando **coisas diferentes**.
 
 É assim que os agentes de IA trabalham: cada um caça uma classe específica de bug. Um procura problemas de memória. Outro, de concorrência. Outro, de erros de API.
 
@@ -77,7 +77,11 @@ Essa técnica corresponde à observação simples na busca por animais. Você es
 
 Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, por ÔXI, varia.
 
-Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas. Isso requer experiência e faro. Talvez seja a técnica mais precisa e profunda para encontrar bugs em softwares, mas até por isso também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
+Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas.
+
+Isso requer experiência e faro.
+
+Quando feita por alguém que conhece bem o domínio, talvez seja a técnica capaz da análise mais profunda. Mas, até por isso, também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
 
 ### Análise Estática
 
@@ -87,39 +91,63 @@ Esta técnica corresponde à procura por indícios da presença de animais. Voc�
 
 Cada ferramenta tem uma forma de consumir e analisar o código. Pode fazer um parse, usar expressões regulares, etc. e tenta identificar trechos do código que correspondem a regras pré-definidas. Estas regras em geral são configuráveis e muitas vezes podem ser acrescidas de regras personalizadas pela pessoa usuária. Então, em vez de depender da memória e do olhar da pessoa desenvolvedora para encontrar possíveis bugs, a análise estática baseia-se em padrões de código que são identificados automaticamente pelas ferramentas, podendo ser executada em grande escala.
 
-Por isso, ela é menos precisa e profunda, mas mais rápida e escalável do que a revisão manual. Mas ainda depende de olhar afiado para filtrar os falsos positivos que as ferramentas tendem a gerar. Ou seja, é capaz de lidar com grandes quantidades de código rapidamente, mas sem o detalhamento e confiabilidade da revisão manual.
+Ela troca parte da profundidade da revisão manual por escala: consegue varrer muito código rapidamente, mas produz resultados que ainda precisam do olhar humano, especialmente para separar falsos positivos. Ou seja, é capaz de lidar com grandes quantidades de código rapidamente, mas sem o detalhamento e confiabilidade da revisão manual.
 
 ### Fuzzing
 
-Fuzzing é uma técnica baseada em fornecer inputs problemáticos ou inválidos, frequentemente de forma aleatória e guiada, para testar a robustez do software. Como o software é executado com esses inputs, é uma forma de análise dinâmica.
+Fuzzing é uma técnica baseada em gerar e fornecer grandes quantidades de inputs, inclusive inesperados, extremos ou inválidos, e observar como o software reage.
 
-Esta técnica corresponde às câmeras com iscas diferentes para atrair animais. Você oferece inputs e vê se atraem algum bug.
+Como o software é executado com esses inputs, é uma forma de análise dinâmica.
 
-No fuzzing, em vez de regras pré-definidas, os inputs são gerados aleatoriamente e frequentemente de forma guiada por um mecanismo de feedback. A parte de ser aleatório, que significa gerar inputs de forma imprevisível e "criativa", permite que o fuzzer explore uma ampla gama de inputs, enquanto a parte de ser guiada pelo feedback, que significa levar em conta o efeito dos inputs anteriores na hora de construir novos, ajuda a identificar inputs com maior probabilidade de encontrar bugs.
+Esta técnica corresponde às câmeras com diferentes iscas para atrair animais. Você oferece inputs e vê se atraem algum bug.
 
-Com o fuzzing, é possível encontrar bugs que outras técnicas não alcançam, em larga escala e, em geral, confirmados, pois a detecção é de estados inválidos do programa que podem ser reproduzidos. Por isso, ele é mais preciso e confiável do que a análise estática, mas menos abrangente e geralmente requer bastante tempo de CPU para ter bons resultados, além de não encontrar problemas de lógica que não tenham sintomas claros. Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro.
+No fuzzing, em vez de procurar diretamente por padrões de código problemáticos, o fuzzer gera ou modifica inputs, muitas vezes com uma parte aleatória e com um mecanismo de feedback.
+
+Há duas ideias importantes aí: aleatoriedade e feedback.
+
+A aleatoriedade ajuda o fuzzer a experimentar coisas que nós talvez não imaginaríamos.
+
+O feedback mostra quais dessas tentativas parecem interessantes, por exemplo, porque alcançaram uma parte nova do código, e ajuda a escolher as próximas.
+
+Com o fuzzing, é possível encontrar em larga escala bugs que outras técnicas não alcançam. 
+
+Uma vantagem é que muitos achados já vêm acompanhados de uma evidência executável: um crash, uma exceção inesperada ou outro comportamento que podemos reproduzir.
+
+Entre as desvantagens, geralmente requer bastante tempo de CPU para ter bons resultados. 
+
+E o fuzzing tem dificuldade para encontrar problemas de lógica quando não existe um sintoma observável que permita detectar que algo deu errado.
+
+Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro.
 
 ### Análise Baseada em IA (Híbrida)
 
-É uma técnica recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando ao modelo que procure de forma livre. Mas aqui vamos falar sobre uma forma mais estruturada, na qual delegamos a diversos agentes que procuram tipos de bugs específicos. Usada dessa maneira, a IA permite uma abordagem híbrida, com características de revisão manual, análise estática e fuzzing.
+É uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando à IA que procure de forma livre.
+
+Mas aqui vamos falar sobre uma forma mais estruturada: vários agentes, e cada um recebe uma especialidade. Aqui, quando eu falo em agente, pense basicamente numa instância do modelo com uma missão, instruções e ferramentas específicas.
 
 Esta técnica corresponde à equipe de pessoas biólogas especialistas trabalhando em conjunto.
 
-Os diferentes agentes de IA são instruídos a partir de prompts específicos, cada um descrevendo o tipo de análise que devem realizar e exemplos de problemas que devem procurar. Cada agente pode ter acesso a recursos especiais, como ferramentas de análise estática e ambientes preparados para a execução de código, para aumentar sua eficácia.
+Cada agente tem seus alvos e métodos específicos. Alguns leem. Outros procuram padrões. Outros executam.
 
-Alguns dos agentes realizam uma leitura direta do código, interpretando o fluxo de execução e percebendo diretamente inconsistências e problemas como fazemos na revisão manual.
+Ou seja, alguns fazem uma leitura direta do código, interpretando o fluxo de execução e percebendo diretamente inconsistências e problemas. Como fazemos na revisão manual.
 
-Também existem agentes voltados à procura de padrões de código que geralmente são problemáticos, como na análise estática. Esses agentes podem inclusive rodar ferramentas de análise estática e fazer o trabalho de identificar problemas reais, descartando falsos positivos.
+Outros procuram padrões de código que ostumam indicar problemas. Como na análise estática. Esses agentes podem inclusive rodar ferramentas de análise estática e fazer o trabalho de identificar problemas reais, descartando falsos positivos.
 
-Outros agentes podem focar no que acontece quando inputs inválidos são passados ao programa, podendo escrever scripts que chamam o programa com esses inputs e observar o comportamento quando executados, se assemelhando ao fuzzing.
+Outros experimentam inputs problemáticos ou inesperados e observam o comportamento do programa. Como no fuzzing.
 
-E é possível ter agentes utilizando técnicas que só são possíveis com IA, como a análise do histórico de correções de bugs num projeto, que permite identificar correções imprecisas ou incompletas, nas quais código semelhante ainda apresenta o mesmo bug. É quando você corrige um bug numa função e não percebe que o mesmo bug está presente em outra função parecida.
+E a IA também torna práticas, em grande escala, análises que seriam muito trabalhosas manualmente.
 
-Além do trabalho individual de cada agente, eles também podem corroborar ou desmentir os resultados uns dos outros, às vezes utilizando estes resultados como base da sua própria análise. Por exemplo, um agente que identifica erros de lógica pode ser guiado por um agente que identifica trechos de código mais complexos, mais propensos a abrigar bugs.
+Por exemplo, examinar o histórico de correções de um projeto e procurar lugares semelhantes em que o mesmo bug talvez tenha ficado para trás.
 
-Como cada agente tem uma missão específica, geralmente precisamos de um passo de unificação dos seus relatórios. Esse passo remove duplicatas, analisa e prioriza os problemas encontrados, e gera um relatório que pode ser encaminhado às pessoas mantenedoras do código para que possam resolver os bugs, ou pelo menos tomar ciência deles.
+É quando você corrige um bug numa função e não percebe que o mesmo bug está presente em outra função parecida.
 
-A interação com as pessoas mantenedoras é um tópico que merece uma palestra por si só, pois passa por incredulidade, sobrecarga, resistências diversas, respeito ao tempo e energia de pessoas mantenedoras, formas adequadas de comunicação, etc.
+Além disso, os agentes podem usar os resultados uns dos outros. Um agente pode identificar os trechos mais complexos do código, e outro usar essa informação para concentrar ali a procura por erros de lógica.
+
+Mas encontrar alguma coisa não é o fim do processo. Outros agentes podem tentar verificar o achado, comparar resultados, eliminar duplicatas e consolidar tudo.
+
+Só então produzimos um relatório que possa ser levado às pessoas mantenedoras, para que possam resolver os bugs, ou pelo menos tomar ciência deles.
+
+E aí começa outro problema: como levar esses resultados às pessoas mantenedoras sem gerar sobrecarga ou ruído. Isso, por si só, daria outra palestra.
 
 ## Ferramentas
 
@@ -195,7 +223,7 @@ Como foi citado lá no início, essas ferramentas de fuzzing e IA que discutimos
 
 ### Sobre as Campanhas
 
-As campanhas aconteceram em ondas, e a ordem delas conta a própria história do título da palestra. Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no velho bugs.python.org, achados na base do Uai. Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar no JIT experimental. E em março de 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
+As campanhas aconteceram em ondas, e a ordem delas conta a própria história do título da palestra. Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no velho bugs.python.org, achados na base do Uai. Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar bugs no JIT experimental. E em março de 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
 
 Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts [PREENCHER: posts/links dos resultados], e organizei tudo num catálogo de bugs: cada número que vou mostrar a seguir vem de lá e é auditável.
 
@@ -203,41 +231,99 @@ Nada disso foi um esforço solitário: as issues e as correções envolveram dez
 
 ### Resultados Alcançados
 
-Começando pela onda de fuzzing: o fusil, somando o modo clássico, o modo de falhas de alocação de memória e os plugins, é responsável por 146 bugs distintos até hoje — só a caçada de crashes por falta de memória rendeu 31 bugs distintos numa única issue guarda-chuva. O lafleur, focado no JIT experimental, já soma 28 bugs, e o plugin do fusil para a extensão cereggii, mais 14.
+Começando pela onda de fuzzing.
 
-Na onda de IA, o cext-review-toolkit apontou cerca de 690 problemas em 50 extensões, mais de 215 deles com script de reprodução, que depois de deduplicação e triagem viraram 138 bugs reportados. O cpython-review-toolkit encontrou 55 bugs no CPython, e o ft-review-toolkit, além de 29 bugs já reportados, mapeou mais de 4.500 corridas de dados potenciais em 18 extensões.
+O fusil, considerando seus diferentes modos e plugins, já é responsável por 146 bugs distintos. O lafleur, focado no JIT experimental do CPython, encontrou outros 28.
 
-Somando todas as ondas — olho humano, fuzzing e IA — o catálogo registra 464 bugs distintos, sendo 146 crashes, com 347 issues e 490 PRs associados, e 321 bugs já corrigidos ou fechados. De 9 bugs em 2008, no olho, para 250 bugs só em 2026, com fuzzing e IA: os números contam a mesma história do título.
+Depois veio a onda de IA.
 
-[...]
+O cext-review-toolkit analisou 50 extensões e produziu centenas de achados. Depois de reprodução, deduplicação e triagem, isso virou 138 bugs reportados.
+
+O cpython-review-toolkit encontrou 55 bugs no próprio CPython.
+
+E a análise de free threading, além dos bugs já reportados, mapeou mais de 4.500 corridas de dados potenciais em 18 extensões — aqui estamos falando de pontos que ainda precisam de investigação, e não de 4.500 bugs confirmados.
+
+Somando todas as ondas — olho humano, fuzzing e IA — o catálogo registra hoje 464 bugs distintos.
+
+Em 2008 foram nove, encontrados basicamente no olho.
+
+Em 2026, foram 250 com fuzzing e IA.
+
+Os números acabam contando a mesma história do título desta palestra.
 
 ### Importância das Campanhas
 
-Esse tipo de esforço sistemático é importante em diferentes níveis. No mais básico, reportamos problemas e às vezes soluções para bugs específicos. Também fomentamos que as pessoas mantenedoras procurem mais falhas e problemas, além dos que identificamos, por si mesmas, às vezes até utilizando as mesmas ferramentas. Isso pode mudar um pouco a cultura do projeto. O fato de ser um esforço amplo permite que identifiquemos problemas recorrentes em diferentes contextos, podendo dar origem a soluções nas APIs que frequentemente são utilizadas de maneira incorreta. Por fim, a discussão que esse tipo de campanha gera contribui para que projetos procurem por ajuda para analisar seu código de diversas formas e adotem práticas defensivas preventivas. Tudo isso tem impactos positivos na comunidade Python, pois, desde que feita com responsabilidade e respeito a pessoas mantenedoras, uma campanha dessas mobiliza energia para aumentar a robustez e confiabilidade do software que usamos. E os números mostram que dá para fazer isso sem virar ruído: 146 dos bugs catalogados foram issues que eu abri e uma pessoa mantenedora escolheu corrigir, e outros 114 foram registrados pelas próprias pessoas dos projetos a partir dos meus relatórios. Quando o relatório é bom, ele vira trabalho aceito, não spam.
+Mas uma campanha dessas não serve apenas para aumentar um contador de bugs.
+
+O primeiro efeito é o mais óbvio: encontramos problemas concretos e, em muitos casos, eles são corrigidos.
+
+O segundo aparece quando começamos a ver o mesmo tipo de problema em lugares diferentes. A repetição pode revelar uma API fácil de usar errado, uma prática perigosa ou uma classe inteira de bugs que merece uma solução mais geral.
+
+E existe um terceiro efeito: a própria campanha pode mudar a maneira como um projeto procura bugs. Pessoas mantenedoras começam a buscar casos semelhantes, usar as mesmas ferramentas e adotar práticas mais defensivas.
+
+Isso só funciona, é claro, quando a campanha é feita com responsabilidade e respeito pelo tempo das pessoas mantenedoras.
+
+E temos um sinal de que isso pode funcionar: parte dos bugs foi reportada diretamente por mim, mas muitos outros foram registrados pelas próprias pessoas dos projetos depois de receberem os relatórios.
+
+Um bom relatório vira insumo útil para o projeto, não ruído.
 
 ### Importância das Ferramentas
 
-As ferramentas permitem que até mesmo pessoas com pouca familiaridade com o código de um projeto rodem análises capazes de ajudar a tornar o software mais robusto. Também deixam as pessoas especialistas num projeto avaliarem o código de formas totalmente diferentes das que estão acostumadas.
+As ferramentas também diminuem a barreira de entrada.
 
-Além de possibilitarem as campanhas e análises individuais de bases de código, as ferramentas ensinam pessoas desenvolvedoras a pensar como caçadoras de bugs: uma abordagem adversarial na qual pensamos "como isso pode dar errado?" por diversas perspectivas.
+Elas permitem que alguém que ainda não conhece profundamente uma base de código faça análises úteis, e permitem que quem conhece muito bem aquele projeto enxergue o código por perspectivas diferentes das habituais.
+
+Mas talvez exista um efeito ainda mais interessante.
+
+Essas ferramentas ensinam uma maneira de pensar.
+
+Você começa a olhar para o código e perguntar:
+
+“Como isso pode dar errado?”
+
+E depois faz a mesma pergunta de várias perspectivas diferentes.
+
+Isso é pensar como uma pessoa caçadora de bugs.
 
 ### Futuro
 
-E o que vem por aí? Três frentes. Primeiro, os modelos: cada geração de LLM deixa os agentes mais afiados, então bugs que hoje escapam serão encontrados amanhã pelas mesmas ferramentas, sem mudar uma linha delas. Segundo, as ferramentas: mais tipos de agente, verificação automática mais rigorosa dos achados antes de qualquer relatório e menos atrito para rodar em projetos novos, além de uma nova grande campanha [PREENCHER: detalhes e alvos da próxima campanha]. Terceiro, e mais importante: mais gente caçando. As ferramentas existem, funcionam e estão disponíveis — o que falta é você.
+E o que vem por aí?
 
-[...]
+Eu vejo três frentes.
+
+A primeira são os modelos. Modelos mais capazes podem tornar os mesmos agentes mais eficientes e, em alguns casos, fazer aparecer problemas que antes escapavam.
+
+A segunda são as ferramentas: novos tipos de agente, verificação automática mais rigorosa antes que qualquer achado vire relatório e menos trabalho para aplicar tudo isso a um projeto novo.
+
+E a terceira, para mim a mais importante, é ter mais gente caçando.
+
+As ferramentas existem. Funcionam. Estão disponíveis.
+
+O próximo passo é colocar mais gente para usá-las.
 
 ## Fechamento
 
-Bom, basicamente é isso que eu tinha para compartilhar com vocês. Chegamos à parte final da palestra, espero que estejamos todas e todos bem, quem cochilou pode acordar agora.
+Bom, era isso que eu queria compartilhar com vocês.
 
-Vocês lembram da metáfora do levantamento de fauna no início? Quando você desenvolve um arsenal de técnicas que funciona num local desconhecido, permitindo encontrar diversos tipos de animais, esse arsenal também serve para descobertas semelhantes em outros locais. As ferramentas que vocês viram hoje encontraram bugs no CPython, no Pillow, no Cython, no PyPy e em dezenas de outros projetos, e agora elas estão à disposição para encontrar bugs no código de vocês.
+Se alguém cochilou, essa é uma boa hora para acordar.
+
+Vocês lembram do levantamento de fauna lá do começo?
+
+Quando desenvolvemos um conjunto de técnicas capaz de encontrar diferentes animais numa mata desconhecida, podemos levar essas mesmas técnicas para outras matas.
+
+É exatamente o que aconteceu aqui.
+
+Essas ferramentas já encontraram bugs no CPython, no Pillow, no Cython, no PyPy e em dezenas de outros projetos.
+
+E agora elas também podem procurar bugs no código de vocês.
 
 ### Um Convite
 
-Se você é pessoa mantenedora de um pacote ou extensão Python, ou se é pessoa usuária de algum projeto específico com o qual gostaria de contribuir, ou apenas ficou com curiosidade sobre o que foi mencionado, fica aqui o convite para que a gente analise esse código em conjunto utilizando as ferramentas que foram apresentadas.
+Então fica o convite.
 
-Se essas ferramentas fizerem sentido para o código de vocês, estou à disposição para ensinar e fazer junto.
+Se você mantém um projeto Python, usa um projeto no qual gostaria de contribuir ou simplesmente ficou curioso, venha conversar comigo.
+
+Se alguma dessas ferramentas fizer sentido para o projeto, eu posso ensinar como usá-la e podemos fazer a análise juntos.
 
 PÁ, CAPIVARA!
 
