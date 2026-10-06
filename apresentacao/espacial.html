@@ -2,7 +2,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=1024" />
+        <meta name="viewport" content="width=1080" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <title>Caçando bugs em Python: do olho humano à IA</title>
 
@@ -297,7 +297,7 @@
                 data-scale="11"
             >
                 <h1>Revisão Manual</h1>
-                <p class="substep">Todo mundo faz</p>
+                <p class="substep">Olho humano</p>
                 <p class="substep">Depende da experiência</p>
                 <p class="substep">Não escala bem</p>
                 <p class="substep">Desenvolvimento Guiado por Uai</p>
@@ -358,9 +358,9 @@
                 data-scale="11"
             >
                 <h1>Análise Baseada em IA</h1>
-                <p class="substep">Técnicas exclusivas de IA</p>
-                <p class="substep">Trabalho em conjunto</p>
-                <p class="substep">Passo de síntese</p>
+                <p class="substep">Especialização</p>
+                <p class="substep">Colaboração</p>
+                <p class="substep">Verificação</p>
             </div>
 
             <div
@@ -403,9 +403,15 @@
                 data-scale="11"
             >
                 <h1>Para Análise Estática</h1>
-                <p class="substep">Populares em projetos Python</p>
-                <p class="substep">Focam em estilo, erros, tipagem</p>
-                <p class="substep">pylint, ruff, mypy, pyright, bandit</p>
+                <p class="substep">
+                    <b>Padrões locais</b>: Ruff, Pylint
+                    <br />
+                    <b>Tipos e fluxo</b>: mypy, Pyright
+                    <br />
+                    <b>Fluxo de dados</b>: Pysa, CodeQL
+                    <br />
+                    <b>Contratos</b>: CrossHair
+                </p>
             </div>
 
             <div
@@ -444,9 +450,15 @@
                 data-scale="11"
             >
                 <h1>Para Fuzzing</h1>
-                <p class="substep">Pouco conhecidas e usadas</p>
-                <p class="substep">AFL, OSS-Fuzz, fusil, lafleur, ferramentas fechadas</p>
-                <p class="substep">Hypothesis se aproxima</p>
+                <p class="substep">
+                    <b>Atheris</b>: cobertura
+                    <br />
+                    <b>Hypothesis</b> / <b>HypoFuzz</b>: propriedades, cobertura
+                    <br />
+                    <b>OSS-Fuzz</b>: campanhas contínuas
+                    <br />
+                    <b>fusil</b> / <b>lafleur</b>: fuzzers especializados
+                </p>
             </div>
 
             <div
@@ -469,6 +481,25 @@
             </div>
 
             <div
+                id="ferramentas_fuzzing_03"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <pre class="substep"><code class="python" style="font-size: larger;">class Silly:
+    def __iter__(self):
+        raise RuntimeError("ninguém espera a Inquisição Espanhola")
+
+def generator():
+    yield from Silly()
+
+next(generator())
+                </code></pre>
+                <h2 class="substep">Esperado: RuntimeError</h2>
+                <h2 class="substep">Observado: crash</h2>
+            </div>
+            <div
                 id="ferramentas_ia_01"
                 class="step slide appear"
                 data-x="0"
@@ -476,9 +507,12 @@
                 data-scale="11"
             >
                 <h1>Para Análise Baseada em IA</h1>
-                <p>Exemplos</p>
-                <p>Informações</p>
-                <p>Etc.</p>
+                <p><b>Revisão de PR</b><br/>
+                Copilot · CodeRabbit · Qodo</p>
+                <p><b>Análise + IA</b><br/>
+                Semgrep · Snyk · CodeQL</p>
+                <p><b>Auditoria de repositório</b><br/>
+                RepoAudit · toolkits</p>
             </div>
 
             <div
@@ -506,11 +540,99 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Para Análise Baseada em IA</h1>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <h1>Da pegada à descoberta</h1>
+
+                <pre style="text-align: center; font-size: 68px; line-height: 90%;">
+Agentes especializados
+        ↓
+Achados candidatos
+        ↓
+Reproduzir + cruzar + deduplicar
+        ↓
+Evidência priorizada
+        ↓
+Pessoa mantenedora
+                </pre>
+            </div>
+
+            <div
+                id="ferramentas_ia_04"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Um bug corrigido... quase</h1>
+                <p>
+                    <br/>
+                    groupby_next:
+                    ✅ referência protegida
+                </p>
+                <br/>
+                <p>_grouper_next:
+                    ❌ bug permaneceu
+                    <br/>
+                    <br/>
+                </p>
+                <p style="font-weight: bold;">O agente examinou o histórico e procurou a variante.</p>
+            </div>
+
+
+            <div
+                id="ferramentas_ia_05"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Um bug corrigido... quase</h1>
+                <p><br/></p>
+                <table>
+                    <tr>
+                        <td>
+                <pre><code class="python">class Key:
+    __hash__ = None
+    counter = 0
+
+    def __eq__(self, other):  # <- AQUI
+        if not self.counter:
+            self.counter += 1
+            try: next(grouper_iter)  # <- E AQUI!
+            except StopIteration: pass
+            return NotImplemented
+        return True</code></pre>
+                        </td>
+                        <td>
+                            <pre class="substep"><code class="python">from itertools import groupby
+
+it = groupby(range(4), lambda x: Key())
+key, grouper_iter = next(it)
+items = list(grouper_iter)</code></pre>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div
+                id="achado_01"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Do achado à contribuição</h1>
+                <pre style="text-align: center; font-size: 48px; line-height: 90%;">
+achado
+    ↓
+reproducer
+    ↓
+deduplicação
+    ↓
+comunicação + validação
+    ↓
+correção
+                </pre>
+                <h2>Respeito ao tempo das pessoas mantenedoras</h2>
             </div>
 
             <div
@@ -524,7 +646,7 @@
                 <p class="substep">2008: primeiros bugs, no olho</p>
                 <p class="substep">2024-2025: fuzzing do CPython</p>
                 <p class="substep">2026: IA no CPython e nas extensões</p>
-                <p class="substep">Tudo reportado e catalogado</p>
+                <p class="substep">Olho → fuzzing → IA</p>
             </div>
 
             <div
@@ -535,10 +657,10 @@
                 data-scale="11"
             >
                 <h1>Resultados: Fuzzing</h1>
-                <p class="substep">fusil: 146 bugs distintos</p>
-                <p class="substep">52 issues em 2024-2025, release blockers</p>
-                <p class="substep">lafleur: 28 bugs no JIT</p>
-                <p class="substep">Falta de memória: 31 bugs numa issue</p>
+                <p>fusil: 146 bugs distintos</p>
+                <p>52 issues em 2024-2025, release blockers</p>
+                <p>lafleur: 28 bugs no JIT</p>
+                <p>Falta de memória: 31 bugs numa issue</p>
             </div>
 
             <div
@@ -549,10 +671,31 @@
                 data-scale="11"
             >
                 <h1>Resultados: IA</h1>
-                <p class="substep">Extensões: ~690 achados, 215+ reproduzidos</p>
-                <p class="substep">138 bugs em extensões, 55 no CPython</p>
-                <p class="substep">Free threading: 4.556+ corridas, 30+ crashes</p>
-                <p class="substep">No total: 464 bugs, 321 resolvidos</p>
+                <p>Extensões: ~690 achados, 215+ reproduzidos</p>
+                <p>138 bugs em extensões, 55 no CPython</p>
+                <p>Free threading: 4.556+ corridas, 30+ crashes</p>
+                <p>No total: 464 bugs, 321 resolvidos</p>
+            </div>
+
+            <div
+                id="resultados_04"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Achado não é bug</h1>
+                <pre style="text-align: center; font-size: 45px ;">
+~690 achados
+        ↓
+    revisão + reprodução
+        ↓
+215+ reproduzidos
+        ↓
+deduplicação + comunicação
+        ↓
+138 bugs distintos
+                </pre>
             </div>
 
             <div
@@ -563,10 +706,10 @@
                 data-scale="11"
             >
                 <h1>Importância das Campanhas</h1>
-                <p class="substep">Bugs corrigidos, APIs repensadas</p>
-                <p class="substep">Cultura de caça nos projetos</p>
-                <p class="substep">146 bugs: eu reportei, o projeto corrigiu</p>
-                <p class="substep">114 issues abertas por outras pessoas</p>
+                <p>Bugs corrigidos</p>
+                <p>Padrões recorrentes aparecem</p>
+                <p>APIs e práticas podem melhorar</p>
+                <p>Projetos passam a caçar melhor</p>
             </div>
 
             <div
@@ -577,10 +720,10 @@
                 data-scale="11"
             >
                 <h1>Importância das Ferramentas</h1>
-                <p class="substep">Análises úteis sem conhecer o código</p>
-                <p class="substep">Olhares novos para quem é especialista</p>
-                <p class="substep">Ensinam a pensar como caça-bugs</p>
-                <p class="substep">"Como isso pode dar errado?"</p>
+                <p>Ampliam o olhar</p>
+                <p>Trazem perspectivas diferentes</p>
+                <p>Ensinam a pensar como caça-bugs</p>
+                <p><b>"Como isso pode dar errado?"</b></p>
             </div>
 
             <div
@@ -591,10 +734,9 @@
                 data-scale="11"
             >
                 <h1>Futuro</h1>
-                <p class="substep">Modelos melhores, agentes mais afiados</p>
-                <p class="substep">Mais agentes, mais verificação</p>
-                <p class="substep">Novas campanhas a caminho</p>
-                <p class="substep">Mais gente caçando: que tal você?</p>
+                <p>Modelos mais capazes</p>
+                <p>Ferramentas + verificação melhores</p>
+                <p><b>Mais gente caçando</b></p>
             </div>
 
             <div
@@ -604,32 +746,16 @@
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Fechamento</h1>
-                <p class="substep">As ferramentas funcionaram com:</p>
-                <ul class="substep">
+                <h1>Outras matas</h1>
+                <p>As ferramentas funcionaram com:</p>
+                <ul>
                     <li>CPython</li>
                     <li>Pillow</li>
                     <li>Cython</li>
                     <li>PyPy</li>
                     <li>Dezenas de outros projetos</li>
                 </ul>
-                <p class="substep">Também podem funcionar para você!</p>
-            </div>
-
-            <div
-                id="convite"
-                class="step slide appear"
-                data-x="0"
-                data-y="0"
-                data-scale="11"
-            >
-                <h1>Um Convite</h1>
-                <p class="substep">Vamos caçar bugs?</p>
-                <img
-                    class="substep sudden imagem-convite"
-                    src="images/capivara_programando.png"
-                    alt="Capivara programando"
-                />
+                <p class="substep"><b>Também podem funcionar para você!</b></p>
             </div>
 
             <div
@@ -678,6 +804,22 @@
                     class="substep sudden absolute imagem-contato"
                     src="images/capivara_computador.gif"
                     alt="Capivara usando o computador"
+                />
+            </div>
+
+            <div
+                id="convite"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Um Convite</h1>
+                <p class="substep">Vamos caçar bugs?</p>
+                <img
+                    class="substep sudden imagem-convite"
+                    src="images/capivara_programando.png"
+                    alt="Capivara programando"
                 />
             </div>
 

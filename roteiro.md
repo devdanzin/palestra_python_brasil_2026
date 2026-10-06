@@ -252,6 +252,8 @@ key, grouper_iter = next(g)
 items = list(grouper_iter)
 ```
 
+Não precisa entender esse código inteiro. Olhem só para isto: durante o __eq__, ele avança o próprio iterador.
+
 Você corrige um bug numa função e esquece outra função parecida. Lembram quando eu falei nisso? Aconteceu de verdade.
 
 E é interessante que quando relatei esse bug, primeiro acharam que era uma duplicata, daí com o reproducer a issue foi revelidada, levando à correção e criação de um teste. O processo não termina com o achado, nem com o primeiro report.

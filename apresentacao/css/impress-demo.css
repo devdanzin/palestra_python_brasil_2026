@@ -466,7 +466,9 @@ ul {
 
 /* Código num painel claro destacado, do tamanho do conteúdo e centralizado
    (margens automáticas centralizam o item flex). */
-#ferramentas_revisao_manual pre {
+#ferramentas_revisao_manual pre,
+#ferramentas_fuzzing_03 pre,
+#ferramentas_ia_05 pre {
     width: fit-content;
     max-width: 100%;
     margin: 0 auto;
@@ -515,6 +517,10 @@ ul {
     padding-bottom: 30px;
 }
 
+#ferramentas_ia_01 p {
+    font-size: var(--fs-paragrafo-denso);
+}
+
 /* Rótulo "Família -review-toolkit:" e a lista de toolkits (slide ia_02). */
 #ferramentas_ia_02 span {
     font-size: var(--fs-paragrafo);
@@ -528,6 +534,24 @@ ul {
     color: var(--cor-texto);
     padding-top: var(--espaco-li);
     padding-left: var(--recuo-li);
+}
+
+#ferramentas_ia_04 p {
+    font-size: 65px;
+    text-align: center;
+}
+
+#ferramentas_ia_04 h1, #ferramentas_ia_05 h1 {
+    font-size: 108px;
+}
+
+#ferramentas_ia_05 code {
+    font-size: 130%;
+}
+
+#achado_01 h1 {
+    font-size: var(--fs-h1-menor);
+    padding-bottom: 30px;
 }
 
 /* --- resultados / conclusoes --- */
