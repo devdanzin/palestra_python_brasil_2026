@@ -41,21 +41,13 @@ Procurar por indícios corresponde à **análise estática**, uma técnica que t
 
 E tentar atrair animais com iscas diferentes parece com o **fuzzing**, técnica na qual alimentamos programas com inputs de diversos tipos, tentando que algum deles faça um bug oculto se mostrar.
 
-Agora imagine **uma equipe** de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo t empo, mas cada uma procurando **coisas diferentes**.
+Agora imagine **uma equipe** de pessoas biólogas. Uma procura mamíferos. Outra, aves. Outra, répteis. Todas investigam a mesma mata, ao mesmo tempo, mas cada uma procurando **coisas diferentes**.
 
 É assim que os agentes de IA trabalham: cada um caça uma classe específica de bug. Um procura problemas de memória. Outro, de concorrência. Outro, de erros de API.
 
 ## Spoilers
 
-Bom, para adiantar o que um esforço de caça aos bugs pode encontrar, eu gostaria de dar spoilers sobre uma campanha recente de caça aos bugs baseada em IA, focando tanto no CPython quanto no ecossistema de extensões Python em C e C++.
-
-Essa campanha começou em março deste ano, e nela eu utilizei ferramentas que serão detalhadas em breve.
-Nesse período, foram encontrados 55 bugs distintos no código do CPython.
-Além disso, foram analisadas 50 extensões Python em C e C++. Nelas, foram apontados cerca de 690 problemas em nível de correção, dos quais mais de 215 possuem exemplos de reprodução: um pequeno script que demonstra o crash ou o comportamento inesperado do código. Depois de deduplicar, confirmar e reportar, esses achados viraram 138 bugs distintos registrados nos projetos. Uma análise específica de free threading, cobrindo 18 extensões, ainda mapeou mais de 4.500 corridas de dados potenciais e mais de 30 crashes reproduzíveis.
-
-Antes da virada para ferramentas baseadas em IA, uma campanha de fuzzing tradicional do CPython em 2024-2025 já tinha rendido 52 issues, incluindo release blockers, que são bugs tão severos que uma nova versão do Python só pode ser lançada depois de consertá-los. Um fuzzer mais recente, focado no JIT experimental do Python, já encontrou 28 bugs distintos.
-
-Espero que esses resultados tenham despertado curiosidade sobre como encontrar esses bugs, porque é isso que veremos agora.
+Só para vocês saberem que isso não é uma discussão hipotética: as campanhas que vou mostrar encontraram dezenas de bugs no próprio CPython e mais de uma centena em extensões do ecossistema. No final eu mostro os números. Agora quero mostrar como chegamos até eles.
 
 ## Técnicas
 
@@ -131,7 +123,7 @@ Cada agente tem seus alvos e métodos específicos. Alguns leem. Outros procuram
 
 Ou seja, alguns fazem uma leitura direta do código, interpretando o fluxo de execução e percebendo diretamente inconsistências e problemas. Como fazemos na revisão manual.
 
-Outros procuram padrões de código que ostumam indicar problemas. Como na análise estática. Esses agentes podem inclusive rodar ferramentas de análise estática e fazer o trabalho de identificar problemas reais, descartando falsos positivos.
+Outros procuram padrões de código que costumam indicar problemas. Como na análise estática. Esses agentes podem inclusive rodar ferramentas de análise estática e fazer o trabalho de identificar problemas reais, descartando falsos positivos.
 
 Outros experimentam inputs problemáticos ou inesperados e observam o comportamento do programa. Como no fuzzing.
 
@@ -187,69 +179,138 @@ Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra probl
 
 Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso. O modo estrito reclama, mas apenas da falta das anotações. A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`. A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela flagra o caminho que não retorna nada.
 
+Ruff e mypy são só duas espécies dessa família. Algumas ferramentas vão bem mais fundo.
+
+Semgrep procura padrões estruturais; Pysa e CodeQL conseguem acompanhar fluxos de dados entre funções; CrossHair procura entradas que violem contratos. Então análise estática não é uma técnica com uma profundidade só: ferramentas diferentes procuram pegadas diferentes.
+
 ### Para Fuzzing
 
-AFL, fuzzers específicos do CPython no OSSFuzz, fusil e lafleur.
+No mundo Python temos ferramentas com papéis diferentes. Atheris faz fuzzing guiado por cobertura. Hypothesis trabalha com propriedades e geração de casos; HypoFuzz acrescenta fuzzing contínuo guiado por cobertura. OSS-Fuzz fornece infraestrutura para campanhas contínuas. E fusil e lafleur são fuzzers mais especializados que usei nas campanhas que vou mostrar.
 
 Como vimos, elas executam o código e acabam analisando a lógica profunda, desde que tenha efeitos visíveis.
 
-Vamos ver brevemente como uma dessas ferramentas, lafleur, funciona e que tipo de resultados ela traz:
+Então vamos sair da teoria. Este foi um programa produzido a partir de uma campanha do fusil.
 
-[...]
+```python
+class Silly:
+    def __iter__(self):
+        raise RuntimeError("ninguém espera a Inquisição Espanhola")
+
+def generator():
+    yield from Silly()
+
+next(generator())  # deveria propagar RuntimeError; ocorria crash
+```
+
+Tem alguma coisa ilegal aqui? Não. O __iter__ é perfeitamente autorizado a levantar uma exceção. O que deveria acontecer? RuntimeError. O que aconteceu? Crash.
+
+PÁ, CAPIVARA.
+
+Esse bug foi corrigido e virou teste de regressão no CPython.
 
 ### Para Análise Baseada em IA (Híbrida)
 
-Temos uma ampla gama de projetos nessa categoria: pr-review-toolkit, xxx, yyy. Mas geralmente são focados ou em análise de PRs ou de segurança do código. Além disso, são multi-linguagem.
+Hoje existem muitas ferramentas de IA que suportam Python. Algumas revisam mudanças em PRs. Outras colocam IA sobre resultados de análise estática. E outras trabalham em nível de repositório inteiro.
 
-No ecossistema Python, as principais ferramentas de análise baseada em IA são criações minhas. São alguns plugins para Claude Code, cada um focando em um aspecto específico:
+A família que desenvolvi está principalmente nesse terceiro grupo, com uma especialização adicional: Python, o próprio CPython e a fronteira com código nativo.
 
-- code-review-toolkit, que analisa código Python puro.
-- cext-review-toolkit, que analisa extensões em C e C++ para Python.
-- ft-review-toolkit, que analisa suporte e problemas de extensões em C relacionados ao Free Threading.
-- cpython-review-toolkit, que analisa o código do próprio CPython.
-- rust-ext-review-toolkit (junto com Charlie Lin), que analisa extensões em Rust para Python.
+```slide
+- code-review-toolkit: código Python puro.
+- cext-review-toolkit: extensões em C e C++.
+- ft-review-toolkit: Free Threading.
+- cpython-review-toolkit: código do próprio CPython.
+- rust-ext-review-toolkit: extensões em Rust.
+```
 
-Essas ferramentas formam uma família que compartilha métodos, código e filosofia, sendo cada uma adaptada de forma específica para o fim a que se destina. Alguns agentes e scripts são compartilhados e adaptados, outros são exclusivos de uma ferramenta.
+Vamos ver um exemplo do tipo de erro que uma dessas ferramentas encontra:
 
-Vamos ver como é a organização geral desses plugins.
+Uma correção anterior protegeu referências em `groupby_next` antes de chamar código Python reentrante, por exemplo um dunder eq que avança o iterador.
 
-Vamos ver exemplos dos tipos de erro que uma dessas ferramentas encontra:
+O `cpython-review-toolkit` examinou o histórico e encontrou a mesma operação desprotegida na função irmã `_grouper_next`. Um `__eq__` malicioso podia reentrar no iterador, substituir e liberar uma chave ainda em uso, produzindo use-after-free e causando crash.
 
-[...]
+O código no slide, que é bastante avançado, fazia o CPython ter uma falha de segmentação.
+
+```python
+import itertools
+
+class Key:
+    __hash__ = None
+    counter = 0
+
+    def __eq__(self, other):
+        if not self.counter:
+            self.counter += 1
+            try: next(grouper_iter)
+            except StopIteration: pass
+            return NotImplemented
+        return True
+
+g = itertools.groupby(range(4), lambda x: Key())
+key, grouper_iter = next(g)
+items = list(grouper_iter)
+```
+
+Você corrige um bug numa função e esquece outra função parecida. Lembram quando eu falei nisso? Aconteceu de verdade.
+
+E é interessante que quando relatei esse bug, primeiro acharam que era uma duplicata, daí com o reproducer a issue foi revelidada, levando à correção e criação de um teste. O processo não termina com o achado, nem com o primeiro report.
 
 ## Resultados e Conclusões
 
 Como foi citado lá no início, essas ferramentas de fuzzing e IA que discutimos não são teóricas, com aplicação potencial. Elas foram utilizadas em algumas campanhas voltadas ao ecossistema Python e trouxeram resultados significativos.
 
+Mas encontrar um código suspeito é a parte fácil. Para isso virar uma contribuição, há todo um outro caminho.
+
+Além de encontrar um possível bug, o que chamamos de achado, temos que produzir um script que reproduza esse bug, o que chamamos de reproducer.
+
+Quando temos o reproducer, precisamos checar se aquele já é um problema conhecido: repetir um report anterior desperdiça tempo e energia da pessoa mantenedora.
+
+Com a confirmação de que é um bug desconhecido, precisamos entrar em contato com as pessoas mantenedoras e validar o bug, até mesmo para saber se elas têm interesse em corrigi-lo. 
+
+Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes.
+
+Daria para fazer uma palestra inteira só sobre essa parte humana do processo.
+
+```slide
+Respeito às pessoas mantenedoras!
+
+encontrar → reproduzir → deduplicar → discutir e validar → corrigir
+```
+
 ### Sobre as Campanhas
 
-As campanhas aconteceram em ondas, e a ordem delas conta a própria história do título da palestra. Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no velho bugs.python.org, achados na base do Uai. Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar bugs no JIT experimental. E em março de 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
+As campanhas aconteceram em ondas, e a ordem delas conta a própria história do título da palestra.
 
-Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts [PREENCHER: posts/links dos resultados], e organizei tudo num catálogo de bugs: cada número que vou mostrar a seguir vem de lá e é auditável.
+Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no velho bugs.python.org, achados na base do Uai.
 
-[...]
+Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar bugs no JIT experimental.
+
+E em 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
+
+Cada onda encontrou mais bugs que a anterior.
+
+Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. Deu até em dissertação de mestrado de um colega e matéria jornalística.
 
 ### Resultados Alcançados
 
-Começando pela onda de fuzzing.
-
-O fusil, considerando seus diferentes modos e plugins, já é responsável por 146 bugs distintos. O lafleur, focado no JIT experimental do CPython, encontrou outros 28.
-
-Depois veio a onda de IA.
-
-O cext-review-toolkit analisou 50 extensões e produziu centenas de achados. Depois de reprodução, deduplicação e triagem, isso virou 138 bugs reportados.
-
-O cpython-review-toolkit encontrou 55 bugs no próprio CPython.
-
-E a análise de free threading, além dos bugs já reportados, mapeou mais de 4.500 corridas de dados potenciais em 18 extensões — aqui estamos falando de pontos que ainda precisam de investigação, e não de 4.500 bugs confirmados.
-
-Somando todas as ondas — olho humano, fuzzing e IA — o catálogo registra hoje 464 bugs distintos.
-
 Em 2008 foram nove, encontrados basicamente no olho.
 
-Em 2026, foram 250 com fuzzing e IA.
+Em 2026, já foram 250 com fuzzing e IA.
 
 Os números acabam contando a mesma história do título desta palestra.
+
+Quando falamos de achados e bugs, há um funil de evidência, por exemplo:
+
+```slide
+~690 achados
+↓ revisão + reprodução
+215+ reproduzidos
+↓ deduplicação + comunicação
+138 bugs distintos
+```
+
+É justamente por isso que eu faço distinção entre achado, reproducer e bug. Esses números não são intercambiáveis e se afunilam a partir da verificação e colaboração.
+
+Somando todas as ondas — olho humano, fuzzing e IA — o catálogo registra hoje 464 bugs distintos.
 
 ### Importância das Campanhas
 
