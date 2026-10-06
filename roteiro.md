@@ -83,7 +83,7 @@ Esta técnica corresponde à procura por indícios da presença de animais. Voc�
 
 Cada ferramenta tem uma forma de consumir e analisar o código. Pode fazer um parse, usar expressões regulares, etc. e tenta identificar trechos do código que correspondem a regras pré-definidas. Estas regras em geral são configuráveis e muitas vezes podem ser acrescidas de regras personalizadas pela pessoa usuária. Então, em vez de depender da memória e do olhar da pessoa desenvolvedora para encontrar possíveis bugs, a análise estática baseia-se em padrões de código que são identificados automaticamente pelas ferramentas, podendo ser executada em grande escala.
 
-Ela troca parte da profundidade da revisão manual por escala: consegue varrer muito código rapidamente, mas produz resultados que ainda precisam do olhar humano, especialmente para separar falsos positivos. Ou seja, é capaz de lidar com grandes quantidades de código rapidamente, mas sem o detalhamento e confiabilidade da revisão manual.
+Ela troca parte da profundidade da revisão manual por escala: consegue varrer muito código rapidamente, mas produz resultados que ainda precisam do olhar humano, especialmente para separar falsos positivos.
 
 ### Fuzzing
 
@@ -169,7 +169,9 @@ O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o códig
 
 Acredito que seja a técnica com mais ferramentas disponíveis, e você acha alguma para quase qualquer linguagem de programação.
 
-Em Python, são famosos os linters e os checadores de tipagem. É comum que essas ferramentas venham como parte do IDE, como é o caso do PyCharm e do Zed, seja nativamente, seja na forma de LSPs. Elas encontram erros como variáveis não definidas, problemas de estilo, código com potencial de falhar por fluxos incompletos, tipos incorretos, mas não analisam a lógica mais profunda do código.
+Em Python, são famosos os linters e os checadores de tipagem. É comum que essas ferramentas venham como parte do IDE, como é o caso do PyCharm e do Zed, seja nativamente, seja na forma de LSPs.
+
+Essas ferramentas mais comuns encontram variáveis não definidas, problemas de estilo, tipos incorretos e fluxos incompletos, mas cada ferramenta trabalha com uma abstração e uma profundidade diferentes.
 
 Exemplos bem conhecidos são ruff e pylint e os checadores de tipagem, como mypy e pyright. Temos outros, por exemplo o bandit, que é um linter para encontrar vulnerabilidades em código Python.
 
@@ -202,7 +204,7 @@ def generator():
 next(generator())  # deveria propagar RuntimeError; ocorria crash
 ```
 
-Tem alguma coisa ilegal aqui? Não. O __iter__ é perfeitamente autorizado a levantar uma exceção. O que deveria acontecer? RuntimeError. O que aconteceu? Crash.
+Esse código é estranho? É. Mas tem alguma coisa inválida aqui? Não. O __iter__ é perfeitamente autorizado a levantar uma exceção. O que deveria acontecer? RuntimeError. O que aconteceu? Crash.
 
 PÁ, CAPIVARA.
 
@@ -258,7 +260,7 @@ E é interessante que quando relatei esse bug, primeiro acharam que era uma dupl
 
 Como foi citado lá no início, essas ferramentas de fuzzing e IA que discutimos não são teóricas, com aplicação potencial. Elas foram utilizadas em algumas campanhas voltadas ao ecossistema Python e trouxeram resultados significativos.
 
-Mas encontrar um código suspeito é a parte fácil. Para isso virar uma contribuição, há todo um outro caminho.
+Mas encontrar um código suspeito é só o começo. Para isso virar uma contribuição, há todo um outro caminho.
 
 Além de encontrar um possível bug, o que chamamos de achado, temos que produzir um script que reproduza esse bug, o que chamamos de reproducer.
 
@@ -273,7 +275,7 @@ Daria para fazer uma palestra inteira só sobre essa parte humana do processo.
 ```slide
 Respeito às pessoas mantenedoras!
 
-encontrar → reproduzir → deduplicar → discutir e validar → corrigir
+encontrar → reproduzir → deduplicar → comunicar e validar → corrigir
 ```
 
 ### Sobre as Campanhas
@@ -285,8 +287,6 @@ Tudo começou com o olho humano: meus primeiros bugs reportados são de 2008, no
 Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando o fusil, depois criando o lafleur para caçar bugs no JIT experimental.
 
 E em 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
-
-Cada onda encontrou mais bugs que a anterior.
 
 Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. Deu até em dissertação de mestrado de um colega e matéria jornalística.
 
@@ -307,6 +307,10 @@ Quando falamos de achados e bugs, há um funil de evidência, por exemplo:
 ↓ deduplicação + comunicação
 138 bugs distintos
 ```
+
+Então, quando eu digo 690 achados, eu não estou dizendo 690 bugs.
+
+Depois de revisão, reprodução, deduplicação e comunicação, chegaram a 138 bugs distintos.
 
 É justamente por isso que eu faço distinção entre achado, reproducer e bug. Esses números não são intercambiáveis e se afunilam a partir da verificação e colaboração.
 
@@ -378,6 +382,10 @@ Essas ferramentas já encontraram bugs no CPython, no Pillow, no Cython, no PyPy
 
 E agora elas também podem procurar bugs no código de vocês.
 
+### Contato
+
+Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato.
+
 ### Um Convite
 
 Então fica o convite.
@@ -387,7 +395,3 @@ Se você mantém um projeto Python, usa um projeto no qual gostaria de contribui
 Se alguma dessas ferramentas fizer sentido para o projeto, eu posso ensinar como usá-la e podemos fazer a análise juntos.
 
 PÁ, CAPIVARA!
-
-### Agradecimento e Contato
-
-Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato. Se quiser tirar uma dúvida, solicitar uma análise ou só bater papo, fique à vontade para mandar mensagens. Obrigado!
