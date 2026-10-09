@@ -79,7 +79,7 @@ Em resumo: você está lá olhando o código e PÁ, CAPIVARA.
 
 ### Análise Estática
 
-Essa técnica tem "estática" no nome porque analisa o código sem executá-lo, utilizando ferramentas que procuram padrões de código que indicam possíveis bugs.
+Seguindo para a análise estática. Essa técnica tem "estática" no nome porque analisa o código sem executá-lo, utilizando ferramentas que procuram padrões de código que indicam possíveis bugs.
 
 Esta técnica corresponde à procura por indícios da presença de animais. Você está buscando as pegadas dos bugs.
 
@@ -119,11 +119,11 @@ Entre as desvantagens, geralmente requer bastante tempo de CPU para ter bons res
 
 E o fuzzing tem dificuldade para encontrar problemas de lógica quando não existe um sintoma observável que permita detectar que algo deu errado.
 
-Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro. Já vi arquivo de 25 mil linhas, que foi minimizado para nove linhas!
+Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro. Já vi arquivo de 25 mil linhas, que foi minimizado para nove linhas suficientes para mostrar o bug!
 
 ### Análise Baseada em IA (Híbrida)
 
-É uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando a uma IA que procure de forma livre.
+A análise baseada em IA é uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando a uma IA que procure de forma livre.
 
 Mas aqui vamos falar sobre uma forma mais estruturada: vários agentes, e cada um recebe uma especialidade. Aqui, quando eu falo em agente, pense basicamente numa instância do modelo com uma missão, instruções e ferramentas específicas.
 
@@ -161,7 +161,9 @@ Agora faremos um breve passeio por ferramentas que nos ajudam a aplicar as técn
 
 ### Para Revisão Manual de Código
 
-Como vimos, este método não utiliza ferramentas específicas. Mas pode se valer de processos como discutir os achados com outras pessoas, criar programas ou scripts para reproduzir o problema, etc. Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se encontramos um "Uai". É um código mal escrito e confuso, mas isso é só para atrapalhar a análise de vocês.
+Como vimos, este método não utiliza ferramentas específicas. Mas pode se valer de processos como discutir os achados com outras pessoas, criar programas ou scripts para reproduzir o problema, etc.
+
+Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se encontramos um "Uai". É um código mal escrito e confuso, mas isso é só para atrapalhar a análise de vocês.
 
 ```python
 def max_power(a, b):
@@ -177,7 +179,7 @@ def max_power(a, b):
             result = abs(result)
 ```
 
-Acharam um Uai?
+Acharam um Uai? Quem achou levanta a mão.
 
 O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o código calcula tudo direitinho, guarda em `result` e... esquece de retornar. Quem chamar a função por esse caminho recebe `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
 
@@ -334,7 +336,15 @@ Imagem Tese Hameed
 Imagem matéria LWN.net
 ```
 
-Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte. Eu uso pequenas máquinas virtuais grátis na nuvem, mas também comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers. E tenho uma assinatura básica do Claude para caçar com IA. Ou seja, não ganho dinheiro com isso: eu gasto. Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
+Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte.
+
+Eu uso pequenas máquinas virtuais grátis na nuvem, mas também comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers.
+
+E tenho uma assinatura básica do Claude para caçar com IA. Ou seja, não ganho dinheiro com isso: eu gasto.
+
+Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
+
+Na verdade, o maior investimento de um caçador de bugs é de tempo: é preciso analisar cada achado, reproduzir, validar, fazer a ponte com pessoas mantenedoras, afiar as ferramentas, às vezes até abrir PR para consertar os bugs e agir para adotar sugestões dos reviews.
 
 ```slide
 Logos Oracle, Alibaba, GCP?
