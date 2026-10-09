@@ -13,9 +13,9 @@ Gostaria de agradecer a vocês por participarem da palestra. E também gostaria 
 Minhas qualificações, em ordem de importância:
 
 - Sou pai do **Pedro**, que tem 12 anos e está aqui conosco
-- Sou **biólogo** e exerço a profissão
+- Sou **biólogo** e trabalho na área
 - Sou Programador **Amador** de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
-- Faço parte de dois times **oficiais** do Python: **Triage Team** que faz triagem de bugs no GitHub do CPython
+- Faço parte de dois times **oficiais** do Python: **Triage Team**, que faz triagem de bugs no GitHub do CPython
 - E **Fuzzing Team**, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
 - Sou um **caçador de bugs**, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
 
@@ -63,7 +63,7 @@ E finalmente IA, que mistura características das três anteriores.
 
 ### Revisão Manual de Código
 
-Pois bem. Começando pela revisão manual de código, frequentemente empregada pelas pessoas mantenedoras nos seus projetos, ou por quem tem que resolver problemas encontrados na execução do software.
+Começando pela revisão manual de código, frequentemente empregada pelas pessoas mantenedoras nos seus projetos, ou por quem tem que resolver problemas encontrados na execução de um software.
 
 Essa técnica corresponde à observação simples na busca por animais.
 
@@ -73,17 +73,21 @@ Isso requer experiência e faro.
 
 Quando feita por alguém que conhece bem o domínio, talvez seja a técnica capaz da análise mais profunda. Mas, até por isso, também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
 
-Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??,  varia.
+Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, varia.
 
 Em resumo: você está lá olhando o código e PÁ, CAPIVARA.
 
 ### Análise Estática
 
-Tem esse nome porque analisa o código sem executá-lo, utilizando ferramentas que procuram padrões de código que indicam possíveis bugs.
+Essa técnica tem "estática" no nome porque analisa o código sem executá-lo, utilizando ferramentas que procuram padrões de código que indicam possíveis bugs.
 
 Esta técnica corresponde à procura por indícios da presença de animais. Você está buscando as pegadas dos bugs.
 
 Cada ferramenta tem uma forma de consumir e analisar o código. Pode fazer um parse, usar expressões regulares, etc. e tenta identificar trechos do código que correspondem a regras pré-definidas. Estas regras em geral são configuráveis e muitas vezes podem ser acrescidas de regras personalizadas pela pessoa usuária. Então, em vez de depender da memória e do olhar da pessoa desenvolvedora para encontrar possíveis bugs, a análise estática baseia-se em padrões de código que são identificados automaticamente pelas ferramentas, podendo ser executada em grande escala.
+
+```slide?
+Ilustrar o processo de dar match em regras?
+```
 
 Ela troca parte da profundidade da revisão manual por escala: consegue varrer muito código rapidamente, mas produz resultados que ainda precisam do olhar humano, especialmente para separar falsos positivos.
 
@@ -101,7 +105,11 @@ Há duas ideias importantes aí: aleatoriedade e feedback.
 
 A aleatoriedade ajuda o fuzzer a experimentar coisas que nós talvez não imaginaríamos.
 
-O feedback mostra quais dessas tentativas parecem interessantes, por exemplo, porque alcançaram uma parte nova do código, e ajuda a escolher as próximas.
+O feedback mostra quais dessas tentativas parecem interessantes, por exemplo, porque alcançaram uma parte nova do código, e ajuda a escolher as próximas tentativas.
+
+```slide?
+Aleatoriedade e feedback podem fazer o público se perder se não tivermos ilustração?
+```
 
 Com o fuzzing, é possível encontrar em larga escala bugs que outras técnicas não alcançam. 
 
@@ -111,11 +119,11 @@ Entre as desvantagens, geralmente requer bastante tempo de CPU para ter bons res
 
 E o fuzzing tem dificuldade para encontrar problemas de lógica quando não existe um sintoma observável que permita detectar que algo deu errado.
 
-Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro.
+Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro. Já vi arquivo de 25 mil linhas, que foi minimizado para nove linhas!
 
 ### Análise Baseada em IA (Híbrida)
 
-É uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando à IA que procure de forma livre.
+É uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando a uma IA que procure de forma livre.
 
 Mas aqui vamos falar sobre uma forma mais estruturada: vários agentes, e cada um recebe uma especialidade. Aqui, quando eu falo em agente, pense basicamente numa instância do modelo com uma missão, instruções e ferramentas específicas.
 
@@ -134,6 +142,10 @@ E a IA também torna práticas, em grande escala, análises que seriam muito tra
 Por exemplo, examinar o histórico de correções de um projeto e procurar lugares semelhantes em que o mesmo bug talvez tenha ficado para trás.
 
 É quando você corrige um bug numa função e não percebe que o mesmo bug está presente em outra função parecida.
+
+```slide?
+É uma frase marcante, devemos ilustrar?
+```
 
 Além disso, os agentes podem usar os resultados uns dos outros. Um agente pode identificar os trechos mais complexos do código, e outro usar essa informação para concentrar ali a procura por erros de lógica.
 
@@ -165,9 +177,15 @@ def max_power(a, b):
             result = abs(result)
 ```
 
+Acharam um Uai?
+
 O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o código calcula tudo direitinho, guarda em `result` e... esquece de retornar. Quem chamar a função por esse caminho recebe `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
 
 ### Para Análise Estática
+
+```slide
+Introduzindo Análise Estática, já que o slide de ferramentas foi deslocado.
+```
 
 Acredito que seja a técnica com mais ferramentas disponíveis, e você acha alguma para quase qualquer linguagem de programação.
 
@@ -181,7 +199,7 @@ Vamos dar uma rápida olhada em como algumas dessas ferramentas são utilizadas 
 
 Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, fluxos incompletos, entre outros. Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão. Mas, se ativamos as regras de fluxo de retorno, o grupo RET, ele encontra o UAI na hora, apontando que falta um `return` explícito no fim de uma função que pode retornar valores.
 
-Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso. O modo estrito reclama, mas apenas da falta das anotações. A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`. A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela flagra o caminho que não retorna nada.
+Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso. O modo estrito reclama, mas apenas da falta das anotações. A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`. A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela encontra o caminho que não retorna nada.
 
 Ruff e mypy são só duas espécies dessa família. Algumas ferramentas vão bem mais fundo.
 
@@ -209,6 +227,10 @@ next(generator())  # deveria propagar RuntimeError; ocorria crash
 Esse código é estranho? É. Mas tem alguma coisa inválida aqui? Não. O __iter__ é perfeitamente autorizado a levantar uma exceção. O que deveria acontecer? RuntimeError. O que aconteceu? Crash.
 
 PÁ, CAPIVARA.
+
+```slide
+capivara
+```
 
 Esse bug foi corrigido e virou teste de regressão no CPython.
 
@@ -264,6 +286,7 @@ Não precisa entender esse código inteiro. Olhem só para isto: durante o __eq_
 
 Você corrige um bug numa função e esquece outra função parecida. Lembram quando eu falei nisso? Aconteceu de verdade.
 
+<!-- Cortar? -->
 E é interessante que quando relatei esse bug, primeiro acharam que era uma duplicata, daí com o reproducer a issue foi revelidada, levando à correção e criação de um teste. O processo não termina com o achado, nem com o primeiro report.
 
 ## Resultados e Conclusões
@@ -278,7 +301,11 @@ Quando temos o reproducer, precisamos checar se aquele já é um problema conhec
 
 Com a confirmação de que é um bug desconhecido, precisamos entrar em contato com as pessoas mantenedoras e validar o bug, até mesmo para saber se elas têm interesse em corrigi-lo. 
 
-Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes.
+Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes. Imagine se esse relatório for mal feito!
+
+```slide
+Manadas de capivaras, com a legenda "Capivárias".
+```
 
 Daria para fazer uma palestra inteira só sobre essa parte humana do processo.
 
@@ -298,9 +325,22 @@ Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando 
 
 E em 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
 
-Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. Deu até em dissertação de mestrado de um colega e uma matéria jornalística.
+Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. 
 
-Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte. Eu uso pequenas máquinas virtuais grátis na nuvem, comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers, e tenho uma assinatura básica do Claude para caçar com IA. Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
+Deu até em dissertação de mestrado de um colega e uma matéria jornalística.
+
+```slide
+Imagem Tese Hameed
+Imagem matéria LWN.net
+```
+
+Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte. Eu uso pequenas máquinas virtuais grátis na nuvem, mas também comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers. E tenho uma assinatura básica do Claude para caçar com IA. Ou seja, não ganho dinheiro com isso: eu gasto. Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
+
+```slide
+Logos Oracle, Alibaba, GCP?
+Talvez foto das máquinas pessoais?
+Logo Anthropic grande
+```
 
 ### Resultados Alcançados
 
@@ -372,17 +412,25 @@ A primeira são os modelos. Modelos mais capazes podem tornar os mesmos agentes 
 
 A segunda são as ferramentas: novos tipos de agente, verificação automática mais rigorosa antes que qualquer achado vire relatório e menos trabalho para aplicar tudo isso a um projeto novo.
 
-A terceira, para mim a mais importante, é ter mais gente caçando de forma coordenada. É, colaborando entre si, coordenando campanhas, melhorando ferramentas, se comunicando melhor com pessoas mantenedoras. É meu sonho viabilizar isso.
+A terceira, para mim a mais importante, é ter mais gente caçando de forma cooperativa. É, colaborando entre si, coordenando campanhas, melhorando ferramentas, se comunicando melhor com pessoas mantenedoras. É meu sonho viabilizar isso.
+
+```slide
+Imagem para consolidar a ideia de cooperação entre caçadores de bugs?
+```
 
 As ferramentas existem. Funcionam. Estão disponíveis.
 
-O próximo passo é colocar mais gente para usá-las.
+O próximo passo é colocar mais gente para usá-las, de forma responsável.
 
 ## Fechamento
 
-Bom, era isso que eu queria compartilhar com vocês.
+```slide
+Imagem para introduzir a transição para o final e uma conversa direta com o público.
+```
 
-Se alguém cochilou, essa é uma boa hora para acordar.
+Bom, isso era a maior parte do que eu queria compartilhar com vocês.
+
+Se alguém cochilou, essa é uma boa hora para acordar: estamos nos finalmentes.
 
 Vocês lembram do levantamento de fauna lá do começo?
 
@@ -397,6 +445,8 @@ E agora elas também podem procurar bugs no código de vocês.
 ### Contato
 
 Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato.
+
+Ah, esqueci de uma coisa!
 
 ### Um Convite
 
