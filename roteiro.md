@@ -79,7 +79,7 @@ Em resumo: você está lá olhando o código e PÁ, CAPIVARA.
 
 ### Análise Estática
 
-Seguindo para a análise estática. Essa técnica tem "estática" no nome porque analisa o código sem executá-lo, utilizando ferramentas que procuram padrões de código que indicam possíveis bugs.
+Seguindo para a próxima técnica. É chamada análise estática porque examina o código sem executá-lo. Utiliza ferramentas que procuram padrões de código que indicam possíveis bugs.
 
 Esta técnica corresponde à procura por indícios da presença de animais. Você está buscando as pegadas dos bugs.
 
@@ -119,7 +119,9 @@ Entre as desvantagens, geralmente requer bastante tempo de CPU para ter bons res
 
 E o fuzzing tem dificuldade para encontrar problemas de lógica quando não existe um sintoma observável que permita detectar que algo deu errado.
 
-Também é comum que gere scripts enormes, que por vezes precisam ser minimizados antes que o problema fique claro. Já vi arquivo de 25 mil linhas, que foi minimizado para nove linhas suficientes para mostrar o bug!
+Às vezes o fuzzer produz programas enormes. Eu já vi um com 25 mil linhas.
+
+Depois de reduzir o programa, sobraram nove linhas. E eram suficientes para reproduzir o bug.
 
 ### Análise Baseada em IA (Híbrida)
 
@@ -249,7 +251,7 @@ A família que desenvolvi está principalmente nesse terceiro grupo, com uma esp
 - cpython-review-toolkit: código do próprio CPython.
 ```
 
-Além dessas ferramentas, há um par desenvolvido em conjunto com colaboradores:
+E essa família já começou a crescer com a colaboração de outras pessoas. Bhuvansh Kataria desenvolveu uma ferramenta para analisar o PyPy, e Charlie Lin, outra voltada a extensões Python em Rust.
 
 ```slide
 - pypy-review-toolkit: PyPy, criado por Bhuvansh Kataria.
@@ -336,20 +338,24 @@ Imagem Tese Hameed
 Imagem matéria LWN.net
 ```
 
-Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte.
+Uma pergunta interessante que recebi na prévia dessa palestra foi: e os recursos para fazer tudo isso? CPU, tokens, infraestrutura? Você paga do próprio bolso?
 
-Eu uso pequenas máquinas virtuais grátis na nuvem, mas também comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers.
+Em parte, sim.
 
-E tenho uma assinatura básica do Claude para caçar com IA. Ou seja, não ganho dinheiro com isso: eu gasto.
+Uso máquinas virtuais gratuitas na nuvem, mas também investi em máquinas próprias para executar fuzzers.
 
-Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
+Para a IA, uso uma assinatura básica do Claude. Também recebi um patrocínio da Anthropic, com acesso por 12 meses a um plano mais avançado, que viabilizou boa parte das campanhas recentes. Fica aqui meu agradecimento.
 
-Na verdade, o maior investimento de um caçador de bugs é de tempo: é preciso analisar cada achado, reproduzir, validar, fazer a ponte com pessoas mantenedoras, afiar as ferramentas, às vezes até abrir PR para consertar os bugs e agir para adotar sugestões dos reviews.
+Mas talvez o maior investimento seja o tempo. Analisar os achados, reproduzir os bugs, investigar, melhorar as ferramentas e conversar com as pessoas mantenedoras exige bastante trabalho humano.
+
+Ou seja, não ganho dinheiro com isso: eu gasto.
 
 ```slide
-Logos Oracle, Alibaba, GCP?
-Talvez foto das máquinas pessoais?
-Logo Anthropic grande
+| Recurso | Como obtenho |
+|---|---|
+| CPU | Máquinas próprias e nuvem |
+| IA | Assinatura e apoio recebido |
+| Tempo | Trabalho voluntário |
 ```
 
 ### Resultados Alcançados
@@ -422,7 +428,15 @@ A primeira são os modelos. Modelos mais capazes podem tornar os mesmos agentes 
 
 A segunda são as ferramentas: novos tipos de agente, verificação automática mais rigorosa antes que qualquer achado vire relatório e menos trabalho para aplicar tudo isso a um projeto novo.
 
-A terceira, para mim a mais importante, é ter mais gente caçando de forma cooperativa. É, colaborando entre si, coordenando campanhas, melhorando ferramentas, se comunicando melhor com pessoas mantenedoras. É meu sonho viabilizar isso.
+E a terceira frente, para mim a mais importante, é ter mais gente caçando.
+
+Mas não cada pessoa por conta própria.
+
+Eu gostaria de ver pessoas colaborando, coordenando campanhas, melhorando ferramentas juntas e trabalhando de forma organizada com quem mantém os projetos.
+
+Mais gente caçando, mas também mais gente trabalhando em equipe.
+
+É algo que eu gostaria muito de ajudar a construir.
 
 ```slide
 Imagem para consolidar a ideia de cooperação entre caçadores de bugs?
@@ -454,9 +468,11 @@ E agora elas também podem procurar bugs no código de vocês.
 
 ### Contato
 
-Agradeço a presença de todas e todos e a sua atenção. Espero que tenham aproveitado a palestra e tenham saído com mais conhecimento e interesse pela caça aos bugs. Aqui estão meus dados para contato.
+Muito obrigado pela atenção. Aqui estão meus contatos, caso queiram conversar depois.
 
-Ah, esqueci de uma coisa!
+Ah, falta uma coisa. A mais importante.
+
+Vocês não precisam apenas assistir a outras pessoas encontrando bugs...
 
 ### Um Convite
 
