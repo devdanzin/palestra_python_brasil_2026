@@ -65,15 +65,17 @@ E finalmente IA, que mistura características das três anteriores.
 
 Pois bem. Começando pela revisão manual de código, frequentemente empregada pelas pessoas mantenedoras nos seus projetos, ou por quem tem que resolver problemas encontrados na execução do software.
 
-Essa técnica corresponde à observação simples na busca por animais. Você está lá olhando o código e PÁ, CAPIVARA.
-
-Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, por ÔXI, varia.
+Essa técnica corresponde à observação simples na busca por animais.
 
 Nessa técnica, as regras geralmente ficam armazenadas nas cabeças das pessoas desenvolvedoras e sua aplicação depende de olhar afiado para encontrar problemas.
 
 Isso requer experiência e faro.
 
 Quando feita por alguém que conhece bem o domínio, talvez seja a técnica capaz da análise mais profunda. Mas, até por isso, também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
+
+Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??,  varia.
+
+Em resumo: você está lá olhando o código e PÁ, CAPIVARA.
 
 ### Análise Estática
 
@@ -221,7 +223,13 @@ A família que desenvolvi está principalmente nesse terceiro grupo, com uma esp
 - cext-review-toolkit: extensões em C e C++.
 - ft-review-toolkit: Free Threading.
 - cpython-review-toolkit: código do próprio CPython.
-- rust-ext-review-toolkit: extensões em Rust.
+```
+
+Além dessas ferramentas, há um par desenvolvido em conjunto com colaboradores:
+
+```slide
+- pypy-review-toolkit: PyPy, criado por Bhuvansh Kataria.
+- rust-ext-review-toolkit: extensões em Rust, criado por Charlie Lin.
 ```
 
 Vamos ver um exemplo do tipo de erro que uma dessas ferramentas encontra:
@@ -290,7 +298,9 @@ Entre 2024 e 2025 veio a onda de fuzzing, primeiro ressuscitando e modernizando 
 
 E em 2026 começou a onda de IA: a família review-toolkit varrendo o CPython, dezenas de extensões C e C++ e o suporte a free threading.
 
-Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. Deu até em dissertação de mestrado de um colega e matéria jornalística.
+Nada disso foi um esforço solitário: as issues e as correções envolveram dezenas de pessoas, incluindo core developers do CPython e pessoas mantenedoras dos projetos analisados. Os resultados foram publicados ao longo do caminho em issues, PRs, gists e posts. Deu até em dissertação de mestrado de um colega e uma matéria jornalística.
+
+Uma pergunta que me fizeram quando apresentei uma prévia dessa palestra: e a CPU? E os tokens? Você paga do seu bolso? Em parte. Eu uso pequenas máquinas virtuais grátis na nuvem, comprei umas máquinas pra entre outras coisas caçar bugs com fuzzers, e tenho uma assinatura básica do Claude para caçar com IA. Mas a Anthropic já me patrocinou 12 meses do plano mais caro dela de graça, o que possibilitou a maior parte dos achados das campanhas baseadas em IA. Fica aqui o meu agradecimento.
 
 ### Resultados Alcançados
 
@@ -362,7 +372,7 @@ A primeira são os modelos. Modelos mais capazes podem tornar os mesmos agentes 
 
 A segunda são as ferramentas: novos tipos de agente, verificação automática mais rigorosa antes que qualquer achado vire relatório e menos trabalho para aplicar tudo isso a um projeto novo.
 
-E a terceira, para mim a mais importante, é ter mais gente caçando.
+A terceira, para mim a mais importante, é ter mais gente caçando de forma coordenada. É, colaborando entre si, coordenando campanhas, melhorando ferramentas, se comunicando melhor com pessoas mantenedoras. É meu sonho viabilizar isso.
 
 As ferramentas existem. Funcionam. Estão disponíveis.
 
