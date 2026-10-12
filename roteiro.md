@@ -6,15 +6,17 @@
 
 Boa tarde a todas e a todos! Meu nome é Daniel e esta é a palestra "Caçando bugs em Python: do olho humano à IA".
 
-Gostaria de agradecer a vocês por participarem da palestra. E também gostaria de me apresentar.
+Agradeço a vocês por participarem da palestra. E gostaria de me apresentar.
+
+Primeiro, minha auto-descrição. Sou um homem negro de pele clara, cabelos cacheados na altura dos ombros, de pretos a grisalhos. Estou usando uma calça preta e uma camiseta preta com uma imagem de capivara. Tenho cara de panaca.
 
 ### Quem sou
 
-Minhas qualificações, em ordem de importância:
+Essas são minhas qualificações, em ordem de importância:
 
 - Sou pai do **Pedro**, que tem 12 anos e está aqui conosco
 - Sou **biólogo** e trabalho na área
-- Sou Programador **Amador** de Python há mais de 20 anos, nunca atuei profissionalmente na área de tecnologia
+- Sou Programador **Amador** de Python há mais de 20 anos, nunca trabalhei na área de tecnologia
 - Faço parte de dois times **oficiais** do Python: **Triage Team**, que faz triagem de bugs no GitHub do CPython
 - E **Fuzzing Team**, grupo voltado ao fuzzing do CPython, a gente vai ver o que é fuzzing daqui a pouco
 - Sou um **caçador de bugs**, interessado em ajudar projetos a serem mais robustos encontrando falhas neles
@@ -47,7 +49,7 @@ Agora imagine **uma equipe** de pessoas biólogas. Uma procura mamíferos. Outra
 
 ## Spoilers
 
-Só para vocês saberem que isso não é uma discussão hipotética: as campanhas que vou mostrar encontraram dezenas de bugs no próprio CPython e mais de uma centena em extensões do ecossistema. No final eu mostro os números. Agora quero mostrar como chegamos até eles.
+Só para vocês saberem que isso não é uma discussão hipotética: as campanhas que vou mostrar encontraram dezenas de bugs no próprio CPython e mais de uma centena em extensões do ecossistema Python. No final eu mostro os números. Agora quero mostrar como chegamos até eles.
 
 ## Técnicas
 
@@ -73,7 +75,7 @@ Isso requer experiência e faro.
 
 Quando feita por alguém que conhece bem o domínio, talvez seja a técnica capaz da análise mais profunda. Mas, até por isso, também é a mais demorada e não é escalável. Ou seja, não é uma boa técnica para cobrir grandes quantidades de código rapidamente.
 
-Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!". Pode ser guiado por UÉ, por É O QUÊ??, varia.
+Eu gosto de chamar de Desenvolvimento Guiado por Uai, porque o que acontece é que você olha pro código e pensa "UAI! o código tá errado aqui!" ou "Ué, isso vai dar crash...".
 
 Em resumo: você está lá olhando o código e PÁ, CAPIVARA.
 
@@ -103,13 +105,13 @@ No fuzzing, em vez de procurar diretamente por padrões de código problemático
 
 Há duas ideias importantes aí: aleatoriedade e feedback.
 
+```slide
+Aleatoriedade e feedback
+```
+
 A aleatoriedade ajuda o fuzzer a experimentar coisas que nós talvez não imaginaríamos.
 
 O feedback mostra quais dessas tentativas parecem interessantes, por exemplo, porque alcançaram uma parte nova do código, e ajuda a escolher as próximas tentativas.
-
-```slide?
-Aleatoriedade e feedback podem fazer o público se perder se não tivermos ilustração?
-```
 
 Com o fuzzing, é possível encontrar em larga escala bugs que outras técnicas não alcançam. 
 
@@ -127,7 +129,7 @@ Depois de reduzir o programa, sobraram nove linhas. E eram suficientes para repr
 
 A análise baseada em IA é uma abordagem recente, na qual instruímos um LLM a procurar os bugs no código. Podemos fazer isso de forma direta, solicitando a uma IA que procure de forma livre.
 
-Mas aqui vamos falar sobre uma forma mais estruturada: vários agentes, e cada um recebe uma especialidade. Aqui, quando eu falo em agente, pense basicamente numa instância do modelo com uma missão, instruções e ferramentas específicas.
+Mas vamos falar sobre uma forma mais estruturada: vários agentes, e cada um recebe uma especialidade. Aqui, quando eu falo em agente, pense basicamente numa instância do modelo com uma missão, instruções e ferramentas específicas.
 
 Esta técnica corresponde à equipe de pessoas biólogas especialistas trabalhando em conjunto.
 
@@ -145,9 +147,11 @@ Por exemplo, examinar o histórico de correções de um projeto e procurar lugar
 
 É quando você corrige um bug numa função e não percebe que o mesmo bug está presente em outra função parecida.
 
-```slide?
-É uma frase marcante, devemos ilustrar?
+```slide
+Mesmo bug não foi corrigido em código semelhante.
 ```
+
+Como citei, os agentes são especializados.
 
 Além disso, os agentes podem usar os resultados uns dos outros. Um agente pode identificar os trechos mais complexos do código, e outro usar essa informação para concentrar ali a procura por erros de lógica.
 
@@ -181,7 +185,7 @@ def max_power(a, b):
             result = abs(result)
 ```
 
-Acharam um Uai? Quem achou levanta a mão.
+Acharam um Uai? Pode levantar a mão ou arriscar uma resposta.
 
 O Uai que eu vejo é que falta um `return` ao final do bloco do `else`: o código calcula tudo direitinho, guarda em `result` e... esquece de retornar. Quem chamar a função por esse caminho recebe `None`. Talvez você encontre outro Uai na matemática ou na lógica, mas deu para entender o princípio.
 
@@ -201,9 +205,19 @@ Exemplos bem conhecidos são ruff e pylint e os checadores de tipagem, como mypy
 
 Vamos dar uma rápida olhada em como algumas dessas ferramentas são utilizadas e os resultados delas:
 
-Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, fluxos incompletos, entre outros. Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão. Mas, se ativamos as regras de fluxo de retorno, o grupo RET, ele encontra o UAI na hora, apontando que falta um `return` explícito no fim de uma função que pode retornar valores.
+Primeiro, o ruff. Ele é um linter que analisa o código Python e encontra problemas de estilo, variáveis não definidas, fluxos incompletos, entre outros.
 
-Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso. O modo estrito reclama, mas apenas da falta das anotações. A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`. A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela encontra o caminho que não retorna nada.
+Ele é rápido e eficiente, e pode ser configurado para encontrar problemas específicos. Por exemplo, ele não encontra o nosso UAI do código anterior nas configurações padrão.
+
+Mas, se ativamos as regras de fluxo de retorno, o grupo RET, ele encontra o UAI na hora, apontando que falta um `return` explícito no fim de uma função que pode retornar valores.
+
+Já o mypy, o checador de tipagem mais tradicional do Python, tem um comportamento curioso: nas configurações padrão, ele nem analisa o corpo de funções sem anotações de tipo, então o nosso `max_power` passa ileso.
+
+O modo estrito reclama, mas apenas da falta das anotações.
+
+A mágica acontece quando atendemos ao pedido: no momento em que declaramos que `max_power` recebe e retorna `int`, o mypy encontra o UAI imediatamente, mesmo sem modo estrito: `Missing return statement`, falta um `return`.
+
+A anotação de tipo é a gente mostrando à ferramenta qual pegada procurar: dizemos o que a função deveria retornar, e ela encontra o caminho que não retorna nada.
 
 Ruff e mypy são só duas espécies dessa família. Algumas ferramentas vão bem mais fundo.
 
@@ -211,7 +225,9 @@ Semgrep procura padrões estruturais; Pysa e CodeQL conseguem acompanhar fluxos 
 
 ### Para Fuzzing
 
-No mundo Python temos ferramentas com papéis diferentes. Atheris faz fuzzing guiado por cobertura. Hypothesis trabalha com propriedades e geração de casos; HypoFuzz acrescenta fuzzing contínuo guiado por cobertura. OSS-Fuzz fornece infraestrutura para campanhas contínuas. E fusil e lafleur são fuzzers mais especializados que usei nas campanhas que vou mostrar.
+No mundo Python temos ferramentas com papéis diferentes. Atheris faz fuzzing guiado por cobertura. Hypothesis trabalha com propriedades e geração de casos; HypoFuzz acrescenta fuzzing contínuo guiado por cobertura. OSS-Fuzz fornece infraestrutura para campanhas contínuas.
+
+E fusil e lafleur são fuzzers mais especializados, focados no Python, que eu desenvolvo e usei nas campanhas que vou mostrar.
 
 Como vimos, elas executam o código e acabam analisando a lógica profunda, desde que tenha efeitos visíveis.
 
@@ -249,18 +265,15 @@ A família que desenvolvi está principalmente nesse terceiro grupo, com uma esp
 - cext-review-toolkit: extensões em C e C++.
 - ft-review-toolkit: Free Threading.
 - cpython-review-toolkit: código do próprio CPython.
-```
-
-E essa família já começou a crescer com a colaboração de outras pessoas. Bhuvansh Kataria desenvolveu uma ferramenta para analisar o PyPy, e Charlie Lin, outra voltada a extensões Python em Rust.
-
-```slide
 - pypy-review-toolkit: PyPy, criado por Bhuvansh Kataria.
 - rust-ext-review-toolkit: extensões em Rust, criado por Charlie Lin.
 ```
 
+E essa família já começou a crescer com a colaboração de outras pessoas. Bhuvansh Kataria desenvolveu uma ferramenta para analisar o PyPy, e Charlie Lin, outra voltada a extensões Python em Rust.
+
 Vamos ver um exemplo do tipo de erro que uma dessas ferramentas encontra:
 
-Uma correção anterior protegeu referências em `groupby_next` antes de chamar código Python reentrante, por exemplo um dunder eq que avança o iterador.
+O alvo da análise era o código por trás do `groupby`, uma ferramenta do módulo `itertools` do Python. Uma correção anterior protegeu referências em `groupby_next` antes de chamar código Python reentrante, por exemplo um dunder eq que avança o iterador.
 
 O `cpython-review-toolkit` examinou o histórico e encontrou a mesma operação desprotegida na função irmã `_grouper_next`. Um `__eq__` malicioso podia reentrar no iterador, substituir e liberar uma chave ainda em uso, produzindo use-after-free e causando crash.
 
@@ -286,7 +299,7 @@ key, grouper_iter = next(g)
 items = list(grouper_iter)
 ```
 
-Não precisa entender esse código inteiro. Olhem só para isto: durante o __eq__, ele avança o próprio iterador.
+Não precisa entender esse código inteiro. Olhem só para isto: durante o __eq__, ele avança o próprio iterador. Usando essa classe como no código à direita, temos um crash.
 
 Você corrige um bug numa função e esquece outra função parecida. Lembram quando eu falei nisso? Aconteceu de verdade.
 
@@ -311,7 +324,7 @@ Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que p
 Manadas de capivaras, com a legenda "Capivárias".
 ```
 
-Daria para fazer uma palestra inteira só sobre essa parte humana do processo.
+Como falei, daria para fazer uma palestra inteira só sobre essa parte humana do processo.
 
 ```slide
 Respeito às pessoas mantenedoras!
@@ -360,9 +373,9 @@ Ou seja, não ganho dinheiro com isso: eu gasto.
 
 ### Resultados Alcançados
 
-Em 2008 foram nove, encontrados basicamente no olho.
+Em 2008 foram nove bugs, encontrados basicamente no olho.
 
-Em 2026, já foram 250 com fuzzing e IA.
+Em 2026, já foram 250 bugs com fuzzing e IA.
 
 Os números acabam contando a mesma história do título desta palestra.
 
@@ -390,9 +403,9 @@ Mas uma campanha dessas não serve apenas para aumentar um contador de bugs.
 
 O primeiro efeito é o mais óbvio: encontramos problemas concretos e, em muitos casos, eles são corrigidos.
 
-O segundo aparece quando começamos a ver o mesmo tipo de problema em lugares diferentes. A repetição pode revelar uma API fácil de usar errado, uma prática perigosa ou uma classe inteira de bugs que merece uma solução mais geral.
+O segundo aparece quando começamos a ver o mesmo tipo de problema em lugares diferentes. A repetição pode revelar uma API fácil de usar errado, uma prática perigosa ou uma classe inteira de bugs que merece uma solução mais geral. Só com campanhas em larga escala conseguimos construir essa visão macro do ecossistem.
 
-E existe um terceiro efeito: a própria campanha pode mudar a maneira como um projeto procura bugs. Pessoas mantenedoras começam a buscar casos semelhantes, usar as mesmas ferramentas e adotar práticas mais defensivas.
+E existe um terceiro efeito: a própria campanha pode mudar a maneira como um projeto procura bugs. Pessoas mantenedoras começam a buscar casos semelhantes, usar as mesmas ferramentas e adotar práticas mais defensivas. Isso já encontrou diversos bugs que eu não tinha achado.
 
 Isso só funciona, é claro, quando a campanha é feita com responsabilidade e respeito pelo tempo das pessoas mantenedoras.
 
