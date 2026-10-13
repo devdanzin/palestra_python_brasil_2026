@@ -87,8 +87,8 @@ Esta técnica corresponde à procura por indícios da presença de animais. Voc�
 
 Cada ferramenta tem uma forma de consumir e analisar o código. Pode fazer um parse, usar expressões regulares, etc. e tenta identificar trechos do código que correspondem a regras pré-definidas. Estas regras em geral são configuráveis e muitas vezes podem ser acrescidas de regras personalizadas pela pessoa usuária. Então, em vez de depender da memória e do olhar da pessoa desenvolvedora para encontrar possíveis bugs, a análise estática baseia-se em padrões de código que são identificados automaticamente pelas ferramentas, podendo ser executada em grande escala.
 
-```slide?
-Ilustrar o processo de dar match em regras?
+```slide
+Ilustrar o processo de dar match em regra
 ```
 
 Ela troca parte da profundidade da revisão manual por escala: consegue varrer muito código rapidamente, mas produz resultados que ainda precisam do olhar humano, especialmente para separar falsos positivos.
@@ -252,7 +252,9 @@ PÁ, CAPIVARA.
 capivara
 ```
 
-Esse bug foi corrigido e virou teste de regressão no CPython.
+O problema estava no tratamento de erros dentro do interpretador. Quando o __iter__ falhava, uma operação interna tentava utilizar o resultado da chamada antes de verificar que ela tinha falhado. O resultado foi um acesso inválido à memória.
+
+A correção foi verificar a falha antes de continuar. E o caso virou um teste de regressão.
 
 ### Para Análise Baseada em IA (Híbrida)
 
@@ -303,8 +305,7 @@ Não precisa entender esse código inteiro. Olhem só para isto: durante o __eq_
 
 Você corrige um bug numa função e esquece outra função parecida. Lembram quando eu falei nisso? Aconteceu de verdade.
 
-<!-- Cortar? -->
-E é interessante que quando relatei esse bug, primeiro acharam que era uma duplicata, daí com o reproducer a issue foi revelidada, levando à correção e criação de um teste. O processo não termina com o achado, nem com o primeiro report.
+Quando reportei o bug, inicialmente acharam que era uma duplicata. Foi preciso revalidar o reproducer para demonstrar que se tratava de outro problema. Depois ele foi corrigido e ganhou um teste de regressão.
 
 ## Resultados e Conclusões
 

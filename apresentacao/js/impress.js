@@ -3514,23 +3514,23 @@
         }
 
         stepElement = event.target;
-        removeMediaClasses();
+        // removeMediaClasses();
 
-        media = stepElement.querySelectorAll( "audio, video" );
-        for ( i = 0; i < media.length; i += 1 ) {
-            mediaElement = media[ i ];
+        // media = stepElement.querySelectorAll( "audio, video" );
+        // for ( i = 0; i < media.length; i += 1 ) {
+        //     mediaElement = media[ i ];
 
-            // Autoplay when (maybe inherited) autoplay setting is true,
-            // but only if not on preview of the next step in impressConsole
-            onConsole = onStepenterDetectImpressConsole();
-            autoplay = getMediaAttribute( "autoplay", [ mediaElement, stepElement, root ] );
-            if ( autoplay && !onConsole.preview ) {
-                if ( onConsole.slideView ) {
-                    mediaElement.muted = true;
-                }
-                mediaElement.play();
-            }
-        }
+        //     // Autoplay when (maybe inherited) autoplay setting is true,
+        //     // but only if not on preview of the next step in impressConsole
+        //     onConsole = onStepenterDetectImpressConsole();
+        //     autoplay = getMediaAttribute( "autoplay", [ mediaElement, stepElement, root ] );
+        //     if ( autoplay && !onConsole.preview ) {
+        //         if ( onConsole.slideView ) {
+        //             mediaElement.muted = true;
+        //         }
+        //         mediaElement.play();
+        //     }
+        // }
     };
 
     onStepleave = function( event ) {

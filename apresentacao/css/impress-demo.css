@@ -37,12 +37,12 @@
     --fs-corpo: 30px; /* texto base dentro do cartão do slide */
     --fs-paragrafo: 70px; /* parágrafos centrais da maioria dos slides */
     --fs-paragrafo-denso: 60px; /* parágrafos dos slides densos em números */
-    --fs-ul: 55px;
+    --fs-ul: 45px;
 
     /* Espaçamento vertical padrão acima de cada parágrafo central */
     --espaco-paragrafo: 45px;
     --espaco-li: 25px;
-    --recuo-li: 270px;
+    --recuo-li: 40px;
 }
 
 /* ========================== 2. RESET E BASE ============================== */
@@ -209,7 +209,7 @@ a:focus {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
         url("../images/cobra_loading.svg");
     background-repeat: no-repeat;
     background-position:
@@ -280,11 +280,14 @@ h3 {
 
 /* Listas dentro dos slides. */
 ul {
-    margin: 0 0 0 50px;
+    margin: 20px 20px 20px 50px;
     padding: 0;
     list-style: none;
     font-size: 45px;
     color: var(--cor-texto);
+    background-color:#d0d0d088;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* =============================== 6. IMAGENS ============================= */
@@ -347,7 +350,8 @@ ul {
 #paralelo_2 p,
 #tecnicas p,
 #revisao_manual p,
-#analise_estatica p,
+#analise_estatica_01 p,
+#analise_estatica_02 p,
 #fuzzing_01 p,
 #fuzzing_02 p,
 #analise_baseada_em_ia_01 p,
@@ -475,7 +479,7 @@ ul {
     margin: 0 auto;
     padding: 0.6em 1em;
     text-align: left;
-    background: #f6f8fa;
+    background: #f6f8fa99;
     border: 1px solid #d0d7de;
     border-radius: 8px;
 }

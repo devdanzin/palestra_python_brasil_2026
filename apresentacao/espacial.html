@@ -311,7 +311,7 @@
             </div>
 
             <div
-                id="analise_estatica"
+                id="analise_estatica_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
@@ -320,6 +320,34 @@
                 <h1>Análise Estática</h1>
                 <p class="substep">Não executa, procura padrões</p>
                 <p class="substep">Regras pré-definidas, configuráveis</p>
+                <p></p>
+                <p></p>
+            </div>
+
+            <div
+                id="analise_baseada_em_ia_img"
+                class="step appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <img
+                    src="images/Analise_Estatica_Codigo_Python.png"
+                    alt="Análise Estática Código Python"
+                    style="transform: translate(-28%, 1%) translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;"
+
+                />
+            </div>
+            <div
+                id="analise_estatica_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Análise Estática</h1>
+                <p>Não executa, procura padrões</p>
+                <p>Regras pré-definidas, configuráveis</p>
                 <p class="substep">Funciona bem em larga escala</p>
                 <p class="substep">Tende a gerar falsos positivos</p>
             </div>
@@ -334,6 +362,8 @@
                 <h1>Fuzzing</h1>
                 <p class="substep">Fornece inputs problemáticos</p>
                 <p class="substep">Executa, análise dinâmica</p>
+                <p></p>
+                <p></p>
                 <img
                     class="substep sudden absolute"
                     src="images/Fuzzing_Aleatoriedade_e_Feedback.png"
@@ -515,23 +545,33 @@
 
             <div
                 id="ferramentas_fuzzing_03"
-                class="step slide appear"
+                class="step slide appear sudden"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
-                <pre class="substep"><code class="python" style="font-size: larger;">class Silly:
+                <pre class="substep"><code class="python" style="font-size: 40px;">class Silly:
     def __iter__(self):
         raise RuntimeError("ninguém espera a Inquisição Espanhola")
 
 def generator():
     yield from Silly()
 
-next(generator())
-                </code></pre>
+next(generator())</code></pre>
                 <h2 class="substep">Esperado: RuntimeError</h2>
                 <h2 class="substep">Observado: crash</h2>
             </div>
+
+            <div
+                id="capivara_crash"
+                class="step appear sudden"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <video class="sudden" id="crash_video" src="images/capy.mp4" alt="Capivara Crash" />
+            </div>
+
             <div
                 id="ferramentas_ia_01"
                 class="step slide appear"
@@ -555,7 +595,6 @@ next(generator())
                 data-y="0"
                 data-scale="11"
             >
-                <h1>Para Análise Baseada em IA</h1>
                 <span>Família -review-toolkit:</span>
                 <ul>
                     <li>code (Python puro)</li>
@@ -563,6 +602,10 @@ next(generator())
                     <li>ft (suporte a Free Threading)</li>
                     <li>cpython (CPython em si)</li>
                     <li>rust-ext (extensões Rust)</li>
+                </ul>
+                <ul>
+                    <li>pypy-review-toolkit: PyPy, criado por Bhuvansh Kataria.</li>
+                    <li>rust-ext-review-toolkit: extensões em Rust, criado por Charlie Lin.</li>
                 </ul>
             </div>
 
@@ -669,12 +712,39 @@ correção
             </div>
 
             <div
+                id="capivarias"
+                class="step appear slide sudden"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Capivárias</h1>
+                <p>_</p>
+                <table>
+                    <tr>
+                        <td>
+                            <video class="sudden" id="capivarias_01" src="images/many.mp4" alt="Capivarias 0" style="height: 650px;"/>
+                        </td>
+                        <td>
+                            <img src="images/too_many.png" style="height: 650px;"/>
+                        </td>
+                        <td>
+                            <video class="sudden" id="capivarias_02" src="images/herd.mp4" alt="Capivarias 2" style="height: 650px;"/>
+                        </td>
+                    </tr>
+                </table>                
+            </div>
+
+
+            <div
                 id="resultados_01"
                 class="step slide appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
+
+
                 <h1>As Campanhas</h1>
                 <p class="substep">2008: primeiros bugs, no olho</p>
                 <p class="substep">2024-2025: fuzzing do CPython</p>
@@ -873,7 +943,30 @@ deduplicação + comunicação
         <script src="js/highlight/highlight.pack.js"></script>
         <script src="js/impress.js"></script>
         <script>
+
+            ["capivara_crash"].forEach(function(name) {
+                var videoStep = document.getElementById(name);
+                var video = document.getElementById("crash_video");
+                videoStep.addEventListener("impress:stepenter", function() {
+                    video.play();
+                }, false);
+                videoStep.addEventListener("impress:stepleave", function() {
+                    video.pause();
+                }, false);
+            });
+
+            ["capivarias_01", "capivarias_02"].forEach(function(name) {
+                var videoStep = document.getElementById("capivarias");
+                var video = document.getElementById(name);
+                videoStep.addEventListener("impress:stepenter", function() {
+                    video.play();
+                }, false);
+                videoStep.addEventListener("impress:stepleave", function() {
+                    video.pause();
+                }, false);
+            });
             impress().init();
+
         </script>
     </body>
 </html>
