@@ -319,7 +319,7 @@ Quando temos o reproducer, precisamos checar se aquele já é um problema conhec
 
 Com a confirmação de que é um bug desconhecido, precisamos entrar em contato com as pessoas mantenedoras e validar o bug, até mesmo para saber se elas têm interesse em corrigi-lo. 
 
-Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes. Imagine se esse relatório for mal feito!
+Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes. E se boa parte desses achados forem falsos positivos, a situação fica ainda pior.
 
 ```slide
 Manadas de capivaras, com a legenda "Capivárias".
