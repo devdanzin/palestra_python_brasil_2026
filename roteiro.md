@@ -8,7 +8,7 @@ Boa tarde a todas e a todos! Meu nome é Daniel e esta é a palestra "Caçando b
 
 Agradeço a vocês por participarem da palestra. E gostaria de me apresentar.
 
-Primeiro, minha auto-descrição. Sou um homem negro de pele clara, cabelos cacheados na altura dos ombros, de pretos a grisalhos. Estou usando uma calça preta e uma camiseta preta com uma imagem de capivara. Tenho cara de panaca.
+Primeiro, minha auto-descrição. Sou um homem negro de pele clara, cabelos cacheados na altura dos ombros, de pretos a grisalhos. Estou usando uma calça preta e uma camiseta preta com uma imagem de capivara com um arco-íris. Tenho cara de panaca.
 
 ### Quem sou
 
@@ -163,7 +163,7 @@ E aí começa outro problema: como levar esses resultados às pessoas mantenedor
 
 ## Ferramentas
 
-Agora faremos um breve passeio por ferramentas que nos ajudam a aplicar as técnicas descritas, com certa ênfase nas ferramentas de IA que desenvolvi.
+Agora faremos um breve passeio por ferramentas que nos ajudam a aplicar as técnicas descritas, com certa ênfase nas ferramentas que desenvolvi.
 
 ### Para Revisão Manual de Código
 
@@ -319,19 +319,21 @@ Quando temos o reproducer, precisamos checar se aquele já é um problema conhec
 
 Com a confirmação de que é um bug desconhecido, precisamos entrar em contato com as pessoas mantenedoras e validar o bug, até mesmo para saber se elas têm interesse em corrigi-lo. 
 
+```slide
+Respeito às pessoas mantenedoras!
+
+encontrar → reproduzir → deduplicar → comunicar e validar → corrigir
+```
+
 Esse contato com pessoas mantenedoras é algo importante e delicado. Temos que pensar no custo-benefício do nosso trabalho. Um relatório com 50 achados pode significar 50 horas de trabalho para alguém que não pediu por ele e até mesmo que não considera esses bugs relevantes. E se boa parte desses achados forem falsos positivos, a situação fica ainda pior.
 
 ```slide
 Manadas de capivaras, com a legenda "Capivárias".
 ```
 
+A última coisa que você quer é descarregar uma avalanche de achados sobre uma pessoa mantenedora que provavelmente já está sobrecarregada com tarefas relativas ao seu projeto.
+
 Como falei, daria para fazer uma palestra inteira só sobre essa parte humana do processo.
-
-```slide
-Respeito às pessoas mantenedoras!
-
-encontrar → reproduzir → deduplicar → comunicar e validar → corrigir
-```
 
 ### Sobre as Campanhas
 
@@ -347,7 +349,7 @@ Nada disso foi um esforço solitário: as issues e as correções envolveram dez
 
 Deu até em dissertação de mestrado de um colega e uma matéria jornalística.
 
-```slide
+```slides
 Imagem Tese Hameed
 Imagem matéria LWN.net
 ```
@@ -383,10 +385,15 @@ Os números acabam contando a mesma história do título desta palestra.
 Quando falamos de achados e bugs, há um funil de evidência, por exemplo:
 
 ```slide
+Achado não é bug
 ~690 achados
-↓ revisão + reprodução
+↓ 
+revisão + reprodução
+↓
 215+ reproduzidos
-↓ deduplicação + comunicação
+↓ 
+deduplicação + comunicação
+↓
 138 bugs distintos
 ```
 
@@ -463,12 +470,8 @@ O próximo passo é colocar mais gente para usá-las, de forma responsável.
 ## Fechamento
 
 ```slide
-Imagem para introduzir a transição para o final e uma conversa direta com o público.
+overview para callback da mata
 ```
-
-Bom, isso era a maior parte do que eu queria compartilhar com vocês.
-
-Se alguém cochilou, essa é uma boa hora para acordar: estamos nos finalmentes.
 
 Vocês lembram do levantamento de fauna lá do começo?
 
@@ -484,7 +487,7 @@ E agora elas também podem procurar bugs no código de vocês.
 
 Muito obrigado pela atenção. Aqui estão meus contatos, caso queiram conversar depois.
 
-Ah, falta uma coisa. A mais importante.
+Mas falta uma coisa. A mais importante.
 
 Vocês não precisam apenas assistir a outras pessoas encontrando bugs...
 

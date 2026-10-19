@@ -131,7 +131,7 @@
 
             <div
                 id="observacao_direta"
-                class="step slide appear"
+                class="step slide appear sudden"
                 data-x="-2500"
                 data-y="-4000"
                 data-scale="4"
@@ -459,6 +459,20 @@
             </div>
 
             <div
+                id="ferramentas_analise_estatica_00"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Para Análise Estática</h1>
+                <p class="substep">Diversidade de ferramentas</p>
+                <p class="substep">Integradas a IDEs</p>
+                <p class="substep">Abstrações e profundidades diferentes</p>
+                <p class="substep">Exemplos</p>
+            </div>
+
+            <div
                 id="ferramentas_analise_estatica_02"
                 class="step appear"
                 data-x="0"
@@ -516,7 +530,9 @@
                 <p class="substep">
                     <b>Atheris</b>: cobertura
                     <br />
-                    <b>Hypothesis</b> / <b>HypoFuzz</b>: propriedades, cobertura
+                    <b>Hypothesis</b>: propriedades
+                    <br />
+                    <b>HypoFuzz</b>: cobertura
                     <br />
                     <b>OSS-Fuzz</b>: campanhas contínuas
                     <br />
@@ -536,11 +552,11 @@
                     src="images/lafleur.png"
                     alt="Diagrama do ciclo do lafleur"
                 />
-                <p>Seleção</p>
-                <p>Mutação</p>
-                <p>Execução</p>
-                <p>Análise</p>
-                <p>Introspecção</p>
+                <p class="substep">Seleção</p>
+                <p class="substep">Mutação</p>
+                <p class="substep">Execução</p>
+                <p class="substep">Análise</p>
+                <p class="substep">Introspecção</p>
             </div>
 
             <div
@@ -601,34 +617,11 @@ next(generator())</code></pre>
                     <li>cext (extensões C e C++)</li>
                     <li>ft (suporte a Free Threading)</li>
                     <li>cpython (CPython em si)</li>
-                    <li>rust-ext (extensões Rust)</li>
                 </ul>
-                <ul>
-                    <li>pypy-review-toolkit: PyPy, criado por Bhuvansh Kataria.</li>
-                    <li>rust-ext-review-toolkit: extensões em Rust, criado por Charlie Lin.</li>
+                <ul class="substep">
+                    <li>pypy: PyPy, criado por Bhuvansh Kataria.</li>
+                    <li>rust-ext: extensões em Rust, criado por Charlie Lin.</li>
                 </ul>
-            </div>
-
-            <div
-                id="ferramentas_ia_03"
-                class="step slide appear"
-                data-x="0"
-                data-y="0"
-                data-scale="11"
-            >
-                <h1>Da pegada à descoberta</h1>
-
-                <pre style="text-align: center; font-size: 68px; line-height: 90%;">
-Agentes especializados
-        ↓
-Achados candidatos
-        ↓
-Reproduzir + cruzar + deduplicar
-        ↓
-Evidência priorizada
-        ↓
-Pessoa mantenedora
-                </pre>
             </div>
 
             <div
@@ -652,7 +645,6 @@ Pessoa mantenedora
                 </p>
                 <p style="font-weight: bold;">O agente examinou o histórico e procurou a variante.</p>
             </div>
-
 
             <div
                 id="ferramentas_ia_05"
@@ -688,6 +680,23 @@ items = list(grouper_iter)</code></pre>
                     </tr>
                 </table>
             </div>
+            <div
+                id="ferramentas_ia_03"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Da pegada à descoberta</h1>
+                <pre class="substep" style="text-align: center; font-size: 80px; line-height: 90%;">
+
+Achados candidatos
+        ↓
+Reproduzir + cruzar + deduplicar
+        ↓
+Evidência priorizada
+                </pre>
+            </div>
 
             <div
                 id="achado_01"
@@ -697,7 +706,7 @@ items = list(grouper_iter)</code></pre>
                 data-scale="11"
             >
                 <h1>Do achado à contribuição</h1>
-                <pre style="text-align: center; font-size: 48px; line-height: 90%;">
+                <pre  class="substep" style="text-align: center; font-size: 62px; line-height: 90%;">
 achado
     ↓
 reproducer
@@ -706,9 +715,8 @@ deduplicação
     ↓
 comunicação + validação
     ↓
-correção
-                </pre>
-                <h2>Respeito ao tempo das pessoas mantenedoras</h2>
+correção</pre>
+                <h2 class="substep">Respeito às pessoas mantenedoras</h2>
             </div>
 
             <div
@@ -732,10 +740,8 @@ correção
                             <video class="sudden" id="capivarias_02" src="images/herd.mp4" alt="Capivarias 2" style="height: 650px;"/>
                         </td>
                     </tr>
-                </table>                
+                </table>
             </div>
-
-
             <div
                 id="resultados_01"
                 class="step slide appear"
@@ -743,14 +749,79 @@ correção
                 data-y="0"
                 data-scale="11"
             >
-
-
                 <h1>As Campanhas</h1>
                 <p class="substep">2008: primeiros bugs, no olho</p>
                 <p class="substep">2024-2025: fuzzing do CPython</p>
                 <p class="substep">2026: IA no CPython e nas extensões</p>
                 <p class="substep">Olho → fuzzing → IA</p>
             </div>
+
+            <div
+                id="resultados_pub_01"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Publicações</h1>
+                    <img src="images/bugs_lwn.png" style="height: 70%;"/>
+            </div>
+
+            <div
+                id="resultados_pub_02"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Publicações</h1>
+                    <img src="images/coverage_hameed.png" style="height: 650px;"/>
+            </div>
+
+            <div
+                id="recursos"
+                class="step slide appear"
+                data-x="0"
+                data-y="0"
+                data-scale="11"
+            >
+                <h1>Recursos</h1>
+                <table>
+                    <tr class="substep">
+                        <td>
+                            <p><b>Requisito</b></p>
+                        </td>
+                        <td>
+                            <p><b>Como obtenho</b></p>
+                        </td>
+                    </tr>
+                    <tr class="substep">
+                        <td>
+                            <p>CPU</p>
+                        </td>
+                        <td>
+                            <p>Máquinas próprias e nuvem</p>
+                        </td>
+                    </tr>
+                    <tr class="substep">
+                        <td>
+                            <p>IA</p>
+                        </td>
+                        <td>
+                            <p>Assinatura e apoio recebido</p>
+                        </td>
+                    </tr>
+                    <tr class="substep">
+                        <td>
+                            <p>Tempo</p>
+                        </td>
+                        <td>
+                            <p>Trabalho voluntário</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
 
             <div
                 id="resultados_02"
@@ -775,9 +846,8 @@ correção
             >
                 <h1>Resultados: IA</h1>
                 <p>Extensões: ~690 achados, 215+ reproduzidos</p>
-                <p>138 bugs em extensões, 55 no CPython</p>
-                <p>Free threading: 4.556+ corridas, 30+ crashes</p>
-                <p>No total: 464 bugs, 321 resolvidos</p>
+                <p>138+ bugs em extensões, 55+ no CPython</p>
+                <p class="substep"><b>No total (julho/2026): 464 bugs, 321 resolvidos</b></p>
             </div>
 
             <div
@@ -788,7 +858,8 @@ correção
                 data-scale="11"
             >
                 <h1>Achado não é bug</h1>
-                <pre style="text-align: center; font-size: 45px ;">
+                <pre style="text-align: center; font-size: 62px; line-height: 90%;"  class="substep">
+
 ~690 achados
         ↓
     revisão + reprodução
@@ -809,10 +880,10 @@ deduplicação + comunicação
                 data-scale="11"
             >
                 <h1>Importância das Campanhas</h1>
-                <p>Bugs corrigidos</p>
-                <p>Padrões recorrentes aparecem</p>
-                <p>APIs e práticas podem melhorar</p>
-                <p>Projetos passam a caçar melhor</p>
+                <p class="substep">Bugs corrigidos</p>
+                <p class="substep">Padrões recorrentes aparecem</p>
+                <p class="substep">APIs e práticas podem melhorar</p>
+                <p class="substep">Projetos passam a caçar melhor</p>
             </div>
 
             <div
@@ -823,10 +894,10 @@ deduplicação + comunicação
                 data-scale="11"
             >
                 <h1>Importância das Ferramentas</h1>
-                <p>Ampliam o olhar</p>
-                <p>Trazem perspectivas diferentes</p>
-                <p>Ensinam a pensar como caça-bugs</p>
-                <p><b>"Como isso pode dar errado?"</b></p>
+                <p class="substep">Ampliam o olhar</p>
+                <p class="substep">Trazem perspectivas diferentes</p>
+                <p class="substep">Ensinam a pensar como caça-bugs</p>
+                <p class="substep"><b>"Como isso pode dar errado?"</b></p>
             </div>
 
             <div
@@ -837,11 +908,17 @@ deduplicação + comunicação
                 data-scale="11"
             >
                 <h1>Futuro</h1>
-                <p>Modelos mais capazes</p>
-                <p>Ferramentas + verificação melhores</p>
-                <p><b>Mais gente caçando</b></p>
+                <p class="substep">Modelos mais capazes</p>
+                <p class="substep">Ferramentas + verificação melhores</p>
+                <p class="substep"><b>Mais gente caçando</b></p>
             </div>
-
+            <div
+                id="volta_a_mata"
+                class="step"
+                data-x="650"
+                data-y="500"
+                data-scale="12"
+            ></div>
             <div
                 id="fechamento"
                 class="step slide appear"
@@ -850,8 +927,8 @@ deduplicação + comunicação
                 data-scale="11"
             >
                 <h1>Outras matas</h1>
-                <p>As ferramentas funcionaram com:</p>
-                <ul>
+                <p class="substep">As ferramentas funcionaram com:</p>
+                <ul class="substep">
                     <li>CPython</li>
                     <li>Pillow</li>
                     <li>Cython</li>

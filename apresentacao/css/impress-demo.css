@@ -285,7 +285,18 @@ ul {
     list-style: none;
     font-size: 45px;
     color: var(--cor-texto);
-    background-color:#d0d0d088;
+    background-color:#d0d0d044;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#quem_sou ul {
+    margin: 20px 20px 20px 50px;
+    padding: 0;
+    list-style: none;
+    font-size: 45px;
+    color: var(--cor-texto);
+    background-color:#ffffff00;
     border-radius: 16px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
@@ -357,6 +368,7 @@ ul {
 #analise_baseada_em_ia_01 p,
 #analise_baseada_em_ia_02 p,
 #ferramentas p,
+#ferramentas_analise_estatica_00 p,
 #ferramentas_analise_estatica_01 p,
 #ferramentas_fuzzing_01 p,
 #ferramentas_ia_01 p,
@@ -568,12 +580,17 @@ ul {
 #resultados_03 p,
 #conclusoes_01 p,
 #conclusoes_02 p,
-#conclusoes_03 p {
+#conclusoes_03 p,
+#recursos p {
     font-size: var(--fs-paragrafo-denso);
     text-align: center;
     color: var(--cor-texto);
     padding-top: var(--espaco-paragrafo);
 }
+/*
+#recursos table {
+    align-self: center;
+}*/
 
 /* Títulos longos ("Importância das ..."): reduzidos para caber numa linha,
    mesmo tratamento dos títulos de ferramentas_ia. */
