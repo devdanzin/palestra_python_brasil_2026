@@ -285,20 +285,15 @@ ul {
     list-style: none;
     font-size: 45px;
     color: var(--cor-texto);
-    background-color:#d0d0d044;
+    background-color: #d0d0d044;
     border-radius: 16px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-#quem_sou ul {
-    margin: 20px 20px 20px 50px;
-    padding: 0;
-    list-style: none;
-    font-size: 45px;
-    color: var(--cor-texto);
-    background-color:#ffffff00;
-    border-radius: 16px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+/* Código sempre em fonte monoespaçada (nem o reset nem o tema do
+   highlight.js definem a família). */
+code {
+    font-family: var(--fonte-codigo);
 }
 
 /* =============================== 6. IMAGENS ============================= */
@@ -345,6 +340,13 @@ ul {
     width: 230%;
 }
 
+/* Diagramas exibidos em passos próprios, sem o cartão (analise_estatica_img e
+   analise_baseada_em_ia_img). O translate desloca a imagem larga para
+   centralizá-la no passo de 900px. (Antes era estilo inline no <img>.) */
+.imagem-diagrama {
+    transform: translate(-28%, 1%);
+}
+
 /* ============ 7. SLIDES DE CONTEÚDO (ORDEM DE APARIÇÃO) ================== */
 
 /* --- Parágrafos centrais (compartilhado por vários slides) ---
@@ -371,8 +373,7 @@ ul {
 #ferramentas_analise_estatica_00 p,
 #ferramentas_analise_estatica_01 p,
 #ferramentas_fuzzing_01 p,
-#ferramentas_ia_01 p,
-#ferramentas_ia_03 p {
+#ferramentas_ia_01 p {
     font-size: var(--fs-paragrafo);
     text-align: center;
     color: var(--cor-texto);
@@ -387,10 +388,12 @@ ul {
 
 /* --- quem_sou --- */
 /* Com o conteúdo centralizado verticalmente (flex em .slide), o hack de margem
-   negativa não é mais necessário; um respiro positivo separa a lista do título. */
+   negativa não é mais necessário; um respiro positivo separa a lista do título.
+   O fundo transparente tira o cinza padrão das listas (base ul, acima). */
 #quem_sou ul {
     margin-top: 40px;
     padding-left: 160px;
+    background-color: transparent;
 }
 
 #quem_sou li {
@@ -414,11 +417,8 @@ ul {
     margin: 30px;
 }
 
-/* Alinhamento das colunas em direção aos dois-pontos centrais.
-   Antes isto estava em "#paralelo span #esquerda/#direita", que nunca aplicava
-   (era seletor de id, e o HTML usa classes; além disso text-align em <span>
-   inline não faz nada). Agora alinhamos as células, que é o que tem efeito.
-   Obs.: com isto, as classes .esquerda/.direita nos <span> ficam dispensáveis. */
+/* Alinhamento das colunas em direção aos dois-pontos centrais: alinhamos as
+   células da tabela, que é o que tem efeito sobre o conteúdo inline. */
 #paralelo td:first-child {
     text-align: right;
 }
@@ -498,7 +498,6 @@ ul {
 
 #ferramentas_revisao_manual code {
     font-size: 120%; /* era 130%; reduzido para o bloco caber no cartão */
-    font-family: var(--fonte-codigo);
 }
 
 /* --- ferramentas_fuzzing_02 (slide do lafleur) ---
@@ -523,6 +522,13 @@ ul {
 #ferramentas_fuzzing_02 p {
     font-size: var(--fs-paragrafo);
     color: var(--cor-texto);
+}
+
+/* --- ferramentas_fuzzing_03 (código do bug do yield from) --- */
+/* Fonte menor que a dos outros blocos de código para o exemplo caber
+   junto dos dois <h2> de desfecho. (Antes era estilo inline no <code>.) */
+#ferramentas_fuzzing_03 code {
+    font-size: 40px;
 }
 
 /* --- ferramentas_ia (família -review-toolkit) --- */
@@ -571,6 +577,39 @@ ul {
     padding-bottom: 30px;
 }
 
+/* --- Diagramas de fluxo em <pre> (ia_03, achado_01, resultados_04) ---
+   Texto centralizado com setas ↓ entre as etapas; linhas compactas.
+   (Antes eram estilos inline em cada <pre>.) */
+#ferramentas_ia_03 pre,
+#achado_01 pre,
+#resultados_04 pre {
+    font-size: 62px;
+    line-height: 90%;
+    text-align: center;
+}
+
+/* O fluxo de ia_03 tem menos etapas, então cabe maior. */
+#ferramentas_ia_03 pre {
+    font-size: 80px;
+}
+
+/* --- capivarias --- */
+/* Vídeos e imagem lado a lado, na mesma altura.
+   (Antes eram estilos inline em cada elemento.) */
+#capivarias video,
+#capivarias img {
+    height: 650px;
+}
+
+/* --- resultados_pub (capturas de publicações) --- */
+#resultados_pub_01 img {
+    height: 70%;
+}
+
+#resultados_pub_02 img {
+    height: 650px;
+}
+
 /* --- resultados / conclusoes --- */
 /* Slides densos em números: parágrafos centralizados como no seletor
    compartilhado, mas um pouco menores (60px) para as linhas com métricas
@@ -587,10 +626,6 @@ ul {
     color: var(--cor-texto);
     padding-top: var(--espaco-paragrafo);
 }
-/*
-#recursos table {
-    align-self: center;
-}*/
 
 /* Títulos longos ("Importância das ..."): reduzidos para caber numa linha,
    mesmo tratamento dos títulos de ferramentas_ia. */

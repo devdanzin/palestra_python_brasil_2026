@@ -15,14 +15,14 @@ The talk's central metaphor runs through every file: hunting for bugs in code is
 - `apresentacao/espacial.html` — the actual slide deck, built on **impress.js** (a spatial/zooming presentation engine, not a linear slide deck). There is no templating or build step: this file is opened directly in a browser.
 - `apresentacao/css/impress-common.css` — impress.js base styles (vendored, don't hand-edit for content changes).
 - `apresentacao/css/impress-demo.css` — this talk's actual presentation styling (fonts, layout, animations, slide-specific classes).
-- `apresentacao/js/impress.js`, `apresentacao/js/highlight/` — vendored JS libraries (impress.js for the spatial engine, highlight.js for code syntax highlighting in the code-sample slide). Not managed by a package manager; there is no `package.json`.
+- `apresentacao/js/impress.js`, `apresentacao/js/highlight/` — vendored JS libraries (impress.js for the spatial engine, highlight.js for code syntax highlighting in the code-sample slide). Not managed by a package manager; there is no `package.json`. Two deliberate local divergences from upstream, both marked with `MODIFICAÇÃO LOCAL` comments: impress.js's media-autoplay block in `onStepenter` is commented out (videos are driven by listeners in `espacial.html` instead), and `impress-common.css` sets `.impress-enabled #impress { pointer-events: none }` (upstream: `auto`), which disables impress.js's click-to-navigate.
 - `apresentacao/images/` — presentation assets: biology-metaphor photos/gifs (capivaras, footprints, forest background) and tool logos (ruff, mypy, mastodon, etc.).
 
 ## How the slide deck is structured
 
 `espacial.html` positions every slide in 3D space via `data-x` / `data-y` / `data-scale` attributes consumed by impress.js — the "camera" flies between coordinates rather than advancing linearly. The file is organized into commented sections marking each camera movement:
 
-- Early slides are grouped into **"VOOS" (flights)** — HTML comments like `<!-- VOO 1 — ... -->` mark each distinct camera position/zoom used while flying over the background forest image (`#fundo`, `images/visao_floresta_05.png`). Slides that share a flight share the same `data-x`/`data-y`/`data-scale`. Some `.step` divs have no content and exist purely as camera waypoints (e.g. `#floresta_01`, `#observacao`).
+- Early slides are grouped into **"VOOS" (flights)** — HTML comments like `<!-- VOO 1 — ... -->` mark each distinct camera position/zoom used while flying over the background forest image (`#fundo`, `images/visao_floresta_05.jpg`; the original `.png` is kept as the full-quality source but is not referenced). Slides that share a flight share the same `data-x`/`data-y`/`data-scale`. Some `.step` divs have no content and exist purely as camera waypoints (e.g. `#floresta_01`, `#observacao`).
 - After the comment **"FIM DO VOO"**, the camera stops moving: all remaining slides sit at the same fixed position (`data-x="0" data-y="0" data-scale="11"`) and are shown as stacked front-facing cards.
 - A final `#overview` step (no content) zooms out to show the whole spatial layout.
 

@@ -173,7 +173,7 @@ Vamos usar nossos olhos como ferramenta e observar o código abaixo para ver se 
 
 ```python
 def max_power(a, b):
-    """Encontra o maior número possível na exponenciação de um par."""
+    """Maior número na exponenciação de um par."""
     if a > b:
         result = b ** a
         if b < 0 and a % 2 == 0:

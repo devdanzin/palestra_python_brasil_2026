@@ -149,6 +149,10 @@ body.impress-mouse-timeout {
 */
 
 .impress-enabled                          { pointer-events: none }
+
+/* MODIFICAÇÃO LOCAL (upstream usa `auto`): com `none`, cliques dentro da
+   apresentação são ignorados — desativa a navegação por clique nos passos
+   (inclusive no modo overview). Troque para `auto` para reativá-la. */
 .impress-enabled #impress                 { pointer-events: none }
 
  /*If you disable pointer-events, you need to re-enable them for the toolbar.

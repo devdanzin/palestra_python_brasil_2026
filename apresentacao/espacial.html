@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/impress-common.css" />
         <link rel="stylesheet" href="css/impress-demo.css" />
 
-        <link rel="shortcut icon" href="favicon.png" />
+        <link rel="icon" href="favicon.png" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     </head>
 
@@ -32,7 +32,7 @@
             -->
             <img
                 id="fundo"
-                src="images/visao_floresta_05.png"
+                src="images/visao_floresta_05.jpg"
                 alt="Visão da floresta"
             />
 
@@ -88,16 +88,14 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><span class="esquerda">Biologia</span></td>
+                                <td><span>Biologia</span></td>
                                 <td><span class="dois_pontos">:</span></td>
-                                <td>
-                                    <span class="direita">Programação</span>
-                                </td>
+                                <td><span>Programação</span></td>
                             </tr>
                             <tr>
-                                <td><span class="esquerda">Animais</span></td>
+                                <td><span>Animais</span></td>
                                 <td><span class="dois_pontos">:</span></td>
-                                <td><span class="direita">Bugs</span></td>
+                                <td><span>Bugs</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -261,9 +259,6 @@
                  FIM DO VOO — A câmera para de se mover.
                  Daqui em diante todos os slides são cartões fixos na MESMA posição
                  (x=0, y=0, scale=11), exibidos de frente, um por cima do outro.
-                 Os slides "ferramentas_ia_01" e "ferramentas_ia_03" ainda
-                 aguardam conteúdo definitivo (ferramentas de terceiros e
-                 exemplos de erros encontrados).
                  =================================================================== -->
 
             <div
@@ -320,22 +315,23 @@
                 <h1>Análise Estática</h1>
                 <p class="substep">Não executa, procura padrões</p>
                 <p class="substep">Regras pré-definidas, configuráveis</p>
+                <!-- Parágrafos vazios: reservam o espaço das duas linhas extras
+                     do slide analise_estatica_02, para o texto não "pular". -->
                 <p></p>
                 <p></p>
             </div>
 
             <div
-                id="analise_baseada_em_ia_img"
+                id="analise_estatica_img"
                 class="step appear"
                 data-x="0"
                 data-y="0"
                 data-scale="11"
             >
                 <img
+                    class="imagem-diagrama"
                     src="images/Analise_Estatica_Codigo_Python.png"
-                    alt="Análise Estática Código Python"
-                    style="transform: translate(-28%, 1%) translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;"
-
+                    alt="Diagrama: análise estática de código Python"
                 />
             </div>
             <div
@@ -362,6 +358,8 @@
                 <h1>Fuzzing</h1>
                 <p class="substep">Fornece inputs problemáticos</p>
                 <p class="substep">Executa, análise dinâmica</p>
+                <!-- Parágrafos vazios: reservam o espaço das duas linhas extras
+                     do slide fuzzing_02, para o texto não "pular". -->
                 <p></p>
                 <p></p>
                 <img
@@ -406,10 +404,9 @@
                 data-scale="11"
             >
                 <img
+                    class="imagem-diagrama"
                     src="images/IA_encontra_codigo_semelhante.png"
-                    alt="IA encontra codigo semelhante"
-                    style="transform: translate(-28%, 1%) translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;"
-
+                    alt="Diagrama: IA encontra código semelhante"
                 />
             </div>
 
@@ -566,7 +563,7 @@
                 data-y="0"
                 data-scale="11"
             >
-                <pre class="substep"><code class="python" style="font-size: 40px;">class Silly:
+                <pre class="substep"><code class="python">class Silly:
     def __iter__(self):
         raise RuntimeError("ninguém espera a Inquisição Espanhola")
 
@@ -585,7 +582,8 @@ next(generator())</code></pre>
                 data-y="0"
                 data-scale="11"
             >
-                <video class="sudden" id="crash_video" src="images/capy.mp4" alt="Capivara Crash" />
+                <!-- Vídeo decorativo: capivara derruba a câmera (o "crash"). -->
+                <video class="sudden" id="crash_video" src="images/capy.mp4"></video>
             </div>
 
             <div
@@ -643,7 +641,7 @@ next(generator())</code></pre>
                     <br/>
                     <br/>
                 </p>
-                <p style="font-weight: bold;">O agente examinou o histórico e procurou a variante.</p>
+                <p><b>O agente examinou o histórico e procurou a variante.</b></p>
             </div>
 
             <div
@@ -656,28 +654,30 @@ next(generator())</code></pre>
                 <h1>Um bug corrigido... quase</h1>
                 <p><br/></p>
                 <table>
-                    <tr>
-                        <td>
+                    <tbody>
+                        <tr>
+                            <td>
                 <pre><code class="python">class Key:
     __hash__ = None
     counter = 0
 
-    def __eq__(self, other):  # <- AQUI
+    def __eq__(self, other):  # &lt;- AQUI
         if not self.counter:
             self.counter += 1
-            try: next(grouper_iter)  # <- E AQUI!
+            try: next(grouper_iter)  # &lt;- E AQUI!
             except StopIteration: pass
             return NotImplemented
         return True</code></pre>
-                        </td>
-                        <td>
-                            <pre class="substep"><code class="python">from itertools import groupby
+                            </td>
+                            <td>
+                                <pre class="substep"><code class="python">from itertools import groupby
 
 it = groupby(range(4), lambda x: Key())
 key, grouper_iter = next(it)
 items = list(grouper_iter)</code></pre>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div
@@ -688,7 +688,7 @@ items = list(grouper_iter)</code></pre>
                 data-scale="11"
             >
                 <h1>Da pegada à descoberta</h1>
-                <pre class="substep" style="text-align: center; font-size: 80px; line-height: 90%;">
+                <pre class="substep">
 
 Achados candidatos
         ↓
@@ -706,7 +706,7 @@ Evidência priorizada
                 data-scale="11"
             >
                 <h1>Do achado à contribuição</h1>
-                <pre  class="substep" style="text-align: center; font-size: 62px; line-height: 90%;">
+                <pre class="substep">
 achado
     ↓
 reproducer
@@ -727,19 +727,34 @@ correção</pre>
                 data-scale="11"
             >
                 <h1>Capivárias</h1>
-                <p>_</p>
+                <!-- Parágrafo espaçador entre o título e a tabela. -->
+                <p>&nbsp;</p>
+                <!-- Vídeos decorativos: muitas capivaras e uma manada. -->
                 <table>
-                    <tr>
-                        <td>
-                            <video class="sudden" id="capivarias_01" src="images/many.mp4" alt="Capivarias 0" style="height: 650px;"/>
-                        </td>
-                        <td>
-                            <img src="images/too_many.png" style="height: 650px;"/>
-                        </td>
-                        <td>
-                            <video class="sudden" id="capivarias_02" src="images/herd.mp4" alt="Capivarias 2" style="height: 650px;"/>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <video
+                                    class="sudden"
+                                    id="capivarias_01"
+                                    src="images/many.mp4"
+                                ></video>
+                            </td>
+                            <td>
+                                <img
+                                    src="images/too_many.png"
+                                    alt="Jogo: too many capybaras... can you handle them all?"
+                                />
+                            </td>
+                            <td>
+                                <video
+                                    class="sudden"
+                                    id="capivarias_02"
+                                    src="images/herd.mp4"
+                                ></video>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div
@@ -764,7 +779,10 @@ correção</pre>
                 data-scale="11"
             >
                 <h1>Publicações</h1>
-                    <img src="images/bugs_lwn.png" style="height: 70%;"/>
+                <img
+                    src="images/bugs_lwn.png"
+                    alt="Artigo na LWN.net: Using LLMs to find Python C-extension bugs"
+                />
             </div>
 
             <div
@@ -775,7 +793,10 @@ correção</pre>
                 data-scale="11"
             >
                 <h1>Publicações</h1>
-                    <img src="images/coverage_hameed.png" style="height: 650px;"/>
+                <img
+                    src="images/coverage_hameed.png"
+                    alt="Dissertação de Hameed Sahib sobre fuzzing guiado por cobertura do JIT do CPython"
+                />
             </div>
 
             <div
@@ -787,38 +808,40 @@ correção</pre>
             >
                 <h1>Recursos</h1>
                 <table>
-                    <tr class="substep">
-                        <td>
-                            <p><b>Requisito</b></p>
-                        </td>
-                        <td>
-                            <p><b>Como obtenho</b></p>
-                        </td>
-                    </tr>
-                    <tr class="substep">
-                        <td>
-                            <p>CPU</p>
-                        </td>
-                        <td>
-                            <p>Máquinas próprias e nuvem</p>
-                        </td>
-                    </tr>
-                    <tr class="substep">
-                        <td>
-                            <p>IA</p>
-                        </td>
-                        <td>
-                            <p>Assinatura e apoio recebido</p>
-                        </td>
-                    </tr>
-                    <tr class="substep">
-                        <td>
-                            <p>Tempo</p>
-                        </td>
-                        <td>
-                            <p>Trabalho voluntário</p>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr class="substep">
+                            <td>
+                                <p><b>Requisito</b></p>
+                            </td>
+                            <td>
+                                <p><b>Como obtenho</b></p>
+                            </td>
+                        </tr>
+                        <tr class="substep">
+                            <td>
+                                <p>CPU</p>
+                            </td>
+                            <td>
+                                <p>Máquinas próprias e nuvem</p>
+                            </td>
+                        </tr>
+                        <tr class="substep">
+                            <td>
+                                <p>IA</p>
+                            </td>
+                            <td>
+                                <p>Assinatura e apoio recebido</p>
+                            </td>
+                        </tr>
+                        <tr class="substep">
+                            <td>
+                                <p>Tempo</p>
+                            </td>
+                            <td>
+                                <p>Trabalho voluntário</p>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -858,7 +881,7 @@ correção</pre>
                 data-scale="11"
             >
                 <h1>Achado não é bug</h1>
-                <pre style="text-align: center; font-size: 62px; line-height: 90%;"  class="substep">
+                <pre class="substep">
 
 ~690 achados
         ↓
@@ -1020,30 +1043,30 @@ deduplicação + comunicação
         <script src="js/highlight/highlight.pack.js"></script>
         <script src="js/impress.js"></script>
         <script>
-
-            ["capivara_crash"].forEach(function(name) {
-                var videoStep = document.getElementById(name);
-                var video = document.getElementById("crash_video");
-                videoStep.addEventListener("impress:stepenter", function() {
-                    video.play();
+            // Os vídeos tocam ao entrar no passo e pausam ao sair. (O autoplay
+            // de mídia do impress.js foi desativado em js/impress.js; o
+            // controle é feito aqui.) Cada par é [id do passo, id do vídeo].
+            [
+                ["capivara_crash", "crash_video"],
+                ["capivarias", "capivarias_01"],
+                ["capivarias", "capivarias_02"]
+            ].forEach(function(par) {
+                var passo = document.getElementById(par[0]);
+                var video = document.getElementById(par[1]);
+                passo.addEventListener("impress:stepenter", function() {
+                    // O catch evita erro no console se o navegador bloquear o
+                    // play() (ex.: ao abrir a URL já neste passo, sem interação).
+                    var tocando = video.play();
+                    if (tocando && tocando.catch) {
+                        tocando.catch(function() {});
+                    }
                 }, false);
-                videoStep.addEventListener("impress:stepleave", function() {
+                passo.addEventListener("impress:stepleave", function() {
                     video.pause();
                 }, false);
             });
 
-            ["capivarias_01", "capivarias_02"].forEach(function(name) {
-                var videoStep = document.getElementById("capivarias");
-                var video = document.getElementById(name);
-                videoStep.addEventListener("impress:stepenter", function() {
-                    video.play();
-                }, false);
-                videoStep.addEventListener("impress:stepleave", function() {
-                    video.pause();
-                }, false);
-            });
             impress().init();
-
         </script>
     </body>
 </html>

@@ -3514,6 +3514,10 @@
         }
 
         stepElement = event.target;
+
+        // MODIFICAÇÃO LOCAL (não é do upstream): o autoplay de mídia do
+        // impress.js foi desativado; os vídeos da apresentação são
+        // controlados por listeners próprios em espacial.html.
         // removeMediaClasses();
 
         // media = stepElement.querySelectorAll( "audio, video" );
