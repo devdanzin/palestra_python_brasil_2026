@@ -583,7 +583,15 @@ next(generator())</code></pre>
                 data-scale="11"
             >
                 <!-- Vídeo decorativo: capivara derruba a câmera (o "crash"). -->
-                <video class="sudden" id="crash_video" src="images/capy.mp4"></video>
+                <video
+                    class="sudden"
+                    id="crash_video"
+                    src="images/capy.mp4"
+                    controls
+                    muted
+                    playsinline
+                    preload="metadata"
+                ></video>
             </div>
 
             <div
@@ -738,6 +746,10 @@ correção</pre>
                                     class="sudden"
                                     id="capivarias_01"
                                     src="images/many.mp4"
+                                    controls
+                                    muted
+                                    playsinline
+                                    preload="metadata"
                                 ></video>
                             </td>
                             <td>
@@ -751,6 +763,10 @@ correção</pre>
                                     class="sudden"
                                     id="capivarias_02"
                                     src="images/herd.mp4"
+                                    controls
+                                    muted
+                                    playsinline
+                                    preload="metadata"
                                 ></video>
                             </td>
                         </tr>
@@ -1043,9 +1059,11 @@ deduplicação + comunicação
         <script src="js/highlight/highlight.pack.js"></script>
         <script src="js/impress.js"></script>
         <script>
-            // Os vídeos tocam ao entrar no passo e pausam ao sair. (O autoplay
-            // de mídia do impress.js foi desativado em js/impress.js; o
-            // controle é feito aqui.) Cada par é [id do passo, id do vídeo].
+            // Os vídeos NÃO tocam sozinhos: o visitante usa os controles do
+            // navegador (som desligado por padrão, via atributo muted). Ao
+            // sair do passo, qualquer vídeo tocando é pausado. (O autoplay de
+            // mídia do impress.js também está desativado, em js/impress.js.)
+            // Cada par é [id do passo, id do vídeo].
             [
                 ["capivara_crash", "crash_video"],
                 ["capivarias", "capivarias_01"],
@@ -1053,14 +1071,6 @@ deduplicação + comunicação
             ].forEach(function(par) {
                 var passo = document.getElementById(par[0]);
                 var video = document.getElementById(par[1]);
-                passo.addEventListener("impress:stepenter", function() {
-                    // O catch evita erro no console se o navegador bloquear o
-                    // play() (ex.: ao abrir a URL já neste passo, sem interação).
-                    var tocando = video.play();
-                    if (tocando && tocando.catch) {
-                        tocando.catch(function() {});
-                    }
-                }, false);
                 passo.addEventListener("impress:stepleave", function() {
                     video.pause();
                 }, false);

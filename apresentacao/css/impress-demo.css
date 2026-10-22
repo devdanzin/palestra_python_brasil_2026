@@ -525,10 +525,10 @@ code {
 }
 
 /* --- ferramentas_fuzzing_03 (código do bug do yield from) --- */
-/* Fonte menor que a dos outros blocos de código para o exemplo caber
-   junto dos dois <h2> de desfecho. (Antes era estilo inline no <code>.) */
+/* Fonte dimensionada para a linha mais longa (o raise de 67 colunas) caber
+   no painel sem barra de rolagem — em monoespaçada, 40px estouram. */
 #ferramentas_fuzzing_03 code {
-    font-size: 40px;
+    font-size: 33px;
 }
 
 /* --- ferramentas_ia (família -review-toolkit) --- */
@@ -568,8 +568,23 @@ code {
     font-size: 108px;
 }
 
+/* Dois painéis de código lado a lado somando ~90 colunas: fonte e respiros
+   reduzidos para a tabela caber na largura do cartão sem vazar. */
+#ferramentas_ia_05 {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#ferramentas_ia_05 pre {
+    padding: 0.5em 0.6em;
+}
+
+#ferramentas_ia_05 td + td {
+    padding-left: 20px;
+}
+
 #ferramentas_ia_05 code {
-    font-size: 130%;
+    font-size: 25px;
 }
 
 #achado_01 h1 {
