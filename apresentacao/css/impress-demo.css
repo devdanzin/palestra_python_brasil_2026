@@ -121,6 +121,13 @@ em {
     font-style: italic;
 }
 
+/* Impede navegadores móveis de inflar fontes dentro do canvas escalado do
+   impress (a "text inflation" quebra o layout dos slides). */
+html {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
 body {
     font-family: var(--fonte);
     /* Fundo cinza atrás de tudo (aparece nas bordas e no zoom-out). */
@@ -149,6 +156,7 @@ a:focus {
 /* Mostrada quando o navegador não suporta o impress; some ao carregar. */
 .fallback-message {
     width: 780px;
+    max-width: 100%;
     margin: 20px auto;
     padding: 10px 10px 0;
     font-family: sans-serif;
@@ -733,4 +741,23 @@ code {
     text-align: left;
     color: #000;
     background-color: #fff;
+}
+
+/* Em telas estreitas (celulares), o cromo da tela encolhe: as margens acima
+   foram afinadas para janelas de ~1920px e deixariam a barra com largura
+   negativa num celular. */
+@media (max-width: 800px) {
+    .impress-progressbar {
+        left: 64px;
+        right: 8px;
+    }
+
+    .impress-progressbar div {
+        height: 10px;
+    }
+
+    .impress-progress {
+        left: 8px;
+        font-size: 16px;
+    }
 }
